@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-16"?>
+<xd:xmldiff version="1.0" srcDocHash="6390234864459829245" options="None" fragments="yes" xmlns:xd="http://schemas.microsoft.com/xmltools/2002/xmldiff">
+  <xd:node match="1">
+    <xd:remove match="1" />
+  </xd:node>
+</xd:xmldiff>
