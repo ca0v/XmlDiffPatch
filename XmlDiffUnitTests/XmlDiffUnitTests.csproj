@@ -62,8 +62,11 @@
       <Name>XmlDiffPatch</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="output\" />
+    <Content Include="output\DiffMissingNodeTest-12.xml" />
+    <Content Include="output\DiffMissingNodeTest-21.xml" />
+    <Content Include="output\DiffWhitespaceTest.xml" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
