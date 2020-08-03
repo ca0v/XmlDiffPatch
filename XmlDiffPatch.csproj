@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F10BA365-2FB3-4BAE-B87E-0853A1CA60D5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XmlDiffPatch</RootNamespace>
+    <AssemblyName>XmlDiffPatch</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlDiffPatch.View\OperationDescriptor.cs" />
+    <Compile Include="XmlDiffPatch.View\TestXmlDiff.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffPath.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffPathMultiNodeList.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffPathNodeList.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffPathSingleNodeList.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffView.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffViewAttribute.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffViewCharData.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffViewDocument.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffViewDocumentType.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffViewElement.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffViewER.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffViewNode.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffViewOperation.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffViewParentNode.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffViewPI.cs" />
+    <Compile Include="XmlDiffPatch.View\XmlDiffViewXmlDeclaration.cs" />
+    <Compile Include="XmlDiffPatch\AttributeInterval.cs" />
+    <Compile Include="XmlDiffPatch\Diffgram.cs" />
+    <Compile Include="XmlDiffPatch\DiffgramAddNode.cs" />
+    <Compile Include="XmlDiffPatch\DiffgramAddSubtrees.cs" />
+    <Compile Include="XmlDiffPatch\DiffgramChangeNode.cs" />
+    <Compile Include="XmlDiffPatch\DiffgramCopy.cs" />
+    <Compile Include="XmlDiffPatch\DiffgramGenerator.cs" />
+    <Compile Include="XmlDiffPatch\DiffgramOperation.cs" />
+    <Compile Include="XmlDiffPatch\DiffgramParentOperation.cs" />
+    <Compile Include="XmlDiffPatch\DiffgramPosition.cs" />
+    <Compile Include="XmlDiffPatch\DiffgramRemoveAttributes.cs" />
+    <Compile Include="XmlDiffPatch\DiffgramRemoveNode.cs" />
+    <Compile Include="XmlDiffPatch\DiffgramRemoveSubtrees.cs" />
+    <Compile Include="XmlDiffPatch\EditScript.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptAdd.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptAddOpened.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptChange.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptEmpty.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptMatch.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptMatchOpened.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptOpened.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptOperation.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptPostponed.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptReference.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptRemove.cs" />
+    <Compile Include="XmlDiffPatch\EditScriptRemoveOpened.cs" />
+    <Compile Include="XmlDiffPatch\HashAlgorithm.cs" />
+    <Compile Include="XmlDiffPatch\MinimalTreeDistanceAlgo.cs" />
+    <Compile Include="XmlDiffPatch\MultiNodeList.cs" />
+    <Compile Include="XmlDiffPatch\OperationDescriptor.cs" />
+    <Compile Include="XmlDiffPatch\OperationDescrMove.cs" />
+    <Compile Include="XmlDiffPatch\OperationDescrNamespaceChange.cs" />
+    <Compile Include="XmlDiffPatch\OperationDescrPrefixChange.cs" />
+    <Compile Include="XmlDiffPatch\Patch.cs" />
+    <Compile Include="XmlDiffPatch\PatchAddNode.cs" />
+    <Compile Include="XmlDiffPatch\PatchAddXmlFragment.cs" />
+    <Compile Include="XmlDiffPatch\PatchChange.cs" />
+    <Compile Include="XmlDiffPatch\PatchCopy.cs" />
+    <Compile Include="XmlDiffPatch\PatchRemove.cs" />
+    <Compile Include="XmlDiffPatch\PatchSetPosition.cs" />
+    <Compile Include="XmlDiffPatch\PathDescriptorParser.cs" />
+    <Compile Include="XmlDiffPatch\SingleNodeList.cs" />
+    <Compile Include="XmlDiffPatch\TriStateBool.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiff.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffAlgorithm.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffAttribute.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffAttributeOrNamespace.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffCharData.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffDescriptorType.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffDocument.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffDocumentType.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffElement.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffER.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffNamespace.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffNode.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffNodeType.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffOperation.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffOptions.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffParentNode.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffPerf.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffPI.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffShrankNode.cs" />
+    <Compile Include="XmlDiffPatch\XmlDiffXmlDeclaration.cs" />
+    <Compile Include="XmlDiffPatch\XmlHash.cs" />
+    <Compile Include="XmlDiffPatch\XmlPatch.cs" />
+    <Compile Include="XmlDiffPatch\XmlPatchError.cs" />
+    <Compile Include="XmlDiffPatch\XmlPatchNodeList.cs" />
+    <Compile Include="XmlDiffPatch\XmlPatchOperation.cs" />
+    <Compile Include="XmlDiffPatch\XmlPatchParentOperation.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
