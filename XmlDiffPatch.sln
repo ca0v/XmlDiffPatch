@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlDiffPatch", "XmlDiffPatch.csproj", "{F10BA365-2FB3-4BAE-B87E-0853A1CA60D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlDiffUnitTests", "XmlDiffUnitTests\XmlDiffUnitTests.csproj", "{944A99BD-7EA7-49D9-A606-F7DBBE99482B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F10BA365-2FB3-4BAE-B87E-0853A1CA60D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F10BA365-2FB3-4BAE-B87E-0853A1CA60D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F10BA365-2FB3-4BAE-B87E-0853A1CA60D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F10BA365-2FB3-4BAE-B87E-0853A1CA60D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{944A99BD-7EA7-49D9-A606-F7DBBE99482B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{944A99BD-7EA7-49D9-A606-F7DBBE99482B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{944A99BD-7EA7-49D9-A606-F7DBBE99482B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{944A99BD-7EA7-49D9-A606-F7DBBE99482B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C35FFCB-7583-4C98-9C17-62F9C4BEF24C}
+	EndGlobalSection
+EndGlobal
