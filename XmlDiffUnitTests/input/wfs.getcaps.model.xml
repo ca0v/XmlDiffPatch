@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WFS_Capabilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.1.0" xsi:schemaLocation="http://www.opengis.net/wfs http://localhost:3002/mock/geoserver/schemas/wfs/1.1.0/wfs.xsd" updateSequence="410" xmlns="http://www.opengis.net/wfs">
+  <ServiceIdentification xmlns="http://www.opengis.net/ows">
+    <Title>GeoServer Web Feature Service</Title>
+    <Abstract>This is the reference implementation of WFS 1.0.0 and WFS 1.1.0, supports all WFS operations including Transaction.</Abstract>
+    <Keywords>
+      <Keyword>WFS</Keyword>
+      <Keyword>WMS</Keyword>
+      <Keyword>GEOSERVER</Keyword>
+    </Keywords>
+    <ServiceType>WFS</ServiceType>
+    <ServiceTypeVersion>1.1.0</ServiceTypeVersion>
+    <Fees>NONE</Fees>
+    <AccessConstraints>NONE</AccessConstraints>
+  </ServiceIdentification>
+  <ServiceProvider xmlns="http://www.opengis.net/ows">
+    <ProviderName>The Ancient Geographers</ProviderName>
+    <ServiceContact>
+      <IndividualName>Claudius Ptolomaeus</IndividualName>
+      <PositionName>Chief Geographer</PositionName>
+      <ContactInfo>
+        <Phone>
+          <Voice />
+          <Facsimile />
+        </Phone>
+        <Address>
+          <DeliveryPoint />
+          <City>Alexandria</City>
+          <AdministrativeArea />
+          <PostalCode />
+          <Country>Egypt</Country>
+          <ElectronicMailAddress>claudius.ptolomaeus@gmail.com</ElectronicMailAddress>
+        </Address>
+      </ContactInfo>
+    </ServiceContact>
+  </ServiceProvider>
+  <OperationsMetadata xmlns="http://www.opengis.net/ows">
+    <Operation name="GetCapabilities">
+      <DCP>
+        <HTTP>
+          <Get p8:href="http://localhost:3002/mock/geoserver/wfs" xmlns:p8="http://www.w3.org/1999/xlink" />
+          <Post p8:href="http://localhost:3002/mock/geoserver/wfs" xmlns:p8="http://www.w3.org/1999/xlink" />
+        </HTTP>
+      </DCP>
+      <Parameter name="AcceptVersions">
+        <Value>1.0.0</Value>
+        <Value>1.1.0</Value>
+      </Parameter>
+      <Parameter name="AcceptFormats">
+        <Value>text/xml</Value>
+      </Parameter>
+    </Operation>
+    <Operation name="DescribeFeatureType">
+      <DCP>
+        <HTTP>
+          <Get p8:href="http://localhost:3002/mock/geoserver/wfs" xmlns:p8="http://www.w3.org/1999/xlink" />
+          <Post p8:href="http://localhost:3002/mock/geoserver/wfs" xmlns:p8="http://www.w3.org/1999/xlink" />
+        </HTTP>
+      </DCP>
+      <Parameter name="outputFormat">
+        <Value>text/xml; subtype=gml/3.1.1</Value>
+      </Parameter>
+    </Operation>
+    <Operation name="GetFeature">
+      <DCP>
+        <HTTP>
+          <Get p8:href="http://localhost:3002/mock/geoserver/wfs" xmlns:p8="http://www.w3.org/1999/xlink" />
+          <Post p8:href="http://localhost:3002/mock/geoserver/wfs" xmlns:p8="http://www.w3.org/1999/xlink" />
+        </HTTP>
+      </DCP>
+      <Parameter name="resultType">
+        <Value>results</Value>
+        <Value>hits</Value>
+      </Parameter>
+      <Parameter name="outputFormat">
+        <Value>text/xml; subtype=gml/3.1.1</Value>
+        <Value>GML2</Value>
+        <Value>KML</Value>
+        <Value>SHAPE-ZIP</Value>
+        <Value>application/gml+xml; version=3.2</Value>
+        <Value>application/json</Value>
+        <Value>application/vnd.google-earth.kml xml</Value>
+        <Value>application/vnd.google-earth.kml+xml</Value>
+        <Value>csv</Value>
+        <Value>gml3</Value>
+        <Value>gml32</Value>
+        <Value>json</Value>
+        <Value>text/javascript</Value>
+        <Value>text/xml; subtype=gml/2.1.2</Value>
+        <Value>text/xml; subtype=gml/3.2</Value>
+      </Parameter>
+      <Constraint name="LocalTraverseXLinkScope">
+        <Value>2</Value>
+      </Constraint>
+    </Operation>
+    <Operation name="GetGmlObject">
+      <DCP>
+        <HTTP>
+          <Get p8:href="http://localhost:3002/mock/geoserver/wfs" xmlns:p8="http://www.w3.org/1999/xlink" />
+          <Post p8:href="http://localhost:3002/mock/geoserver/wfs" xmlns:p8="http://www.w3.org/1999/xlink" />
+        </HTTP>
+      </DCP>
+    </Operation>
+    <Operation name="Transaction">
+      <DCP>
+        <HTTP>
+          <Get p8:href="http://localhost:3002/mock/geoserver/wfs" xmlns:p8="http://www.w3.org/1999/xlink" />
+          <Post p8:href="http://localhost:3002/mock/geoserver/wfs" xmlns:p8="http://www.w3.org/1999/xlink" />
+        </HTTP>
+      </DCP>
+      <Parameter name="inputFormat">
+        <Value>text/xml; subtype=gml/3.1.1</Value>
+      </Parameter>
+      <Parameter name="idgen">
+        <Value>GenerateNew</Value>
+        <Value>UseExisting</Value>
+        <Value>ReplaceDuplicate</Value>
+      </Parameter>
+      <Parameter name="releaseAction">
+        <Value>ALL</Value>
+        <Value>SOME</Value>
+      </Parameter>
+    </Operation>
+  </OperationsMetadata>
+  <FeatureTypeList>
+    <Operations>
+      <Operation>Query</Operation>
+      <Operation>Insert</Operation>
+      <Operation>Update</Operation>
+      <Operation>Delete</Operation>
+    </Operations>
+    <FeatureType>
+      <Name>vegas11:Addresses</Name>
+      <Title>Addresses</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>Addresses</Keyword>
+        <Keyword>features</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.25956555910884 36.17052390177421</LowerCorner>
+        <UpperCorner>-115.20619945841432 36.195779129034634</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Buildings</Name>
+      <Title>Buildings</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>Buildings</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.23688967324213 36.17231254966617</LowerCorner>
+        <UpperCorner>-115.22887156013122 36.17526476139247</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Complexes</Name>
+      <Title>Complexes</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>Complexes</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.23535021037613 36.172190424737664</LowerCorner>
+        <UpperCorner>-115.22061927311249 36.17530141781573</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:ConfigLinears</Name>
+      <Title>ConfigLinears</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>ConfigLinears</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24592700614033 36.17318340788838</LowerCorner>
+        <UpperCorner>-115.20892562364374 36.188560271658226</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:ConfigMains</Name>
+      <Title>ConfigMains</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>ConfigMains</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24230926594515 36.17235498559723</LowerCorner>
+        <UpperCorner>-115.22411284466578 36.18678539802488</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:ConfigPoints</Name>
+      <Title>ConfigPoints</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>ConfigPoints</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24408520384442 36.17291012697744</LowerCorner>
+        <UpperCorner>-115.22605690090376 36.18857317617589</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:ConfigSegments</Name>
+      <Title>ConfigSegments</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>ConfigSegments</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24231150424292 36.17063253051444</LowerCorner>
+        <UpperCorner>-115.22397415729309 36.18673731241811</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>cite:INFRAROADWAY</Name>
+      <Title>INFRAROADWAY</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>INFRAROADWAY</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:32640</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>54.62711209294452 22.650419980448035</LowerCorner>
+        <UpperCorner>55.966688747111036 24.78993388020567</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>ips:MapAU850_addresspoints</Name>
+      <Title>MapAU850_addresspoints</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>addresspoints</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3112</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>105.47747501654585 -44.98043790534888</LowerCorner>
+        <UpperCorner>160.63027519077596 -8.133505971767065</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapCA860:addressesca</Name>
+      <Title>MapCA860 Addresses</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>addressesca</Keyword>
+        <Keyword>features</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:26910</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-123.22449256579046 49.2002377707792</LowerCorner>
+        <UpperCorner>-123.02373219422871 49.2981235536435</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>cite:POINTS</Name>
+      <Title>POINTS</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>POINTS</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.22669722453384 36.17663616746731</LowerCorner>
+        <UpperCorner>-115.22494133250109 36.179176964583576</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Parcels</Name>
+      <Title>Parcels</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>Parcels</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.260241828611 36.16990502579505</LowerCorner>
+        <UpperCorner>-115.20607557696466 36.195989038291735</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Properties</Name>
+      <Title>Properties</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>Properties</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.23962434316506 36.17083754390344</LowerCorner>
+        <UpperCorner>-115.22086435097701 36.18004751721206</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:RailwaySegments</Name>
+      <Title>RailwaySegments</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>RailwaySegments</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.23984619564473 36.17307787023381</LowerCorner>
+        <UpperCorner>-115.22811725893548 36.181928343812494</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Roadways</Name>
+      <Title>Roadways</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>Roadways</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24592700614033 36.17318340788838</LowerCorner>
+        <UpperCorner>-115.20892562364374 36.188560271658226</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:SewerMains</Name>
+      <Title>SewerMains</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>SewerMains</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.25121657619393 36.17111358494287</LowerCorner>
+        <UpperCorner>-115.22373115480546 36.18887779494844</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:SewerManholes</Name>
+      <Title>SewerManholes</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>SewerManholes</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.25935293113345 36.17020534258519</LowerCorner>
+        <UpperCorner>-115.20594181568144 36.19590849911888</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Streets</Name>
+      <Title>Streets</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>Streets</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.2571858561661 36.1703050345994</LowerCorner>
+        <UpperCorner>-115.20587262874291 36.19610295435246</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>topp:states</Name>
+      <Title>USA Population</Title>
+      <Abstract>This is some census data on the states.</Abstract>
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>census</Keyword>
+        <Keyword>united</Keyword>
+        <Keyword>boundaries</Keyword>
+        <Keyword>state</Keyword>
+        <Keyword>states</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-124.731422 24.955967</LowerCorner>
+        <UpperCorner>-66.969849 49.371735</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterHydrants</Name>
+      <Title>WaterHydrants</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>WaterHydrants</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24146392220587 36.17184522104155</LowerCorner>
+        <UpperCorner>-115.21337586453305 36.18601324572231</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterMains</Name>
+      <Title>WaterMains</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>WaterMains</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24231328365934 36.17056004185687</LowerCorner>
+        <UpperCorner>-115.22385062906332 36.1867853873215</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterMiscellaneous</Name>
+      <Title>WaterMiscellaneous</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>WaterMiscellaneous</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24129073889513 36.17159543336041</LowerCorner>
+        <UpperCorner>-115.22095840960897 36.18645577373346</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterNodes</Name>
+      <Title>WaterNodes</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>WaterNodes</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24233795160843 36.17055873160919</LowerCorner>
+        <UpperCorner>-115.22340884923943 36.1879807261171</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterSvcLines</Name>
+      <Title>WaterSvcLines</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>WaterSvcLines</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24257799320681 36.1729768505497</LowerCorner>
+        <UpperCorner>-115.22629779767169 36.18712681223364</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterValves</Name>
+      <Title>WaterValves</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>WaterValves</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24225124740276 36.173659289879545</LowerCorner>
+        <UpperCorner>-115.2245543754422 36.19407882848738</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Water_Meters</Name>
+      <Title>Water_Meters</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>Water_Meters</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-115.24199196327709 36.18086071596879</LowerCorner>
+        <UpperCorner>-115.22645803898202 36.18665840417064</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapVegas860SQL:addresses</Name>
+      <Title>addresses</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>addresses</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-117.15550977476727 34.98008171739624</LowerCorner>
+        <UpperCorner>-113.8716175625461 42.01048957932861</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>QA840CA:addressesca</Name>
+      <Title>addressesca</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>addressesca</Keyword>
+        <Keyword>features</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:26910</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-123.22449256579046 49.2002377707792</LowerCorner>
+        <UpperCorner>-123.02373219422871 49.2981235536435</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapUK860:addressuk</Name>
+      <Title>addressuk</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>addressuk</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-2.832473656649472 50.51410638971785</LowerCorner>
+        <UpperCorner>0.648377712967554 54.41055738821113</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapVegas860SQL:configlinears</Name>
+      <Title>configlinears</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>configlinears</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-117.15550977476727 34.98008171739624</LowerCorner>
+        <UpperCorner>-113.8716175625461 42.01048957932861</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>QA840NZ:hansen_address_points</Name>
+      <Title>hansen_address_points</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>hansen_address_points</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:2193</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>164.91153211187202 -47.520487910125254</LowerCorner>
+        <UpperCorner>179.87672447778493 -33.92267642945477</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapUK860:landuse</Name>
+      <Title>landuse</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>landuse</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-0.1439228 51.3547804</LowerCorner>
+        <UpperCorner>0.1510379 52.2044073</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapCA860:parcelsca</Name>
+      <Title>parcelsca</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>parcelsca</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:26910</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-123.1568773942129 49.23600553398768</LowerCorner>
+        <UpperCorner>-123.11106113146097 49.27214340397805</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>QA840CA:parcelsca</Name>
+      <Title>parcelsca</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>parcelsca</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:26910</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-140.5372300339426 30.505244988250023</LowerCorner>
+        <UpperCorner>-105.40785559115105 81.81115971519311</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapUK860:places</Name>
+      <Title>places</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>places</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-6.454252529085048 49.87173450256529</LowerCorner>
+        <UpperCorner>1.753763835075276 55.80440901608816</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapUK860:points</Name>
+      <Title>points</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>points</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-5.688353413767066 50.07449689851004</LowerCorner>
+        <UpperCorner>1.7552717351054339 55.78414011568278</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>cite:roads</Name>
+      <Title>roads</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>roads</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-6.3609321 49.8835715</LowerCorner>
+        <UpperCorner>1.7625851 55.8076192</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapVegas860SQL:roadways</Name>
+      <Title>roadways</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>roadways</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-117.15550977476727 34.98008171739624</LowerCorner>
+        <UpperCorner>-113.8716175625461 42.01048957932861</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapVegas860SQL:watermains</Name>
+      <Title>watermains</Title>
+      <Abstract />
+      <Keywords xmlns="http://www.opengis.net/ows">
+        <Keyword>features</Keyword>
+        <Keyword>watermains</Keyword>
+      </Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <WGS84BoundingBox xmlns="http://www.opengis.net/ows">
+        <LowerCorner>-117.15550977476727 34.98008171739624</LowerCorner>
+        <UpperCorner>-113.8716175625461 42.01048957932861</UpperCorner>
+      </WGS84BoundingBox>
+    </FeatureType>
+  </FeatureTypeList>
+  <Filter_Capabilities xmlns="http://www.opengis.net/ogc">
+    <Spatial_Capabilities>
+      <GeometryOperands>
+        <GeometryOperand>gml:Envelope</GeometryOperand>
+        <GeometryOperand>gml:Point</GeometryOperand>
+        <GeometryOperand>gml:LineString</GeometryOperand>
+        <GeometryOperand>gml:Polygon</GeometryOperand>
+      </GeometryOperands>
+      <SpatialOperators>
+        <SpatialOperator name="Disjoint" />
+        <SpatialOperator name="Equals" />
+        <SpatialOperator name="DWithin" />
+        <SpatialOperator name="Beyond" />
+        <SpatialOperator name="Intersects" />
+        <SpatialOperator name="Touches" />
+        <SpatialOperator name="Crosses" />
+        <SpatialOperator name="Within" />
+        <SpatialOperator name="Contains" />
+        <SpatialOperator name="Overlaps" />
+        <SpatialOperator name="BBOX" />
+      </SpatialOperators>
+    </Spatial_Capabilities>
+    <Scalar_Capabilities>
+      <LogicalOperators />
+      <ComparisonOperators>
+        <ComparisonOperator>LessThan</ComparisonOperator>
+        <ComparisonOperator>GreaterThan</ComparisonOperator>
+        <ComparisonOperator>LessThanEqualTo</ComparisonOperator>
+        <ComparisonOperator>GreaterThanEqualTo</ComparisonOperator>
+        <ComparisonOperator>EqualTo</ComparisonOperator>
+        <ComparisonOperator>NotEqualTo</ComparisonOperator>
+        <ComparisonOperator>Like</ComparisonOperator>
+        <ComparisonOperator>Between</ComparisonOperator>
+        <ComparisonOperator>NullCheck</ComparisonOperator>
+      </ComparisonOperators>
+      <ArithmeticOperators>
+        <SimpleArithmetic />
+        <Functions>
+          <FunctionNames>
+            <FunctionName nArgs="1">abs</FunctionName>
+            <FunctionName nArgs="1">abs_2</FunctionName>
+            <FunctionName nArgs="1">abs_3</FunctionName>
+            <FunctionName nArgs="1">abs_4</FunctionName>
+            <FunctionName nArgs="1">acos</FunctionName>
+            <FunctionName nArgs="2">AddCoverages</FunctionName>
+            <FunctionName nArgs="-1">Affine</FunctionName>
+            <FunctionName nArgs="-2">Aggregate</FunctionName>
+            <FunctionName nArgs="1">Area</FunctionName>
+            <FunctionName nArgs="1">area2</FunctionName>
+            <FunctionName nArgs="3">AreaGrid</FunctionName>
+            <FunctionName nArgs="1">asin</FunctionName>
+            <FunctionName nArgs="1">atan</FunctionName>
+            <FunctionName nArgs="2">atan2</FunctionName>
+            <FunctionName nArgs="-1">BandMerge</FunctionName>
+            <FunctionName nArgs="-2">BandSelect</FunctionName>
+            <FunctionName nArgs="-6">BarnesSurface</FunctionName>
+            <FunctionName nArgs="3">between</FunctionName>
+            <FunctionName nArgs="1">boundary</FunctionName>
+            <FunctionName nArgs="1">boundaryDimension</FunctionName>
+            <FunctionName nArgs="1">Bounds</FunctionName>
+            <FunctionName nArgs="2">buffer</FunctionName>
+            <FunctionName nArgs="-2">BufferFeatureCollection</FunctionName>
+            <FunctionName nArgs="3">bufferWithSegments</FunctionName>
+            <FunctionName nArgs="7">Categorize</FunctionName>
+            <FunctionName nArgs="1">ceil</FunctionName>
+            <FunctionName nArgs="1">Centroid</FunctionName>
+            <FunctionName nArgs="2">classify</FunctionName>
+            <FunctionName nArgs="-2">Clip</FunctionName>
+            <FunctionName nArgs="1">CollectGeometries</FunctionName>
+            <FunctionName nArgs="1">Collection_Average</FunctionName>
+            <FunctionName nArgs="1">Collection_Bounds</FunctionName>
+            <FunctionName nArgs="0">Collection_Count</FunctionName>
+            <FunctionName nArgs="1">Collection_Max</FunctionName>
+            <FunctionName nArgs="1">Collection_Median</FunctionName>
+            <FunctionName nArgs="1">Collection_Min</FunctionName>
+            <FunctionName nArgs="1">Collection_Nearest</FunctionName>
+            <FunctionName nArgs="1">Collection_Sum</FunctionName>
+            <FunctionName nArgs="1">Collection_Unique</FunctionName>
+            <FunctionName nArgs="-2">Concatenate</FunctionName>
+            <FunctionName nArgs="2">contains</FunctionName>
+            <FunctionName nArgs="-1">Contour</FunctionName>
+            <FunctionName nArgs="2">convert</FunctionName>
+            <FunctionName nArgs="1">convexHull</FunctionName>
+            <FunctionName nArgs="-1">ConvolveCoverage</FunctionName>
+            <FunctionName nArgs="1">cos</FunctionName>
+            <FunctionName nArgs="1">Count</FunctionName>
+            <FunctionName nArgs="-1">CoverageClassStats</FunctionName>
+            <FunctionName nArgs="2">CropCoverage</FunctionName>
+            <FunctionName nArgs="2">crosses</FunctionName>
+            <FunctionName nArgs="2">dateFormat</FunctionName>
+            <FunctionName nArgs="2">dateParse</FunctionName>
+            <FunctionName nArgs="2">difference</FunctionName>
+            <FunctionName nArgs="1">dimension</FunctionName>
+            <FunctionName nArgs="2">disjoint</FunctionName>
+            <FunctionName nArgs="2">disjoint3D</FunctionName>
+            <FunctionName nArgs="2">distance</FunctionName>
+            <FunctionName nArgs="2">distance3D</FunctionName>
+            <FunctionName nArgs="1">double2bool</FunctionName>
+            <FunctionName nArgs="1">endAngle</FunctionName>
+            <FunctionName nArgs="1">endPoint</FunctionName>
+            <FunctionName nArgs="1">env</FunctionName>
+            <FunctionName nArgs="1">envelope</FunctionName>
+            <FunctionName nArgs="2">EqualInterval</FunctionName>
+            <FunctionName nArgs="2">equalsExact</FunctionName>
+            <FunctionName nArgs="3">equalsExactTolerance</FunctionName>
+            <FunctionName nArgs="2">equalTo</FunctionName>
+            <FunctionName nArgs="1">exp</FunctionName>
+            <FunctionName nArgs="1">exteriorRing</FunctionName>
+            <FunctionName nArgs="3">Feature</FunctionName>
+            <FunctionName nArgs="-2">FeatureClassStats</FunctionName>
+            <FunctionName nArgs="1">floor</FunctionName>
+            <FunctionName nArgs="0">geometry</FunctionName>
+            <FunctionName nArgs="1">geometryType</FunctionName>
+            <FunctionName nArgs="1">geomFromWKT</FunctionName>
+            <FunctionName nArgs="1">geomLength</FunctionName>
+            <FunctionName nArgs="2">getGeometryN</FunctionName>
+            <FunctionName nArgs="1">getX</FunctionName>
+            <FunctionName nArgs="1">getY</FunctionName>
+            <FunctionName nArgs="1">getz</FunctionName>
+            <FunctionName nArgs="2">greaterEqualThan</FunctionName>
+            <FunctionName nArgs="2">greaterThan</FunctionName>
+            <FunctionName nArgs="-3">Grid</FunctionName>
+            <FunctionName nArgs="-5">Heatmap</FunctionName>
+            <FunctionName nArgs="0">id</FunctionName>
+            <FunctionName nArgs="2">IEEEremainder</FunctionName>
+            <FunctionName nArgs="3">if_then_else</FunctionName>
+            <FunctionName nArgs="-2">in</FunctionName>
+            <FunctionName nArgs="11">in10</FunctionName>
+            <FunctionName nArgs="3">in2</FunctionName>
+            <FunctionName nArgs="4">in3</FunctionName>
+            <FunctionName nArgs="5">in4</FunctionName>
+            <FunctionName nArgs="6">in5</FunctionName>
+            <FunctionName nArgs="7">in6</FunctionName>
+            <FunctionName nArgs="8">in7</FunctionName>
+            <FunctionName nArgs="9">in8</FunctionName>
+            <FunctionName nArgs="10">in9</FunctionName>
+            <FunctionName nArgs="2">InclusionFeatureCollection</FunctionName>
+            <FunctionName nArgs="1">int2bbool</FunctionName>
+            <FunctionName nArgs="1">int2ddouble</FunctionName>
+            <FunctionName nArgs="1">interiorPoint</FunctionName>
+            <FunctionName nArgs="2">interiorRingN</FunctionName>
+            <FunctionName nArgs="-5">Interpolate</FunctionName>
+            <FunctionName nArgs="2">intersection</FunctionName>
+            <FunctionName nArgs="-2">IntersectionFeatureCollection</FunctionName>
+            <FunctionName nArgs="2">intersects</FunctionName>
+            <FunctionName nArgs="2">intersects3D</FunctionName>
+            <FunctionName nArgs="1">isClosed</FunctionName>
+            <FunctionName nArgs="0">isCoverage</FunctionName>
+            <FunctionName nArgs="1">isEmpty</FunctionName>
+            <FunctionName nArgs="1">isInstanceOf</FunctionName>
+            <FunctionName nArgs="2">isLike</FunctionName>
+            <FunctionName nArgs="1">isNull</FunctionName>
+            <FunctionName nArgs="2">isometric</FunctionName>
+            <FunctionName nArgs="1">isRing</FunctionName>
+            <FunctionName nArgs="1">isSimple</FunctionName>
+            <FunctionName nArgs="1">isValid</FunctionName>
+            <FunctionName nArgs="3">isWithinDistance</FunctionName>
+            <FunctionName nArgs="3">isWithinDistance3D</FunctionName>
+            <FunctionName nArgs="2">Jenks</FunctionName>
+            <FunctionName nArgs="1">length</FunctionName>
+            <FunctionName nArgs="2">lessEqualThan</FunctionName>
+            <FunctionName nArgs="2">lessThan</FunctionName>
+            <FunctionName nArgs="-1">list</FunctionName>
+            <FunctionName nArgs="1">log</FunctionName>
+            <FunctionName nArgs="4">LRSGeocode</FunctionName>
+            <FunctionName nArgs="-4">LRSMeasure</FunctionName>
+            <FunctionName nArgs="5">LRSSegment</FunctionName>
+            <FunctionName nArgs="2">max</FunctionName>
+            <FunctionName nArgs="2">max_2</FunctionName>
+            <FunctionName nArgs="2">max_3</FunctionName>
+            <FunctionName nArgs="2">max_4</FunctionName>
+            <FunctionName nArgs="2">min</FunctionName>
+            <FunctionName nArgs="2">min_2</FunctionName>
+            <FunctionName nArgs="2">min_3</FunctionName>
+            <FunctionName nArgs="2">min_4</FunctionName>
+            <FunctionName nArgs="1">mincircle</FunctionName>
+            <FunctionName nArgs="1">minimumdiameter</FunctionName>
+            <FunctionName nArgs="1">minrectangle</FunctionName>
+            <FunctionName nArgs="2">modulo</FunctionName>
+            <FunctionName nArgs="2">MultiplyCoverages</FunctionName>
+            <FunctionName nArgs="-2">Nearest</FunctionName>
+            <FunctionName nArgs="1">NormalizeCoverage</FunctionName>
+            <FunctionName nArgs="1">not</FunctionName>
+            <FunctionName nArgs="2">notEqualTo</FunctionName>
+            <FunctionName nArgs="2">numberFormat</FunctionName>
+            <FunctionName nArgs="5">numberFormat2</FunctionName>
+            <FunctionName nArgs="1">numGeometries</FunctionName>
+            <FunctionName nArgs="1">numInteriorRing</FunctionName>
+            <FunctionName nArgs="1">numPoints</FunctionName>
+            <FunctionName nArgs="1">octagonalenvelope</FunctionName>
+            <FunctionName nArgs="3">offset</FunctionName>
+            <FunctionName nArgs="2">overlaps</FunctionName>
+            <FunctionName nArgs="-1">parameter</FunctionName>
+            <FunctionName nArgs="1">parseBoolean</FunctionName>
+            <FunctionName nArgs="1">parseDouble</FunctionName>
+            <FunctionName nArgs="1">parseInt</FunctionName>
+            <FunctionName nArgs="1">parseLong</FunctionName>
+            <FunctionName nArgs="0">pi</FunctionName>
+            <FunctionName nArgs="-1">PointBuffers</FunctionName>
+            <FunctionName nArgs="2">pointN</FunctionName>
+            <FunctionName nArgs="-6">PointStacker</FunctionName>
+            <FunctionName nArgs="-1">PolygonExtraction</FunctionName>
+            <FunctionName nArgs="2">pow</FunctionName>
+            <FunctionName nArgs="1">property</FunctionName>
+            <FunctionName nArgs="1">PropertyExists</FunctionName>
+            <FunctionName nArgs="2">Quantile</FunctionName>
+            <FunctionName nArgs="-1">Query</FunctionName>
+            <FunctionName nArgs="0">random</FunctionName>
+            <FunctionName nArgs="-1">RangeLookup</FunctionName>
+            <FunctionName nArgs="-1">RasterAsPointCollection</FunctionName>
+            <FunctionName nArgs="-2">RasterZonalStatistics</FunctionName>
+            <FunctionName nArgs="-6">RasterZonalStatistics2</FunctionName>
+            <FunctionName nArgs="5">Recode</FunctionName>
+            <FunctionName nArgs="-2">RectangularClip</FunctionName>
+            <FunctionName nArgs="2">relate</FunctionName>
+            <FunctionName nArgs="3">relatePattern</FunctionName>
+            <FunctionName nArgs="-1">Reproject</FunctionName>
+            <FunctionName nArgs="-3">rescaleToPixels</FunctionName>
+            <FunctionName nArgs="1">rint</FunctionName>
+            <FunctionName nArgs="1">round</FunctionName>
+            <FunctionName nArgs="1">round_2</FunctionName>
+            <FunctionName nArgs="1">roundDouble</FunctionName>
+            <FunctionName nArgs="-5">ScaleCoverage</FunctionName>
+            <FunctionName nArgs="2">setCRS</FunctionName>
+            <FunctionName nArgs="3">Simplify</FunctionName>
+            <FunctionName nArgs="1">sin</FunctionName>
+            <FunctionName nArgs="-2">Snap</FunctionName>
+            <FunctionName nArgs="1">sqrt</FunctionName>
+            <FunctionName nArgs="2">StandardDeviation</FunctionName>
+            <FunctionName nArgs="1">startAngle</FunctionName>
+            <FunctionName nArgs="1">startPoint</FunctionName>
+            <FunctionName nArgs="1">strCapitalize</FunctionName>
+            <FunctionName nArgs="2">strConcat</FunctionName>
+            <FunctionName nArgs="2">strEndsWith</FunctionName>
+            <FunctionName nArgs="2">strEqualsIgnoreCase</FunctionName>
+            <FunctionName nArgs="2">strIndexOf</FunctionName>
+            <FunctionName nArgs="4">stringTemplate</FunctionName>
+            <FunctionName nArgs="2">strLastIndexOf</FunctionName>
+            <FunctionName nArgs="1">strLength</FunctionName>
+            <FunctionName nArgs="2">strMatches</FunctionName>
+            <FunctionName nArgs="3">strPosition</FunctionName>
+            <FunctionName nArgs="4">strReplace</FunctionName>
+            <FunctionName nArgs="2">strStartsWith</FunctionName>
+            <FunctionName nArgs="3">strSubstring</FunctionName>
+            <FunctionName nArgs="2">strSubstringStart</FunctionName>
+            <FunctionName nArgs="1">strToLowerCase</FunctionName>
+            <FunctionName nArgs="1">strToUpperCase</FunctionName>
+            <FunctionName nArgs="1">strTrim</FunctionName>
+            <FunctionName nArgs="3">strTrim2</FunctionName>
+            <FunctionName nArgs="-1">strURLEncode</FunctionName>
+            <FunctionName nArgs="2">StyleCoverage</FunctionName>
+            <FunctionName nArgs="2">symDifference</FunctionName>
+            <FunctionName nArgs="1">tan</FunctionName>
+            <FunctionName nArgs="1">toDegrees</FunctionName>
+            <FunctionName nArgs="1">toRadians</FunctionName>
+            <FunctionName nArgs="2">touches</FunctionName>
+            <FunctionName nArgs="1">toWKT</FunctionName>
+            <FunctionName nArgs="2">Transform</FunctionName>
+            <FunctionName nArgs="2">union</FunctionName>
+            <FunctionName nArgs="2">UnionFeatureCollection</FunctionName>
+            <FunctionName nArgs="2">Unique</FunctionName>
+            <FunctionName nArgs="2">UniqueInterval</FunctionName>
+            <FunctionName nArgs="-4">VectorToRaster</FunctionName>
+            <FunctionName nArgs="3">VectorZonalStatistics</FunctionName>
+            <FunctionName nArgs="1">vertices</FunctionName>
+            <FunctionName nArgs="2">within</FunctionName>
+          </FunctionNames>
+        </Functions>
+      </ArithmeticOperators>
+    </Scalar_Capabilities>
+    <Id_Capabilities>
+      <FID />
+      <EID />
+    </Id_Capabilities>
+  </Filter_Capabilities>
+</WFS_Capabilities>

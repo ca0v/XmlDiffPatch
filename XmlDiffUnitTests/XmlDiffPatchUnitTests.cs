@@ -1,3 +1,4 @@
+using System.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace XmlDiffPatchTests
@@ -5,6 +6,13 @@ namespace XmlDiffPatchTests
     [TestClass]
     public class XmlDiffPatchUnitTests
     {
+
+        private static XmlNode LoadNodeFromRes(string v)
+        {
+            var doc = new XmlDocument();
+            doc.Load($"input/{v}.xml");
+            return doc.DocumentElement;
+        }
 
         private static void SaveDiff(string identifier, System.Text.StringBuilder sb)
         {
@@ -15,7 +23,7 @@ namespace XmlDiffPatchTests
         {
             var doc1 = new System.Xml.XmlDocument();
             doc1.LoadXml(xml1);
-            var node1 = doc1.FirstChild;
+            var node1 = doc1.DocumentElement;
             return node1;
         }
 
@@ -61,12 +69,8 @@ namespace XmlDiffPatchTests
             [TestMethod]
             public void DiffNsPrefixEqualTest()
             {
-                var doc1 = new System.Xml.XmlDocument();
-                doc1.LoadXml("<XML xmlns:foo=\"http://www.opengis.net/ogc\"><foo:test>TEST</foo:test></XML>");
-                var node1 = doc1.FirstChild;
-                var doc2 = new System.Xml.XmlDocument();
-                doc2.LoadXml("<XML xmlns:bar=\"http://www.opengis.net/ogc\"><bar:test>TEST</bar:test></XML>");
-                var node2 = doc2.FirstChild;
+                var node1 = LoadNode("<XML xmlns:foo=\"http://www.opengis.net/ogc\"><foo:test>TEST</foo:test></XML>");
+                var node2 = LoadNode("<XML xmlns:bar=\"http://www.opengis.net/ogc\"><bar:test>TEST</bar:test></XML>");
                 var diff = new Microsoft.XmlDiffPatch.XmlDiff(Microsoft.XmlDiffPatch.XmlDiffOptions.IgnorePrefixes);
                 Assert.IsTrue(diff.Compare(node1, node2));
             }
@@ -74,12 +78,8 @@ namespace XmlDiffPatchTests
             [TestMethod]
             public void DiffChildOrderEqualTest()
             {
-                var doc1 = new System.Xml.XmlDocument();
-                doc1.LoadXml("<XML xmlns:foo=\"http://www.opengis.net/ogc\"><foo:test>TEST1</foo:test><foo:test>TEST2</foo:test></XML>");
-                var node1 = doc1.FirstChild;
-                var doc2 = new System.Xml.XmlDocument();
-                doc2.LoadXml("<XML xmlns:bar=\"http://www.opengis.net/ogc\"><bar:test>TEST2</bar:test><bar:test>TEST1</bar:test></XML>");
-                var node2 = doc2.FirstChild;
+                var node1 = LoadNode("<XML xmlns:foo=\"http://www.opengis.net/ogc\"><foo:test>TEST1</foo:test><foo:test>TEST2</foo:test></XML>");
+                var node2 = LoadNode("<XML xmlns:bar=\"http://www.opengis.net/ogc\"><bar:test>TEST2</bar:test><bar:test>TEST1</bar:test></XML>");
                 var diff = new Microsoft.XmlDiffPatch.XmlDiff(Microsoft.XmlDiffPatch.XmlDiffOptions.IgnorePrefixes | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreChildOrder);
                 Assert.IsTrue(diff.Compare(node1, node2));
             }
@@ -88,12 +88,8 @@ namespace XmlDiffPatchTests
             [TestMethod]
             public void DiffCommentsEqualTest()
             {
-                var doc1 = new System.Xml.XmlDocument();
-                doc1.LoadXml("<XML xmlns:foo=\"http://www.opengis.net/ogc\"><!--foo--><foo:test>TEST1</foo:test><foo:test>TEST2</foo:test></XML>");
-                var node1 = doc1.FirstChild;
-                var doc2 = new System.Xml.XmlDocument();
-                doc2.LoadXml("<XML xmlns:bar=\"http://www.opengis.net/ogc\"><!--bar--><bar:test>TEST2</bar:test><bar:test>TEST1</bar:test></XML>");
-                var node2 = doc2.FirstChild;
+                var node1 = LoadNode("<XML xmlns:foo=\"http://www.opengis.net/ogc\"><!--foo--><foo:test>TEST1</foo:test><foo:test>TEST2</foo:test></XML>");
+                var node2 = LoadNode("<XML xmlns:bar=\"http://www.opengis.net/ogc\"><!--bar--><bar:test>TEST2</bar:test><bar:test>TEST1</bar:test></XML>");
                 var diff = new Microsoft.XmlDiffPatch.XmlDiff(Microsoft.XmlDiffPatch.XmlDiffOptions.IgnorePrefixes | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreChildOrder | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreComments);
                 Assert.IsTrue(diff.Compare(node1, node2));
             }
@@ -101,15 +97,41 @@ namespace XmlDiffPatchTests
             [TestMethod]
             public void DiffXmlDeclEqualTest()
             {
-                var doc1 = new System.Xml.XmlDocument();
-                doc1.LoadXml("<?xml version=\"1.0\" encoding=\"UTF-8\"?><XML xmlns:foo=\"http://www.opengis.net/ogc\"><!--foo--><foo:test>TEST1</foo:test><foo:test>TEST2</foo:test></XML>");
-                var node1 = doc1.FirstChild;
-                var doc2 = new System.Xml.XmlDocument();
-                doc2.LoadXml("<?xml version=\"1.0\" encoding=\"UTF-16\"?><XML xmlns:bar=\"http://www.opengis.net/ogc\"><!--bar--><bar:test>TEST2</bar:test><bar:test>TEST1</bar:test></XML>");
-                var node2 = doc2.FirstChild;
+                var node1 = LoadNode("<?xml version=\"1.0\" encoding=\"UTF-8\"?><XML xmlns:foo=\"http://www.opengis.net/ogc\"><!--foo--><foo:test>TEST1</foo:test><foo:test>TEST2</foo:test></XML>");
+                var node2 = LoadNode("<?xml version=\"1.0\" encoding=\"UTF-16\"?><XML xmlns:bar=\"http://www.opengis.net/ogc\"><!--bar--><bar:test>TEST2</bar:test><bar:test>TEST1</bar:test></XML>");
                 var diff = new Microsoft.XmlDiffPatch.XmlDiff(Microsoft.XmlDiffPatch.XmlDiffOptions.IgnorePrefixes | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreChildOrder | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreComments | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreXmlDecl);
                 Assert.IsTrue(diff.Compare(node1, node2));
             }
+
+            [TestMethod]
+            public void DiffNamespaceEqualTest()
+            {
+                var node1 = LoadNode("<WFS_Capabilities xmlns=\"http://www.opengis.net/wfs\" version=\"1.1.0\" ></WFS_Capabilities>");
+                var node2 = LoadNode("<wfs:WFS_Capabilities xmlns:wfs=\"http://www.opengis.net/wfs\" version=\"1.1.0\" ></wfs:WFS_Capabilities>");
+                var diff = new Microsoft.XmlDiffPatch.XmlDiff(Microsoft.XmlDiffPatch.XmlDiffOptions.IgnorePrefixes | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreChildOrder | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreComments | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreXmlDecl);
+                Assert.IsTrue(diff.Compare(node1, node2));
+            }
+
+            [TestMethod]
+            public void DiffWmsEqualTest()
+            {
+                var node1 = LoadNodeFromRes("wfs.getcaps.model");
+                var node2 = LoadNodeFromRes("wfs.getcaps.raw");
+                var sb = new System.Text.StringBuilder();
+                var diff = new Microsoft.XmlDiffPatch.XmlDiff(
+                    Microsoft.XmlDiffPatch.XmlDiffOptions.IgnorePrefixes
+                    | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreNamespaces
+                    | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreChildOrder
+                    | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreComments
+                    | Microsoft.XmlDiffPatch.XmlDiffOptions.IgnoreXmlDecl);
+                if (!diff.Compare(node1, node2, CreateWriter(sb)))
+                {
+                    SaveDiff("DiffWmsEqualTest", sb);
+                    Assert.Fail();
+                }
+            }
+
+
         }
 
         [TestClass]

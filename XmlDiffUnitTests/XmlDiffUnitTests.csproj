@@ -64,6 +64,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="input\wfs.getcaps.model.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\wfs.getcaps.raw.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="output\DiffMissingNodeTest-12.xml" />
     <Content Include="output\DiffMissingNodeTest-21.xml" />
     <Content Include="output\DiffWhitespaceTest.xml" />

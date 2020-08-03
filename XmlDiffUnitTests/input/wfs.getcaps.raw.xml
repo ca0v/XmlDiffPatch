@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:WFS_Capabilities xmlns:wfs="http://www.opengis.net/wfs" xmlns="http://www.opengis.net/wfs" xmlns:DEV860SQL="http://inforpublicsector.com/geoserver/DEV860SQL" xmlns:MapAU850="http://inforpublicsector.com/geoserver/MapAU850" xmlns:MapCA860="http://inforpublicsector.com/geoserver/MapCA860" xmlns:MapUK860="http://inforpublicsector.com/geoserver/MapUK860" xmlns:MapVegas860SQL="http://inforpublicsector.com/geoserver/MapVegas860SQL" xmlns:QA840CA="http://inforpublicsector.com/geoserver/QA840CA" xmlns:QA840NZ="http://inforpublicsector.com/geoserver/QA840NZ" xmlns:SPATIAL860="http://inforpublicsector.com/geoserver/spatial860" xmlns:cite="http://www.opengeospatial.net/cite" xmlns:gml="http://www.opengis.net/gml" xmlns:ips="http://inforpublicsector.com/geoserver" xmlns:it.geosolutions="http://www.geo-solutions.it" xmlns:nurc="http://www.nurc.nato.int" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ows="http://www.opengis.net/ows" xmlns:sde="http://geoserver.sf.net" xmlns:sf="http://www.openplans.org/spearfish" xmlns:tiger="http://www.census.gov" xmlns:topp="http://www.openplans.org/topp" xmlns:vegas11="http://geoserver.org/vegas11" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1.0" xsi:schemaLocation="http://www.opengis.net/wfs http://localhost:3002/mock/geoserver/schemas/wfs/1.1.0/wfs.xsd" updateSequence="410">
+  <ows:ServiceIdentification>
+    <ows:Title>GeoServer Web Feature Service</ows:Title>
+    <ows:Abstract>This is the reference implementation of WFS 1.0.0 and WFS 1.1.0, supports all WFS operations including Transaction.</ows:Abstract>
+    <ows:Keywords>
+      <ows:Keyword>WFS</ows:Keyword>
+      <ows:Keyword>WMS</ows:Keyword>
+      <ows:Keyword>GEOSERVER</ows:Keyword>
+    </ows:Keywords>
+    <ows:ServiceType>WFS</ows:ServiceType>
+    <ows:ServiceTypeVersion>1.1.0</ows:ServiceTypeVersion>
+    <ows:Fees>NONE</ows:Fees>
+    <ows:AccessConstraints>NONE</ows:AccessConstraints>
+  </ows:ServiceIdentification>
+  <ows:ServiceProvider>
+    <ows:ProviderName>The Ancient Geographers</ows:ProviderName>
+    <ows:ServiceContact>
+      <ows:IndividualName>Claudius Ptolomaeus</ows:IndividualName>
+      <ows:PositionName>Chief Geographer</ows:PositionName>
+      <ows:ContactInfo>
+        <ows:Phone>
+          <ows:Voice />
+          <ows:Facsimile />
+        </ows:Phone>
+        <ows:Address>
+          <ows:DeliveryPoint />
+          <ows:City>Alexandria</ows:City>
+          <ows:AdministrativeArea />
+          <ows:PostalCode />
+          <ows:Country>Egypt</ows:Country>
+          <ows:ElectronicMailAddress>claudius.ptolomaeus@gmail.com</ows:ElectronicMailAddress>
+        </ows:Address>
+      </ows:ContactInfo>
+    </ows:ServiceContact>
+  </ows:ServiceProvider>
+  <ows:OperationsMetadata>
+    <ows:Operation name="GetCapabilities">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://localhost:3002/mock/geoserver/wfs" />
+          <ows:Post xlink:href="http://localhost:3002/mock/geoserver/wfs" />
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="AcceptVersions">
+        <ows:Value>1.0.0</ows:Value>
+        <ows:Value>1.1.0</ows:Value>
+      </ows:Parameter>
+      <ows:Parameter name="AcceptFormats">
+        <ows:Value>text/xml</ows:Value>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="DescribeFeatureType">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://localhost:3002/mock/geoserver/wfs" />
+          <ows:Post xlink:href="http://localhost:3002/mock/geoserver/wfs" />
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="outputFormat">
+        <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="GetFeature">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://localhost:3002/mock/geoserver/wfs" />
+          <ows:Post xlink:href="http://localhost:3002/mock/geoserver/wfs" />
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="resultType">
+        <ows:Value>results</ows:Value>
+        <ows:Value>hits</ows:Value>
+      </ows:Parameter>
+      <ows:Parameter name="outputFormat">
+        <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+        <ows:Value>GML2</ows:Value>
+        <ows:Value>KML</ows:Value>
+        <ows:Value>SHAPE-ZIP</ows:Value>
+        <ows:Value>application/gml+xml; version=3.2</ows:Value>
+        <ows:Value>application/json</ows:Value>
+        <ows:Value>application/vnd.google-earth.kml xml</ows:Value>
+        <ows:Value>application/vnd.google-earth.kml+xml</ows:Value>
+        <ows:Value>csv</ows:Value>
+        <ows:Value>gml3</ows:Value>
+        <ows:Value>gml32</ows:Value>
+        <ows:Value>json</ows:Value>
+        <ows:Value>text/javascript</ows:Value>
+        <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+        <ows:Value>text/xml; subtype=gml/3.2</ows:Value>
+      </ows:Parameter>
+      <ows:Constraint name="LocalTraverseXLinkScope">
+        <ows:Value>2</ows:Value>
+      </ows:Constraint>
+    </ows:Operation>
+    <ows:Operation name="GetGmlObject">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://localhost:3002/mock/geoserver/wfs" />
+          <ows:Post xlink:href="http://localhost:3002/mock/geoserver/wfs" />
+        </ows:HTTP>
+      </ows:DCP>
+    </ows:Operation>
+    <ows:Operation name="Transaction">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://localhost:3002/mock/geoserver/wfs" />
+          <ows:Post xlink:href="http://localhost:3002/mock/geoserver/wfs" />
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="inputFormat">
+        <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+      </ows:Parameter>
+      <ows:Parameter name="idgen">
+        <ows:Value>GenerateNew</ows:Value>
+        <ows:Value>UseExisting</ows:Value>
+        <ows:Value>ReplaceDuplicate</ows:Value>
+      </ows:Parameter>
+      <ows:Parameter name="releaseAction">
+        <ows:Value>ALL</ows:Value>
+        <ows:Value>SOME</ows:Value>
+      </ows:Parameter>
+    </ows:Operation>
+  </ows:OperationsMetadata>
+  <FeatureTypeList>
+    <Operations>
+      <Operation>Query</Operation>
+      <Operation>Insert</Operation>
+      <Operation>Update</Operation>
+      <Operation>Delete</Operation>
+    </Operations>
+    <FeatureType>
+      <Name>vegas11:Addresses</Name>
+      <Title>Addresses</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>Addresses</ows:Keyword>
+        <ows:Keyword>features</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.25956555910884 36.17052390177421</ows:LowerCorner>
+        <ows:UpperCorner>-115.20619945841432 36.195779129034634</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Buildings</Name>
+      <Title>Buildings</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>Buildings</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.23688967324213 36.17231254966617</ows:LowerCorner>
+        <ows:UpperCorner>-115.22887156013122 36.17526476139247</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Complexes</Name>
+      <Title>Complexes</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>Complexes</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.23535021037613 36.172190424737664</ows:LowerCorner>
+        <ows:UpperCorner>-115.22061927311249 36.17530141781573</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:ConfigLinears</Name>
+      <Title>ConfigLinears</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>ConfigLinears</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24592700614033 36.17318340788838</ows:LowerCorner>
+        <ows:UpperCorner>-115.20892562364374 36.188560271658226</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:ConfigMains</Name>
+      <Title>ConfigMains</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>ConfigMains</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24230926594515 36.17235498559723</ows:LowerCorner>
+        <ows:UpperCorner>-115.22411284466578 36.18678539802488</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:ConfigPoints</Name>
+      <Title>ConfigPoints</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>ConfigPoints</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24408520384442 36.17291012697744</ows:LowerCorner>
+        <ows:UpperCorner>-115.22605690090376 36.18857317617589</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:ConfigSegments</Name>
+      <Title>ConfigSegments</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>ConfigSegments</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24231150424292 36.17063253051444</ows:LowerCorner>
+        <ows:UpperCorner>-115.22397415729309 36.18673731241811</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>cite:INFRAROADWAY</Name>
+      <Title>INFRAROADWAY</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>INFRAROADWAY</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:32640</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>54.62711209294452 22.650419980448035</ows:LowerCorner>
+        <ows:UpperCorner>55.966688747111036 24.78993388020567</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>ips:MapAU850_addresspoints</Name>
+      <Title>MapAU850_addresspoints</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>addresspoints</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3112</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>105.47747501654585 -44.98043790534888</ows:LowerCorner>
+        <ows:UpperCorner>160.63027519077596 -8.133505971767065</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapCA860:addressesca</Name>
+      <Title>MapCA860 Addresses</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>addressesca</ows:Keyword>
+        <ows:Keyword>features</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:26910</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-123.22449256579046 49.2002377707792</ows:LowerCorner>
+        <ows:UpperCorner>-123.02373219422871 49.2981235536435</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>cite:POINTS</Name>
+      <Title>POINTS</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>POINTS</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.22669722453384 36.17663616746731</ows:LowerCorner>
+        <ows:UpperCorner>-115.22494133250109 36.179176964583576</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Parcels</Name>
+      <Title>Parcels</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>Parcels</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.260241828611 36.16990502579505</ows:LowerCorner>
+        <ows:UpperCorner>-115.20607557696466 36.195989038291735</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Properties</Name>
+      <Title>Properties</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>Properties</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.23962434316506 36.17083754390344</ows:LowerCorner>
+        <ows:UpperCorner>-115.22086435097701 36.18004751721206</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:RailwaySegments</Name>
+      <Title>RailwaySegments</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>RailwaySegments</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.23984619564473 36.17307787023381</ows:LowerCorner>
+        <ows:UpperCorner>-115.22811725893548 36.181928343812494</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Roadways</Name>
+      <Title>Roadways</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>Roadways</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24592700614033 36.17318340788838</ows:LowerCorner>
+        <ows:UpperCorner>-115.20892562364374 36.188560271658226</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:SewerMains</Name>
+      <Title>SewerMains</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>SewerMains</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.25121657619393 36.17111358494287</ows:LowerCorner>
+        <ows:UpperCorner>-115.22373115480546 36.18887779494844</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:SewerManholes</Name>
+      <Title>SewerManholes</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>SewerManholes</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.25935293113345 36.17020534258519</ows:LowerCorner>
+        <ows:UpperCorner>-115.20594181568144 36.19590849911888</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Streets</Name>
+      <Title>Streets</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>Streets</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.2571858561661 36.1703050345994</ows:LowerCorner>
+        <ows:UpperCorner>-115.20587262874291 36.19610295435246</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>topp:states</Name>
+      <Title>USA Population</Title>
+      <Abstract>This is some census data on the states.</Abstract>
+      <ows:Keywords>
+        <ows:Keyword>census</ows:Keyword>
+        <ows:Keyword>united</ows:Keyword>
+        <ows:Keyword>boundaries</ows:Keyword>
+        <ows:Keyword>state</ows:Keyword>
+        <ows:Keyword>states</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-124.731422 24.955967</ows:LowerCorner>
+        <ows:UpperCorner>-66.969849 49.371735</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterHydrants</Name>
+      <Title>WaterHydrants</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>WaterHydrants</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24146392220587 36.17184522104155</ows:LowerCorner>
+        <ows:UpperCorner>-115.21337586453305 36.18601324572231</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterMains</Name>
+      <Title>WaterMains</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>WaterMains</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24231328365934 36.17056004185687</ows:LowerCorner>
+        <ows:UpperCorner>-115.22385062906332 36.1867853873215</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterMiscellaneous</Name>
+      <Title>WaterMiscellaneous</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>WaterMiscellaneous</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24129073889513 36.17159543336041</ows:LowerCorner>
+        <ows:UpperCorner>-115.22095840960897 36.18645577373346</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterNodes</Name>
+      <Title>WaterNodes</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>WaterNodes</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24233795160843 36.17055873160919</ows:LowerCorner>
+        <ows:UpperCorner>-115.22340884923943 36.1879807261171</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterSvcLines</Name>
+      <Title>WaterSvcLines</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>WaterSvcLines</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24257799320681 36.1729768505497</ows:LowerCorner>
+        <ows:UpperCorner>-115.22629779767169 36.18712681223364</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:WaterValves</Name>
+      <Title>WaterValves</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>WaterValves</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24225124740276 36.173659289879545</ows:LowerCorner>
+        <ows:UpperCorner>-115.2245543754422 36.19407882848738</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>vegas11:Water_Meters</Name>
+      <Title>Water_Meters</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>Water_Meters</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-115.24199196327709 36.18086071596879</ows:LowerCorner>
+        <ows:UpperCorner>-115.22645803898202 36.18665840417064</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapVegas860SQL:addresses</Name>
+      <Title>addresses</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>addresses</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-117.15550977476727 34.98008171739624</ows:LowerCorner>
+        <ows:UpperCorner>-113.8716175625461 42.01048957932861</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>QA840CA:addressesca</Name>
+      <Title>addressesca</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>addressesca</ows:Keyword>
+        <ows:Keyword>features</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:26910</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-123.22449256579046 49.2002377707792</ows:LowerCorner>
+        <ows:UpperCorner>-123.02373219422871 49.2981235536435</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapUK860:addressuk</Name>
+      <Title>addressuk</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>addressuk</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-2.832473656649472 50.51410638971785</ows:LowerCorner>
+        <ows:UpperCorner>0.648377712967554 54.41055738821113</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapVegas860SQL:configlinears</Name>
+      <Title>configlinears</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>configlinears</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-117.15550977476727 34.98008171739624</ows:LowerCorner>
+        <ows:UpperCorner>-113.8716175625461 42.01048957932861</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>QA840NZ:hansen_address_points</Name>
+      <Title>hansen_address_points</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>hansen_address_points</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:2193</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>164.91153211187202 -47.520487910125254</ows:LowerCorner>
+        <ows:UpperCorner>179.87672447778493 -33.92267642945477</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapUK860:landuse</Name>
+      <Title>landuse</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>landuse</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-0.1439228 51.3547804</ows:LowerCorner>
+        <ows:UpperCorner>0.1510379 52.2044073</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapCA860:parcelsca</Name>
+      <Title>parcelsca</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>parcelsca</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:26910</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-123.1568773942129 49.23600553398768</ows:LowerCorner>
+        <ows:UpperCorner>-123.11106113146097 49.27214340397805</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>QA840CA:parcelsca</Name>
+      <Title>parcelsca</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>parcelsca</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:26910</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-140.5372300339426 30.505244988250023</ows:LowerCorner>
+        <ows:UpperCorner>-105.40785559115105 81.81115971519311</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapUK860:places</Name>
+      <Title>places</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>places</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-6.454252529085048 49.87173450256529</ows:LowerCorner>
+        <ows:UpperCorner>1.753763835075276 55.80440901608816</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapUK860:points</Name>
+      <Title>points</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>points</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-5.688353413767066 50.07449689851004</ows:LowerCorner>
+        <ows:UpperCorner>1.7552717351054339 55.78414011568278</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>cite:roads</Name>
+      <Title>roads</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>roads</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-6.3609321 49.8835715</ows:LowerCorner>
+        <ows:UpperCorner>1.7625851 55.8076192</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapVegas860SQL:roadways</Name>
+      <Title>roadways</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>roadways</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-117.15550977476727 34.98008171739624</ows:LowerCorner>
+        <ows:UpperCorner>-113.8716175625461 42.01048957932861</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>MapVegas860SQL:watermains</Name>
+      <Title>watermains</Title>
+      <Abstract />
+      <ows:Keywords>
+        <ows:Keyword>features</ows:Keyword>
+        <ows:Keyword>watermains</ows:Keyword>
+      </ows:Keywords>
+      <DefaultSRS>urn:x-ogc:def:crs:EPSG:3421</DefaultSRS>
+      <ows:WGS84BoundingBox>
+        <ows:LowerCorner>-117.15550977476727 34.98008171739624</ows:LowerCorner>
+        <ows:UpperCorner>-113.8716175625461 42.01048957932861</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+  </FeatureTypeList>
+  <ogc:Filter_Capabilities>
+    <ogc:Spatial_Capabilities>
+      <ogc:GeometryOperands>
+        <ogc:GeometryOperand>gml:Envelope</ogc:GeometryOperand>
+        <ogc:GeometryOperand>gml:Point</ogc:GeometryOperand>
+        <ogc:GeometryOperand>gml:LineString</ogc:GeometryOperand>
+        <ogc:GeometryOperand>gml:Polygon</ogc:GeometryOperand>
+      </ogc:GeometryOperands>
+      <ogc:SpatialOperators>
+        <ogc:SpatialOperator name="Disjoint" />
+        <ogc:SpatialOperator name="Equals" />
+        <ogc:SpatialOperator name="DWithin" />
+        <ogc:SpatialOperator name="Beyond" />
+        <ogc:SpatialOperator name="Intersects" />
+        <ogc:SpatialOperator name="Touches" />
+        <ogc:SpatialOperator name="Crosses" />
+        <ogc:SpatialOperator name="Within" />
+        <ogc:SpatialOperator name="Contains" />
+        <ogc:SpatialOperator name="Overlaps" />
+        <ogc:SpatialOperator name="BBOX" />
+      </ogc:SpatialOperators>
+    </ogc:Spatial_Capabilities>
+    <ogc:Scalar_Capabilities>
+      <ogc:LogicalOperators />
+      <ogc:ComparisonOperators>
+        <ogc:ComparisonOperator>LessThan</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>GreaterThan</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>LessThanEqualTo</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>GreaterThanEqualTo</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>EqualTo</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>NotEqualTo</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>Like</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>Between</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>NullCheck</ogc:ComparisonOperator>
+      </ogc:ComparisonOperators>
+      <ogc:ArithmeticOperators>
+        <ogc:SimpleArithmetic />
+        <ogc:Functions>
+          <ogc:FunctionNames>
+            <ogc:FunctionName nArgs="1">abs</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">abs_2</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">abs_3</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">abs_4</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">acos</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">AddCoverages</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">Affine</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">Aggregate</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Area</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">area2</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">AreaGrid</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">asin</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">atan</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">atan2</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">BandMerge</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">BandSelect</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-6">BarnesSurface</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">between</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">boundary</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">boundaryDimension</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Bounds</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">buffer</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">BufferFeatureCollection</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">bufferWithSegments</ogc:FunctionName>
+            <ogc:FunctionName nArgs="7">Categorize</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">ceil</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Centroid</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">classify</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">Clip</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">CollectGeometries</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Collection_Average</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Collection_Bounds</ogc:FunctionName>
+            <ogc:FunctionName nArgs="0">Collection_Count</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Collection_Max</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Collection_Median</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Collection_Min</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Collection_Nearest</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Collection_Sum</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Collection_Unique</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">Concatenate</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">contains</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">Contour</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">convert</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">convexHull</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">ConvolveCoverage</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">cos</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">Count</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">CoverageClassStats</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">CropCoverage</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">crosses</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">dateFormat</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">dateParse</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">difference</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">dimension</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">disjoint</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">disjoint3D</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">distance</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">distance3D</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">double2bool</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">endAngle</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">endPoint</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">env</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">envelope</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">EqualInterval</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">equalsExact</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">equalsExactTolerance</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">equalTo</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">exp</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">exteriorRing</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">Feature</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">FeatureClassStats</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">floor</ogc:FunctionName>
+            <ogc:FunctionName nArgs="0">geometry</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">geometryType</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">geomFromWKT</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">geomLength</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">getGeometryN</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">getX</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">getY</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">getz</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">greaterEqualThan</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">greaterThan</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-3">Grid</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-5">Heatmap</ogc:FunctionName>
+            <ogc:FunctionName nArgs="0">id</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">IEEEremainder</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">if_then_else</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">in</ogc:FunctionName>
+            <ogc:FunctionName nArgs="11">in10</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">in2</ogc:FunctionName>
+            <ogc:FunctionName nArgs="4">in3</ogc:FunctionName>
+            <ogc:FunctionName nArgs="5">in4</ogc:FunctionName>
+            <ogc:FunctionName nArgs="6">in5</ogc:FunctionName>
+            <ogc:FunctionName nArgs="7">in6</ogc:FunctionName>
+            <ogc:FunctionName nArgs="8">in7</ogc:FunctionName>
+            <ogc:FunctionName nArgs="9">in8</ogc:FunctionName>
+            <ogc:FunctionName nArgs="10">in9</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">InclusionFeatureCollection</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">int2bbool</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">int2ddouble</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">interiorPoint</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">interiorRingN</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-5">Interpolate</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">intersection</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">IntersectionFeatureCollection</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">intersects</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">intersects3D</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">isClosed</ogc:FunctionName>
+            <ogc:FunctionName nArgs="0">isCoverage</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">isEmpty</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">isInstanceOf</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">isLike</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">isNull</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">isometric</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">isRing</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">isSimple</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">isValid</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">isWithinDistance</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">isWithinDistance3D</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">Jenks</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">length</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">lessEqualThan</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">lessThan</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">list</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">log</ogc:FunctionName>
+            <ogc:FunctionName nArgs="4">LRSGeocode</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-4">LRSMeasure</ogc:FunctionName>
+            <ogc:FunctionName nArgs="5">LRSSegment</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">max</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">max_2</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">max_3</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">max_4</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">min</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">min_2</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">min_3</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">min_4</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">mincircle</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">minimumdiameter</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">minrectangle</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">modulo</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">MultiplyCoverages</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">Nearest</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">NormalizeCoverage</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">not</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">notEqualTo</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">numberFormat</ogc:FunctionName>
+            <ogc:FunctionName nArgs="5">numberFormat2</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">numGeometries</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">numInteriorRing</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">numPoints</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">octagonalenvelope</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">offset</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">overlaps</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">parameter</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">parseBoolean</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">parseDouble</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">parseInt</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">parseLong</ogc:FunctionName>
+            <ogc:FunctionName nArgs="0">pi</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">PointBuffers</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">pointN</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-6">PointStacker</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">PolygonExtraction</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">pow</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">property</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">PropertyExists</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">Quantile</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">Query</ogc:FunctionName>
+            <ogc:FunctionName nArgs="0">random</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">RangeLookup</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">RasterAsPointCollection</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">RasterZonalStatistics</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-6">RasterZonalStatistics2</ogc:FunctionName>
+            <ogc:FunctionName nArgs="5">Recode</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">RectangularClip</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">relate</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">relatePattern</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">Reproject</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-3">rescaleToPixels</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">rint</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">round</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">round_2</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">roundDouble</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-5">ScaleCoverage</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">setCRS</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">Simplify</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">sin</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-2">Snap</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">sqrt</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">StandardDeviation</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">startAngle</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">startPoint</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">strCapitalize</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">strConcat</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">strEndsWith</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">strEqualsIgnoreCase</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">strIndexOf</ogc:FunctionName>
+            <ogc:FunctionName nArgs="4">stringTemplate</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">strLastIndexOf</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">strLength</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">strMatches</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">strPosition</ogc:FunctionName>
+            <ogc:FunctionName nArgs="4">strReplace</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">strStartsWith</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">strSubstring</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">strSubstringStart</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">strToLowerCase</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">strToUpperCase</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">strTrim</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">strTrim2</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-1">strURLEncode</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">StyleCoverage</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">symDifference</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">tan</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">toDegrees</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">toRadians</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">touches</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">toWKT</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">Transform</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">union</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">UnionFeatureCollection</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">Unique</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">UniqueInterval</ogc:FunctionName>
+            <ogc:FunctionName nArgs="-4">VectorToRaster</ogc:FunctionName>
+            <ogc:FunctionName nArgs="3">VectorZonalStatistics</ogc:FunctionName>
+            <ogc:FunctionName nArgs="1">vertices</ogc:FunctionName>
+            <ogc:FunctionName nArgs="2">within</ogc:FunctionName>
+          </ogc:FunctionNames>
+        </ogc:Functions>
+      </ogc:ArithmeticOperators>
+    </ogc:Scalar_Capabilities>
+    <ogc:Id_Capabilities>
+      <ogc:FID />
+      <ogc:EID />
+    </ogc:Id_Capabilities>
+  </ogc:Filter_Capabilities>
+</wfs:WFS_Capabilities>
