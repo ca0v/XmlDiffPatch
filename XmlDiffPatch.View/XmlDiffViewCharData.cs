@@ -48,8 +48,8 @@ namespace Microsoft.XmlDiffPatch
     {
       if (this._op == XmlDiffViewOperation.Change)
       {
-        string str1 = string.Empty;
-        string str2 = string.Empty;
+        var str1 = string.Empty;
+        var str2 = string.Empty;
         if (this._nodeType == XmlNodeType.CDATA)
         {
           str1 = "<!CDATA[";

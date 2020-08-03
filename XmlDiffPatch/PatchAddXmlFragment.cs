@@ -19,10 +19,10 @@ namespace Microsoft.XmlDiffPatch
 
     internal override void Apply(XmlNode parent, ref XmlNode currentPosition)
     {
-      XmlDocument ownerDocument = parent.OwnerDocument;
+            var ownerDocument = parent.OwnerDocument;
       foreach (XmlNode node in this._nodes)
       {
-        XmlNode newChild = ownerDocument.ImportNode(node, true);
+                var newChild = ownerDocument.ImportNode(node, true);
         parent.InsertAfter(newChild, currentPosition);
         currentPosition = newChild;
       }

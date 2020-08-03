@@ -16,9 +16,9 @@ namespace Microsoft.XmlDiffPatch
   {
     private static void Main(string[] args)
     {
-      bool bFragments = false;
-      bool flag1 = false;
-      XmlDiffAlgorithm xmlDiffAlgorithm = XmlDiffAlgorithm.Auto;
+      var bFragments = false;
+      var flag1 = false;
+            var xmlDiffAlgorithm = XmlDiffAlgorithm.Auto;
       try
       {
         if (args.Length < 3)
@@ -26,9 +26,9 @@ namespace Microsoft.XmlDiffPatch
           TestXmlDiff.WriteUsage();
           return;
         }
-        XmlDiffOptions options = XmlDiffOptions.None;
-        int index = 0;
-        string empty = string.Empty;
+                var options = XmlDiffOptions.None;
+        var index = 0;
+        var empty = string.Empty;
         while (args[index][0] == '/')
         {
           if (args[index].Length != 2)
@@ -86,16 +86,16 @@ namespace Microsoft.XmlDiffPatch
             return;
           }
         }
-        string str1 = args[index];
-        string str2 = args[index + 1];
-        string str3 = args[index + 2];
-        bool flag2 = args.Length - index == 4 && args[index + 3] == "verify";
-        string str4 = str1.Substring(str1.LastIndexOf("\\") + 1) + " & " + str2.Substring(str2.LastIndexOf("\\") + 1) + " -> " + str3.Substring(str3.LastIndexOf("\\") + 1);
+        var str1 = args[index];
+        var str2 = args[index + 1];
+        var str3 = args[index + 2];
+        var flag2 = args.Length - index == 4 && args[index + 3] == "verify";
+        var str4 = str1.Substring(str1.LastIndexOf("\\") + 1) + " & " + str2.Substring(str2.LastIndexOf("\\") + 1) + " -> " + str3.Substring(str3.LastIndexOf("\\") + 1);
         if (empty != string.Empty)
           str4 = str4 + " (" + empty + ")";
         Console.Write(str4.Length >= 60 ? str4 + "\n" + new string(' ', 60) : str4 + new string(' ', 60 - str4.Length));
-        XmlWriter diffgramWriter1 = (XmlWriter) new XmlTextWriter(str3, (Encoding) new UnicodeEncoding());
-        XmlDiff xmlDiff = new XmlDiff(options);
+                var diffgramWriter1 = (XmlWriter) new XmlTextWriter(str3, (Encoding) new UnicodeEncoding());
+                var xmlDiff = new XmlDiff(options);
         xmlDiff.Algorithm = xmlDiffAlgorithm;
         bool flag3;
         if (flag1)
@@ -105,9 +105,9 @@ namespace Microsoft.XmlDiffPatch
             Console.Write("Cannot have option 'd' and 'f' together.");
             return;
           }
-          XmlDocument xmlDocument1 = new XmlDocument();
+                    var xmlDocument1 = new XmlDocument();
           xmlDocument1.Load(str1);
-          XmlDocument xmlDocument2 = new XmlDocument();
+                    var xmlDocument2 = new XmlDocument();
           xmlDocument2.Load(str2);
           flag3 = xmlDiff.Compare((XmlNode) xmlDocument1, (XmlNode) xmlDocument2, diffgramWriter1);
         }
@@ -123,10 +123,10 @@ namespace Microsoft.XmlDiffPatch
           XmlNode sourceNode;
           if (bFragments)
           {
-            NameTable nameTable = new NameTable();
-            XmlTextReader xmlTextReader = new XmlTextReader((Stream) new FileStream(str1, FileMode.Open, FileAccess.Read), XmlNodeType.Element, new XmlParserContext((XmlNameTable) nameTable, new XmlNamespaceManager((XmlNameTable) nameTable), string.Empty, XmlSpace.Default));
-            XmlDocument xmlDocument = new XmlDocument();
-            XmlDocumentFragment documentFragment = xmlDocument.CreateDocumentFragment();
+                        var nameTable = new NameTable();
+                        var xmlTextReader = new XmlTextReader((Stream) new FileStream(str1, FileMode.Open, FileAccess.Read), XmlNodeType.Element, new XmlParserContext((XmlNameTable) nameTable, new XmlNamespaceManager((XmlNameTable) nameTable), string.Empty, XmlSpace.Default));
+                        var xmlDocument = new XmlDocument();
+                        var documentFragment = xmlDocument.CreateDocumentFragment();
             XmlNode newChild;
             while ((newChild = xmlDocument.ReadNode((XmlReader) xmlTextReader)) != null)
             {
@@ -137,7 +137,7 @@ namespace Microsoft.XmlDiffPatch
           }
           else
           {
-            XmlDocument xmlDocument = new XmlDocument();
+                        var xmlDocument = new XmlDocument();
             xmlDocument.XmlResolver = (XmlResolver) null;
             xmlDocument.Load(str1);
             sourceNode = (XmlNode) xmlDocument;
@@ -149,11 +149,11 @@ namespace Microsoft.XmlDiffPatch
           }
           else
           {
-            XmlTextWriter xmlTextWriter = new XmlTextWriter("_patched.xml", Encoding.Unicode);
+                        var xmlTextWriter = new XmlTextWriter("_patched.xml", Encoding.Unicode);
             sourceNode.WriteTo((XmlWriter) xmlTextWriter);
             xmlTextWriter.Close();
           }
-          XmlWriter diffgramWriter2 = (XmlWriter) new XmlTextWriter("_2ndDiff.xml", (Encoding) new UnicodeEncoding());
+                    var diffgramWriter2 = (XmlWriter) new XmlTextWriter("_2ndDiff.xml", (Encoding) new UnicodeEncoding());
           if (xmlDiff.Compare("_patched.xml", str2, bFragments, diffgramWriter2))
             Console.Write(" - ok");
           else

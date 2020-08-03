@@ -32,7 +32,7 @@ namespace Microsoft.XmlDiffPatch
 
     public override IEnumerator GetEnumerator()
     {
-      return (IEnumerator) new SingleNodeList.Enumerator(this._node);
+      return (IEnumerator) new Enumerator(this._node);
     }
 
     internal override void AddNode(XmlNode node)
@@ -44,7 +44,7 @@ namespace Microsoft.XmlDiffPatch
 
     private class Enumerator : IEnumerator
     {
-      private SingleNodeList.Enumerator.State _state = SingleNodeList.Enumerator.State.BeforeNode;
+      private State _state = SingleNodeList.Enumerator.State.BeforeNode;
       private XmlNode _node;
 
       internal Enumerator(XmlNode node)

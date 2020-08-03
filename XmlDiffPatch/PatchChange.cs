@@ -62,16 +62,16 @@ namespace Microsoft.XmlDiffPatch
             this._ns = this._matchNode.NamespaceURI;
           if (this._prefix == null)
             this._prefix = this._matchNode.Prefix;
-          XmlElement element = parent.OwnerDocument.CreateElement(this._prefix, this._name, this._ns);
-          XmlAttributeCollection attributes = this._matchNode.Attributes;
+                    var element = parent.OwnerDocument.CreateElement(this._prefix, this._name, this._ns);
+                    var attributes = this._matchNode.Attributes;
           while (attributes.Count > 0)
           {
-            XmlAttribute node = (XmlAttribute) attributes.Item(0);
+                        var node = (XmlAttribute) attributes.Item(0);
             attributes.RemoveAt(0);
             element.Attributes.Append(node);
           }
           XmlNode nextSibling;
-          for (XmlNode xmlNode = this._matchNode.FirstChild; xmlNode != null; xmlNode = nextSibling)
+          for (var xmlNode = this._matchNode.FirstChild; xmlNode != null; xmlNode = nextSibling)
           {
             nextSibling = xmlNode.NextSibling;
             this._matchNode.RemoveChild(xmlNode);
@@ -90,7 +90,7 @@ namespace Microsoft.XmlDiffPatch
             this._prefix = this._matchNode.Prefix;
           if (this._value == null)
             this._value = this._matchNode.Value;
-          XmlAttribute attribute = parent.OwnerDocument.CreateAttribute(this._prefix, this._name, this._ns);
+                    var attribute = parent.OwnerDocument.CreateAttribute(this._prefix, this._name, this._ns);
           attribute.Value = this._value;
           parent.Attributes.Remove((XmlAttribute) this._matchNode);
           parent.Attributes.Append(attribute);
@@ -102,7 +102,7 @@ namespace Microsoft.XmlDiffPatch
           currentPosition = this._matchNode;
           break;
         case XmlNodeType.EntityReference:
-          XmlEntityReference entityReference = parent.OwnerDocument.CreateEntityReference(this._name);
+                    var entityReference = parent.OwnerDocument.CreateEntityReference(this._name);
           parent.ReplaceChild((XmlNode) entityReference, this._matchNode);
           currentPosition = (XmlNode) entityReference;
           break;
@@ -111,7 +111,7 @@ namespace Microsoft.XmlDiffPatch
           {
             if (this._value == null)
               this._value = ((XmlProcessingInstruction) this._matchNode).Data;
-            XmlProcessingInstruction processingInstruction = parent.OwnerDocument.CreateProcessingInstruction(this._name, this._value);
+                        var processingInstruction = parent.OwnerDocument.CreateProcessingInstruction(this._name, this._value);
             parent.ReplaceChild((XmlNode) processingInstruction, this._matchNode);
             currentPosition = (XmlNode) processingInstruction;
             break;
@@ -135,7 +135,7 @@ namespace Microsoft.XmlDiffPatch
           this._matchNode.ParentNode.ReplaceChild((XmlNode) this._matchNode.OwnerDocument.CreateDocumentType(this._name, this._prefix, this._ns, this._value), this._matchNode);
           break;
         case XmlNodeType.XmlDeclaration:
-          XmlDeclaration matchNode = (XmlDeclaration) this._matchNode;
+                    var matchNode = (XmlDeclaration) this._matchNode;
           matchNode.Encoding = (string) null;
           matchNode.Standalone = (string) null;
           matchNode.InnerText = this._value;

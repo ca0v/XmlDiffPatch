@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: Microsoft.XmlDiffPatch.XmlDiffCharData
 // Assembly: XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 // MVID: 2B32D548-922A-4A84-B9AD-FF8E573DAC90
@@ -10,8 +10,8 @@ namespace Microsoft.XmlDiffPatch
 {
     internal class XmlDiffCharData : XmlDiffNode
     {
-        private string _value;
-        private XmlDiffNodeType _nodeType;
+        private readonly string _value;
+        private readonly XmlDiffNodeType _nodeType;
 
         internal XmlDiffCharData(int position, string value, XmlDiffNodeType nodeType)
           : base(position)
@@ -45,8 +45,9 @@ namespace Microsoft.XmlDiffPatch
           XmlDiffNode changedNode,
           XmlDiff xmlDiff)
         {
-            if (this.NodeType != changedNode.NodeType || !(changedNode is XmlDiffCharData xmlDiffCharData))
+            if (this.NodeType != changedNode.NodeType || !( changedNode is XmlDiffCharData ))
                 return XmlDiffOperation.Undefined;
+            var xmlDiffCharData = changedNode as XmlDiffCharData;
             return this.Value == xmlDiffCharData.Value ? XmlDiffOperation.Match : XmlDiffOperation.ChangeCharacterData;
         }
 

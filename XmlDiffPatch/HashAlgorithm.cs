@@ -45,7 +45,7 @@ namespace Microsoft.XmlDiffPatch
     private static ulong GetHash(string data, ulong hash)
     {
       hash += (hash << 13) + (ulong) data.Length;
-      for (int index = 0; index < data.Length; ++index)
+      for (var index = 0; index < data.Length; ++index)
         hash += (hash << 17) + (ulong) data[index];
       return hash;
     }

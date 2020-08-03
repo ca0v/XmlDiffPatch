@@ -35,10 +35,10 @@ namespace Microsoft.XmlDiffPatch
 
     internal override void Apply(XmlNode parent, ref XmlNode currentPosition)
     {
-      XmlNode xmlNode1 = (XmlNode) null;
+            var xmlNode1 = (XmlNode) null;
       if (this._nodeType == XmlNodeType.Attribute)
       {
-        XmlNode xmlNode2 = !(this._prefix == "xmlns") ? (!(this._prefix == "") || !(this._name == "xmlns") ? (XmlNode) parent.OwnerDocument.CreateAttribute(this._prefix, this._name, this._ns) : (XmlNode) parent.OwnerDocument.CreateAttribute(this._name)) : (XmlNode) parent.OwnerDocument.CreateAttribute(this._prefix + ":" + this._name);
+                var xmlNode2 = !(this._prefix == "xmlns") ? (!(this._prefix == "") || !(this._name == "xmlns") ? (XmlNode) parent.OwnerDocument.CreateAttribute(this._prefix, this._name, this._ns) : (XmlNode) parent.OwnerDocument.CreateAttribute(this._name)) : (XmlNode) parent.OwnerDocument.CreateAttribute(this._prefix + ":" + this._name);
         xmlNode2.Value = this._value;
         parent.Attributes.Append((XmlAttribute) xmlNode2);
       }
@@ -66,12 +66,12 @@ namespace Microsoft.XmlDiffPatch
             xmlNode1 = (XmlNode) parent.OwnerDocument.CreateComment(this._value);
             break;
           case XmlNodeType.DocumentType:
-            XmlDocument ownerDocument1 = parent.OwnerDocument;
+                        var ownerDocument1 = parent.OwnerDocument;
             if (this._prefix == string.Empty)
               this._prefix = (string) null;
             if (this._ns == string.Empty)
               this._ns = (string) null;
-            XmlDocumentType documentType = ownerDocument1.CreateDocumentType(this._name, this._prefix, this._ns, this._value);
+                        var documentType = ownerDocument1.CreateDocumentType(this._name, this._prefix, this._ns, this._value);
             if (ownerDocument1.FirstChild.NodeType == XmlNodeType.XmlDeclaration)
             {
               ownerDocument1.InsertAfter((XmlNode) documentType, ownerDocument1.FirstChild);
@@ -80,8 +80,8 @@ namespace Microsoft.XmlDiffPatch
             ownerDocument1.InsertBefore((XmlNode) documentType, ownerDocument1.FirstChild);
             return;
           case XmlNodeType.XmlDeclaration:
-            XmlDocument ownerDocument2 = parent.OwnerDocument;
-            XmlDeclaration xmlDeclaration = ownerDocument2.CreateXmlDeclaration("1.0", string.Empty, string.Empty);
+                        var ownerDocument2 = parent.OwnerDocument;
+                        var xmlDeclaration = ownerDocument2.CreateXmlDeclaration("1.0", string.Empty, string.Empty);
             xmlDeclaration.Value = this._value;
             ownerDocument2.InsertBefore((XmlNode) xmlDeclaration, ownerDocument2.FirstChild);
             return;

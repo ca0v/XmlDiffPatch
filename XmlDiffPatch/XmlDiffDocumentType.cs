@@ -80,7 +80,7 @@ namespace Microsoft.XmlDiffPatch
     {
       if (changedNode.NodeType != XmlDiffNodeType.DocumentType)
         return XmlDiffOperation.Undefined;
-      XmlDiffDocumentType diffDocumentType = (XmlDiffDocumentType) changedNode;
+            var diffDocumentType = (XmlDiffDocumentType) changedNode;
       return this.Name == diffDocumentType.Name && this.PublicId == diffDocumentType.PublicId && (this.SystemId == diffDocumentType.SystemId && this.Subset == diffDocumentType.Subset) ? XmlDiffOperation.Match : XmlDiffOperation.ChangeDTD;
     }
 

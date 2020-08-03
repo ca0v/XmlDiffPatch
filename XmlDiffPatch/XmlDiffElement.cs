@@ -78,8 +78,8 @@ namespace Microsoft.XmlDiffPatch
     {
       if (changedNode.NodeType != XmlDiffNodeType.Element)
         return XmlDiffOperation.Undefined;
-      XmlDiffElement xmlDiffElement = (XmlDiffElement) changedNode;
-      bool flag = false;
+            var xmlDiffElement = (XmlDiffElement) changedNode;
+      var flag = false;
       if (this.LocalName == xmlDiffElement.LocalName)
       {
         if (xmlDiff.IgnoreNamespaces)
@@ -89,7 +89,7 @@ namespace Microsoft.XmlDiffPatch
       }
       if ((long) xmlDiffElement._allAttributesHash == (long) this._allAttributesHash)
         return !flag ? XmlDiffOperation.ChangeElementName : XmlDiffOperation.Match;
-      int num = ((long) xmlDiffElement._attributesHashAH == (long) this._attributesHashAH ? 0 : 1) + ((long) xmlDiffElement._attributesHashIQ == (long) this._attributesHashIQ ? 0 : 1) + ((long) xmlDiffElement._attributesHashRZ == (long) this._attributesHashRZ ? 0 : 1);
+      var num = ((long) xmlDiffElement._attributesHashAH == (long) this._attributesHashAH ? 0 : 1) + ((long) xmlDiffElement._attributesHashIQ == (long) this._attributesHashIQ ? 0 : 1) + ((long) xmlDiffElement._attributesHashRZ == (long) this._attributesHashRZ ? 0 : 1);
       return flag ? (XmlDiffOperation) (3 + num) : (XmlDiffOperation) (6 + num);
     }
 
@@ -97,13 +97,13 @@ namespace Microsoft.XmlDiffPatch
     {
       if (node.NodeType != XmlDiffNodeType.Element)
         return false;
-      XmlDiffElement xmlDiffElement = (XmlDiffElement) node;
+            var xmlDiffElement = (XmlDiffElement) node;
       if (this.LocalName != xmlDiffElement.LocalName || !xmlDiff.IgnoreNamespaces && (this.NamespaceURI != xmlDiffElement.NamespaceURI || !xmlDiff.IgnorePrefixes && this.Prefix != xmlDiffElement.Prefix))
         return false;
-      XmlDiffAttributeOrNamespace attributeOrNamespace1 = this._attributes;
+            var attributeOrNamespace1 = this._attributes;
       while (attributeOrNamespace1 != null && attributeOrNamespace1.NodeType == XmlDiffNodeType.Namespace)
         attributeOrNamespace1 = (XmlDiffAttributeOrNamespace) attributeOrNamespace1._nextSibling;
-      XmlDiffAttributeOrNamespace attributeOrNamespace2 = this._attributes;
+            var attributeOrNamespace2 = this._attributes;
       while (attributeOrNamespace2 != null && attributeOrNamespace2.NodeType == XmlDiffNodeType.Namespace)
         attributeOrNamespace2 = (XmlDiffAttributeOrNamespace) attributeOrNamespace2._nextSibling;
       for (; attributeOrNamespace1 != null && attributeOrNamespace2 != null; attributeOrNamespace2 = (XmlDiffAttributeOrNamespace) attributeOrNamespace2._nextSibling)
@@ -118,8 +118,8 @@ namespace Microsoft.XmlDiffPatch
     internal void InsertAttributeOrNamespace(XmlDiffAttributeOrNamespace newAttrOrNs)
     {
       newAttrOrNs._parent = (XmlDiffParentNode) this;
-      XmlDiffAttributeOrNamespace node1 = this._attributes;
-      XmlDiffAttributeOrNamespace attributeOrNamespace = (XmlDiffAttributeOrNamespace) null;
+            var node1 = this._attributes;
+            var attributeOrNamespace = (XmlDiffAttributeOrNamespace) null;
       for (; node1 != null && XmlDiffDocument.OrderAttributesOrNamespaces(node1, newAttrOrNs) <= 0; node1 = (XmlDiffAttributeOrNamespace) node1._nextSibling)
         attributeOrNamespace = node1;
       if (attributeOrNamespace == null)
@@ -140,10 +140,10 @@ namespace Microsoft.XmlDiffPatch
       }
       else
       {
-        XmlDiffNamespace xmlDiffNamespace = (XmlDiffNamespace) newAttrOrNs;
+                var xmlDiffNamespace = (XmlDiffNamespace) newAttrOrNs;
         c = xmlDiffNamespace.Prefix == string.Empty ? 'A' : xmlDiffNamespace.Prefix[0];
       }
-      char upper = char.ToUpper(c);
+      var upper = char.ToUpper(c);
       if (upper >= 'R')
         this._attributesHashRZ += newAttrOrNs.HashValue;
       else if (upper >= 'I')
@@ -158,7 +158,7 @@ namespace Microsoft.XmlDiffPatch
     internal override void WriteTo(XmlWriter w)
     {
       w.WriteStartElement(this.Prefix, this.LocalName, this.NamespaceURI);
-      for (XmlDiffAttributeOrNamespace attributeOrNamespace = this._attributes; attributeOrNamespace != null; attributeOrNamespace = (XmlDiffAttributeOrNamespace) attributeOrNamespace._nextSibling)
+      for (var attributeOrNamespace = this._attributes; attributeOrNamespace != null; attributeOrNamespace = (XmlDiffAttributeOrNamespace) attributeOrNamespace._nextSibling)
         attributeOrNamespace.WriteTo(w);
       this.WriteContentTo(w);
       w.WriteEndElement();
@@ -166,7 +166,7 @@ namespace Microsoft.XmlDiffPatch
 
     internal override void WriteContentTo(XmlWriter w)
     {
-      for (XmlDiffNode xmlDiffNode = this._firstChildNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
+      for (var xmlDiffNode = this._firstChildNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
         xmlDiffNode.WriteTo(w);
     }
   }

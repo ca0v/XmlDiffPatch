@@ -11,9 +11,9 @@ namespace Microsoft.XmlDiffPatch
   internal class XmlDiffPathMultiNodeList : XmlDiffPathNodeList
   {
     private int _count = 0;
-    private XmlDiffPathMultiNodeList.ListChunk _chunks = (XmlDiffPathMultiNodeList.ListChunk) null;
-    private XmlDiffPathMultiNodeList.ListChunk _lastChunk = (XmlDiffPathMultiNodeList.ListChunk) null;
-    private XmlDiffPathMultiNodeList.ListChunk _currentChunk = (XmlDiffPathMultiNodeList.ListChunk) null;
+    private ListChunk _chunks = (ListChunk) null;
+    private ListChunk _lastChunk = (ListChunk) null;
+    private ListChunk _currentChunk = (ListChunk) null;
     private int _currentChunkIndex = -1;
 
     internal XmlDiffPathMultiNodeList()
@@ -63,13 +63,13 @@ namespace Microsoft.XmlDiffPatch
     {
       if (this._lastChunk == null)
       {
-        this._chunks = new XmlDiffPathMultiNodeList.ListChunk();
+        this._chunks = new ListChunk();
         this._lastChunk = this._chunks;
         this._currentChunk = this._chunks;
       }
       else if (this._lastChunk._count == 10)
       {
-        this._lastChunk._next = new XmlDiffPathMultiNodeList.ListChunk();
+        this._lastChunk._next = new ListChunk();
         this._lastChunk = this._lastChunk._next;
       }
       this._lastChunk.AddNode(node);
@@ -80,7 +80,7 @@ namespace Microsoft.XmlDiffPatch
     {
       internal XmlDiffViewNode[] _nodes = new XmlDiffViewNode[10];
       internal int _count = 0;
-      internal XmlDiffPathMultiNodeList.ListChunk _next = (XmlDiffPathMultiNodeList.ListChunk) null;
+      internal ListChunk _next = (ListChunk) null;
       internal const int ChunkSize = 10;
 
       internal XmlDiffViewNode this[int i]

@@ -182,8 +182,8 @@ namespace Microsoft.XmlDiffPatch
         throw new ArgumentNullException(nameof (sourceFile));
       if (changedFile == null)
         throw new ArgumentNullException(nameof (changedFile));
-      XmlReader sourceReader = (XmlReader) null;
-      XmlReader changedReader = (XmlReader) null;
+            var sourceReader = (XmlReader) null;
+            var changedReader = (XmlReader) null;
       try
       {
         this._fragments = bFragments ? TriStateBool.Yes : TriStateBool.No;
@@ -222,13 +222,13 @@ namespace Microsoft.XmlDiffPatch
       ref XmlReader sourceReader,
       ref XmlReader changedReader)
     {
-      FileStream fileStream1 = (FileStream) null;
-      FileStream fileStream2 = (FileStream) null;
+            var fileStream1 = (FileStream) null;
+            var fileStream2 = (FileStream) null;
       try
       {
-        XmlNameTable xmlNameTable = (XmlNameTable) new NameTable();
-        XmlParserContext context1 = new XmlParserContext(xmlNameTable, new XmlNamespaceManager(xmlNameTable), string.Empty, XmlSpace.Default);
-        XmlParserContext context2 = new XmlParserContext(xmlNameTable, new XmlNamespaceManager(xmlNameTable), string.Empty, XmlSpace.Default);
+                var xmlNameTable = (XmlNameTable) new NameTable();
+                var context1 = new XmlParserContext(xmlNameTable, new XmlNamespaceManager(xmlNameTable), string.Empty, XmlSpace.Default);
+                var context2 = new XmlParserContext(xmlNameTable, new XmlNamespaceManager(xmlNameTable), string.Empty, XmlSpace.Default);
         fileStream1 = new FileStream(sourceFile, FileMode.Open, FileAccess.Read);
         fileStream2 = new FileStream(changedFile, FileMode.Open, FileAccess.Read);
         sourceReader = (XmlReader) new XmlTextReader((Stream) fileStream1, XmlNodeType.Element, context1)
@@ -261,9 +261,9 @@ namespace Microsoft.XmlDiffPatch
         throw new ArgumentNullException(nameof (changedReader));
       try
       {
-        XmlHash xmlHash = new XmlHash(this);
+                var xmlHash = new XmlHash(this);
         this._xmlDiffPerf.Clean();
-        int tickCount = Environment.TickCount;
+        var tickCount = Environment.TickCount;
         this._sourceDoc = new XmlDiffDocument(this);
         this._sourceDoc.Load(sourceReader, xmlHash);
         this._targetDoc = new XmlDiffDocument(this);
@@ -293,9 +293,9 @@ namespace Microsoft.XmlDiffPatch
         throw new ArgumentNullException(nameof (changedNode));
       try
       {
-        XmlHash xmlHash = new XmlHash(this);
+                var xmlHash = new XmlHash(this);
         this._xmlDiffPerf.Clean();
-        int tickCount = Environment.TickCount;
+        var tickCount = Environment.TickCount;
         this._sourceDoc = new XmlDiffDocument(this);
         this._sourceDoc.Load(sourceNode, xmlHash);
         this._targetDoc = new XmlDiffDocument(this);
@@ -315,7 +315,7 @@ namespace Microsoft.XmlDiffPatch
     {
       try
       {
-        int tickCount1 = Environment.TickCount;
+        var tickCount1 = Environment.TickCount;
         if (this.IdenticalSubtrees((XmlDiffNode) this._sourceDoc, (XmlDiffNode) this._targetDoc))
         {
           if (diffgramWriter != null)
@@ -332,10 +332,10 @@ namespace Microsoft.XmlDiffPatch
           return false;
         }
         this._xmlDiffPerf._identicalOrNoDiffWriterTime = Environment.TickCount - tickCount1;
-        int tickCount2 = Environment.TickCount;
+        var tickCount2 = Environment.TickCount;
         this.MatchIdenticalSubtrees();
         this._xmlDiffPerf._matchTime = Environment.TickCount - tickCount2;
-        Diffgram diffgram = (Diffgram) null;
+                var diffgram = (Diffgram) null;
         switch (this._algorithm)
         {
           case XmlDiffAlgorithm.Auto:
@@ -348,7 +348,7 @@ namespace Microsoft.XmlDiffPatch
             diffgram = this.ZhangShashaAlgorithm();
             break;
         }
-        int tickCount3 = Environment.TickCount;
+        var tickCount3 = Environment.TickCount;
         diffgram.WriteTo(diffgramWriter);
         diffgramWriter.Flush();
         this._xmlDiffPerf._diffgramSaveTime = Environment.TickCount - tickCount3;
@@ -363,15 +363,15 @@ namespace Microsoft.XmlDiffPatch
 
     private Diffgram ZhangShashaAlgorithm()
     {
-      int tickCount1 = Environment.TickCount;
+      var tickCount1 = Environment.TickCount;
       this.PreprocessTree(this._sourceDoc, ref this._sourceNodes);
       this.PreprocessTree(this._targetDoc, ref this._targetNodes);
       this._xmlDiffPerf._preprocessTime = Environment.TickCount - tickCount1;
-      int tickCount2 = Environment.TickCount;
-      EditScript minimalDistance = new MinimalTreeDistanceAlgo(this).FindMinimalDistance();
+      var tickCount2 = Environment.TickCount;
+            var minimalDistance = new MinimalTreeDistanceAlgo(this).FindMinimalDistance();
       this._xmlDiffPerf._treeDistanceTime = Environment.TickCount - tickCount2;
-      int tickCount3 = Environment.TickCount;
-      Diffgram fromEditScript = new DiffgramGenerator(this).GenerateFromEditScript(minimalDistance);
+      var tickCount3 = Environment.TickCount;
+            var fromEditScript = new DiffgramGenerator(this).GenerateFromEditScript(minimalDistance);
       this._xmlDiffPerf._diffgramGenerationTime = Environment.TickCount - tickCount3;
       return fromEditScript;
     }
@@ -380,7 +380,7 @@ namespace Microsoft.XmlDiffPatch
     {
       postOrderArray = new XmlDiffNode[(int) checked ((uint) unchecked (doc.NodesCount + 1))];
       postOrderArray[0] = (XmlDiffNode) null;
-      int currentIndex = 1;
+      var currentIndex = 1;
       this.PreprocessNode((XmlDiffNode) doc, ref postOrderArray, ref currentIndex);
       doc._bKeyRoot = true;
     }
@@ -392,7 +392,7 @@ namespace Microsoft.XmlDiffPatch
     {
       if (node.HasChildNodes)
       {
-        XmlDiffNode node1 = node.FirstChildNode;
+                var node1 = node.FirstChildNode;
         node1._bKeyRoot = false;
         while (true)
         {
@@ -415,10 +415,10 @@ namespace Microsoft.XmlDiffPatch
 
     private void MatchIdenticalSubtrees()
     {
-      Hashtable hashtable1 = new Hashtable(16);
-      Hashtable hashtable2 = new Hashtable(16);
-      Queue queue1 = new Queue(16);
-      Queue queue2 = new Queue(16);
+            var hashtable1 = new Hashtable(16);
+            var hashtable2 = new Hashtable(16);
+            var queue1 = new Queue(16);
+            var queue2 = new Queue(16);
       queue1.Enqueue((object) this._sourceDoc);
       queue2.Enqueue((object) this._targetDoc);
       while (queue1.Count > 0 || queue2.Count > 0)
@@ -428,22 +428,22 @@ namespace Microsoft.XmlDiffPatch
           xmlDiffParentNode._bExpanded = true;
           if (xmlDiffParentNode.HasChildNodes)
           {
-            for (XmlDiffNode node = xmlDiffParentNode._firstChildNode; node != null; node = node._nextSibling)
+            for (var node = xmlDiffParentNode._firstChildNode; node != null; node = node._nextSibling)
               this.AddNodeToHashTable(hashtable1, node);
           }
         }
-        int count1 = queue2.Count;
-        for (int index = 0; index < count1; ++index)
+        var count1 = queue2.Count;
+        for (var index = 0; index < count1; ++index)
         {
-          XmlDiffParentNode xmlDiffParentNode = (XmlDiffParentNode) queue2.Dequeue();
+                    var xmlDiffParentNode = (XmlDiffParentNode) queue2.Dequeue();
           xmlDiffParentNode._bExpanded = true;
           if (xmlDiffParentNode.HasChildNodes)
           {
-            XmlDiffNode xmlDiffNode1 = xmlDiffParentNode._firstChildNode;
+                        var xmlDiffNode1 = xmlDiffParentNode._firstChildNode;
             while (xmlDiffNode1 != null)
             {
-              XmlDiffNode xmlDiffNode2 = (XmlDiffNode) null;
-              XmlDiff.XmlDiffNodeListHead nodeListHead = (XmlDiff.XmlDiffNodeListHead) hashtable1[(object) xmlDiffNode1.HashValue];
+                            var xmlDiffNode2 = (XmlDiffNode) null;
+                            var nodeListHead = (XmlDiffNodeListHead) hashtable1[(object) xmlDiffNode1.HashValue];
               if (nodeListHead != null)
                 xmlDiffNode2 = this.HTFindAndRemoveMatchingNode(hashtable1, nodeListHead, xmlDiffNode1);
               if (xmlDiffNode2 == null || xmlDiffNode1.NodeType < XmlDiffNodeType.None)
@@ -460,11 +460,11 @@ namespace Microsoft.XmlDiffPatch
                 this.HTRemoveAncestors(hashtable1, xmlDiffNode2);
                 this.HTRemoveDescendants(hashtable1, xmlDiffNode2);
                 this.HTRemoveAncestors(hashtable2, xmlDiffNode1);
-                XmlDiffNode firstTargetNode = xmlDiffNode1;
-                XmlDiffNode lastSourceNode = xmlDiffNode2;
-                XmlDiffNode lastTargetNode = firstTargetNode;
+                                var firstTargetNode = xmlDiffNode1;
+                                var lastSourceNode = xmlDiffNode2;
+                                var lastTargetNode = firstTargetNode;
                 xmlDiffNode1 = xmlDiffNode1._nextSibling;
-                for (XmlDiffNode nextSibling = xmlDiffNode2._nextSibling; xmlDiffNode1 != null && nextSibling != null && (nextSibling.NodeType != XmlDiffNodeType.ShrankNode && (this.IdenticalSubtrees(nextSibling, xmlDiffNode1) && hashtable1.Contains((object) nextSibling.HashValue))); xmlDiffNode1 = xmlDiffNode1._nextSibling)
+                for (var nextSibling = xmlDiffNode2._nextSibling; xmlDiffNode1 != null && nextSibling != null && (nextSibling.NodeType != XmlDiffNodeType.ShrankNode && (this.IdenticalSubtrees(nextSibling, xmlDiffNode1) && hashtable1.Contains((object) nextSibling.HashValue))); xmlDiffNode1 = xmlDiffNode1._nextSibling)
                 {
                   this.HTRemoveNode(hashtable1, nextSibling);
                   this.HTRemoveDescendants(hashtable1, nextSibling);
@@ -478,7 +478,7 @@ namespace Microsoft.XmlDiffPatch
                 }
                 else
                 {
-                  XmlDiffElement xmlDiffElement = (XmlDiffElement) xmlDiffNode2;
+                                    var xmlDiffElement = (XmlDiffElement) xmlDiffNode2;
                   if (xmlDiffElement.FirstChildNode != null || xmlDiffElement._attributes != null)
                     this.ShrinkNodeInterval(xmlDiffNode2, lastSourceNode, firstTargetNode, lastTargetNode);
                 }
@@ -486,13 +486,13 @@ namespace Microsoft.XmlDiffPatch
             }
           }
         }
-        int count2 = queue1.Count;
-        for (int index = 0; index < count2; ++index)
+        var count2 = queue1.Count;
+        for (var index = 0; index < count2; ++index)
         {
-          XmlDiffParentNode xmlDiffParentNode = (XmlDiffParentNode) queue1.Dequeue();
+                    var xmlDiffParentNode = (XmlDiffParentNode) queue1.Dequeue();
           if (xmlDiffParentNode.HasChildNodes)
           {
-            XmlDiffNode xmlDiffNode1 = xmlDiffParentNode._firstChildNode;
+                        var xmlDiffNode1 = xmlDiffParentNode._firstChildNode;
             while (xmlDiffNode1 != null)
             {
               if (xmlDiffNode1 is XmlDiffShrankNode || !this.NodeInHashTable(hashtable1, xmlDiffNode1))
@@ -501,8 +501,8 @@ namespace Microsoft.XmlDiffPatch
               }
               else
               {
-                XmlDiffNode xmlDiffNode2 = (XmlDiffNode) null;
-                XmlDiff.XmlDiffNodeListHead nodeListHead = (XmlDiff.XmlDiffNodeListHead) hashtable2[(object) xmlDiffNode1.HashValue];
+                                var xmlDiffNode2 = (XmlDiffNode) null;
+                                var nodeListHead = (XmlDiffNodeListHead) hashtable2[(object) xmlDiffNode1.HashValue];
                 if (nodeListHead != null)
                   xmlDiffNode2 = this.HTFindAndRemoveMatchingNode(hashtable2, nodeListHead, xmlDiffNode1);
                 if (xmlDiffNode2 == null || xmlDiffNode1.NodeType < XmlDiffNodeType.None)
@@ -519,11 +519,11 @@ namespace Microsoft.XmlDiffPatch
                   this.HTRemoveDescendants(hashtable2, xmlDiffNode2);
                   this.HTRemoveNode(hashtable1, xmlDiffNode1);
                   this.HTRemoveAncestors(hashtable1, xmlDiffNode1);
-                  XmlDiffNode firstSourceNode = xmlDiffNode1;
-                  XmlDiffNode lastSourceNode = firstSourceNode;
-                  XmlDiffNode lastTargetNode = xmlDiffNode2;
+                                    var firstSourceNode = xmlDiffNode1;
+                                    var lastSourceNode = firstSourceNode;
+                                    var lastTargetNode = xmlDiffNode2;
                   xmlDiffNode1 = xmlDiffNode1._nextSibling;
-                  for (XmlDiffNode nextSibling = xmlDiffNode2._nextSibling; xmlDiffNode1 != null && nextSibling != null && (nextSibling.NodeType != XmlDiffNodeType.ShrankNode && (this.IdenticalSubtrees(xmlDiffNode1, nextSibling) && hashtable1.Contains((object) xmlDiffNode1.HashValue))) && hashtable2.Contains((object) nextSibling.HashValue); nextSibling = nextSibling._nextSibling)
+                  for (var nextSibling = xmlDiffNode2._nextSibling; xmlDiffNode1 != null && nextSibling != null && (nextSibling.NodeType != XmlDiffNodeType.ShrankNode && (this.IdenticalSubtrees(xmlDiffNode1, nextSibling) && hashtable1.Contains((object) xmlDiffNode1.HashValue))) && hashtable2.Contains((object) nextSibling.HashValue); nextSibling = nextSibling._nextSibling)
                   {
                     this.HTRemoveNode(hashtable1, xmlDiffNode1);
                     this.HTRemoveDescendants(hashtable1, xmlDiffNode1);
@@ -539,7 +539,7 @@ namespace Microsoft.XmlDiffPatch
                   }
                   else
                   {
-                    XmlDiffElement xmlDiffElement = (XmlDiffElement) firstSourceNode;
+                                        var xmlDiffElement = (XmlDiffElement) firstSourceNode;
                     if (xmlDiffElement.FirstChildNode != null || xmlDiffElement._attributes != null)
                       this.ShrinkNodeInterval(firstSourceNode, lastSourceNode, xmlDiffNode2, lastTargetNode);
                   }
@@ -553,15 +553,15 @@ namespace Microsoft.XmlDiffPatch
 
     private void AddNodeToHashTable(Hashtable hashtable, XmlDiffNode node)
     {
-      ulong hashValue = node.HashValue;
-      XmlDiff.XmlDiffNodeListHead diffNodeListHead = (XmlDiff.XmlDiffNodeListHead) hashtable[(object) hashValue];
+      var hashValue = node.HashValue;
+            var diffNodeListHead = (XmlDiffNodeListHead) hashtable[(object) hashValue];
       if (diffNodeListHead == null)
       {
-        hashtable[(object) hashValue] = (object) new XmlDiff.XmlDiffNodeListHead(new XmlDiff.XmlDiffNodeListMember(node, (XmlDiff.XmlDiffNodeListMember) null));
+        hashtable[(object) hashValue] = (object) new XmlDiffNodeListHead(new XmlDiffNodeListMember(node, (XmlDiffNodeListMember) null));
       }
       else
       {
-        XmlDiff.XmlDiffNodeListMember diffNodeListMember = new XmlDiff.XmlDiffNodeListMember(node, (XmlDiff.XmlDiffNodeListMember) null);
+                var diffNodeListMember = new XmlDiffNodeListMember(node, (XmlDiffNodeListMember) null);
         diffNodeListHead._last._next = diffNodeListMember;
         diffNodeListHead._last = diffNodeListMember;
       }
@@ -569,10 +569,10 @@ namespace Microsoft.XmlDiffPatch
 
     private bool HTRemoveNode(Hashtable hashtable, XmlDiffNode node)
     {
-      XmlDiff.XmlDiffNodeListHead diffNodeListHead = (XmlDiff.XmlDiffNodeListHead) hashtable[(object) node.HashValue];
+            var diffNodeListHead = (XmlDiffNodeListHead) hashtable[(object) node.HashValue];
       if (diffNodeListHead == null)
         return false;
-      XmlDiff.XmlDiffNodeListMember diffNodeListMember = diffNodeListHead._first;
+            var diffNodeListMember = diffNodeListHead._first;
       if (diffNodeListMember._node == node)
       {
         if (diffNodeListMember._next == null)
@@ -599,10 +599,10 @@ namespace Microsoft.XmlDiffPatch
 
     private bool NodeInHashTable(Hashtable hashtable, XmlDiffNode node)
     {
-      XmlDiff.XmlDiffNodeListHead diffNodeListHead = (XmlDiff.XmlDiffNodeListHead) hashtable[(object) node.HashValue];
+            var diffNodeListHead = (XmlDiffNodeListHead) hashtable[(object) node.HashValue];
       if (diffNodeListHead == null)
         return false;
-      for (XmlDiff.XmlDiffNodeListMember diffNodeListMember = diffNodeListHead._first; diffNodeListMember != null; diffNodeListMember = diffNodeListMember._next)
+      for (var diffNodeListMember = diffNodeListHead._first; diffNodeListMember != null; diffNodeListMember = diffNodeListMember._next)
       {
         if (diffNodeListMember._node == node)
           return true;
@@ -616,15 +616,15 @@ namespace Microsoft.XmlDiffPatch
       XmlDiffNode firstTargetNode,
       XmlDiffNode lastTargetNode)
     {
-      XmlDiffNode firstPreviousSibbling1 = (XmlDiffNode) null;
-      XmlDiffNode firstPreviousSibbling2 = (XmlDiffNode) null;
+            var firstPreviousSibbling1 = (XmlDiffNode) null;
+            var firstPreviousSibbling2 = (XmlDiffNode) null;
       if (this.IgnoreChildOrder && firstSourceNode != lastSourceNode)
       {
         XmlDiff.SortNodesByPosition(ref firstSourceNode, ref lastSourceNode, ref firstPreviousSibbling1);
         XmlDiff.SortNodesByPosition(ref firstTargetNode, ref lastTargetNode, ref firstPreviousSibbling2);
       }
-      XmlDiffShrankNode xmlDiffShrankNode1 = this.ReplaceNodeIntervalWithShrankNode(firstSourceNode, lastSourceNode, firstPreviousSibbling1);
-      XmlDiffShrankNode xmlDiffShrankNode2 = this.ReplaceNodeIntervalWithShrankNode(firstTargetNode, lastTargetNode, firstPreviousSibbling2);
+            var xmlDiffShrankNode1 = this.ReplaceNodeIntervalWithShrankNode(firstSourceNode, lastSourceNode, firstPreviousSibbling1);
+            var xmlDiffShrankNode2 = this.ReplaceNodeIntervalWithShrankNode(firstTargetNode, lastTargetNode, firstPreviousSibbling2);
       xmlDiffShrankNode1.MatchingShrankNode = xmlDiffShrankNode2;
       xmlDiffShrankNode2.MatchingShrankNode = xmlDiffShrankNode1;
     }
@@ -634,8 +634,8 @@ namespace Microsoft.XmlDiffPatch
       XmlDiffNode lastNode,
       XmlDiffNode previousSibling)
     {
-      XmlDiffShrankNode xmlDiffShrankNode = new XmlDiffShrankNode(firstNode, lastNode);
-      XmlDiffParentNode parent = firstNode._parent;
+            var xmlDiffShrankNode = new XmlDiffShrankNode(firstNode, lastNode);
+            var parent = firstNode._parent;
       if (previousSibling == null && firstNode != parent._firstChildNode)
       {
         previousSibling = parent._firstChildNode;
@@ -653,7 +653,7 @@ namespace Microsoft.XmlDiffPatch
         previousSibling._nextSibling = (XmlDiffNode) xmlDiffShrankNode;
       }
       xmlDiffShrankNode._parent = parent;
-      int num1 = 0;
+      var num1 = 0;
       XmlDiffNode nextSibling;
       do
       {
@@ -664,7 +664,7 @@ namespace Microsoft.XmlDiffPatch
       while (nextSibling != lastNode);
       if (num1 > 1)
       {
-        int num2 = num1 - 1;
+        var num2 = num1 - 1;
         for (; parent != null; parent = parent._parent)
           parent.NodesCount -= num2;
       }
@@ -673,11 +673,11 @@ namespace Microsoft.XmlDiffPatch
 
     private XmlDiffNode HTFindAndRemoveMatchingNode(
       Hashtable hashtable,
-      XmlDiff.XmlDiffNodeListHead nodeListHead,
+      XmlDiffNodeListHead nodeListHead,
       XmlDiffNode nodeToMatch)
     {
-      XmlDiff.XmlDiffNodeListMember first = nodeListHead._first;
-      XmlDiffNode node = first._node;
+            var first = nodeListHead._first;
+            var node = first._node;
       if (this.IdenticalSubtrees(node, nodeToMatch))
       {
         if (first._next == null)
@@ -701,7 +701,7 @@ namespace Microsoft.XmlDiffPatch
 
     private void HTRemoveAncestors(Hashtable hashtable, XmlDiffNode node)
     {
-      for (XmlDiffNode parent = (XmlDiffNode) node._parent; parent != null && this.HTRemoveNode(hashtable, parent); parent = (XmlDiffNode) parent._parent)
+      for (var parent = (XmlDiffNode) node._parent; parent != null && this.HTRemoveNode(hashtable, parent); parent = (XmlDiffNode) parent._parent)
         parent._bSomeDescendantMatches = true;
     }
 
@@ -709,7 +709,7 @@ namespace Microsoft.XmlDiffPatch
     {
       if (!parent._bExpanded || !parent.HasChildNodes)
         return;
-      XmlDiffNode node = parent.FirstChildNode;
+            var node = parent.FirstChildNode;
       while (true)
       {
         for (; !node._bExpanded || !node.HasChildNodes; node = node._nextSibling)
@@ -734,17 +734,17 @@ namespace Microsoft.XmlDiffPatch
       ref XmlDiffNode lastNode,
       ref XmlDiffNode firstPreviousSibbling)
     {
-      XmlDiffParentNode parent = firstNode._parent;
+            var parent = firstNode._parent;
       if (firstPreviousSibbling == null && firstNode != parent._firstChildNode)
       {
         firstPreviousSibbling = parent._firstChildNode;
         while (firstPreviousSibbling._nextSibling != firstNode)
           firstPreviousSibbling = firstPreviousSibbling._nextSibling;
       }
-      XmlDiffNode nextSibling = lastNode._nextSibling;
+            var nextSibling = lastNode._nextSibling;
       lastNode._nextSibling = (XmlDiffNode) null;
-      int count = 0;
-      for (XmlDiffNode xmlDiffNode = firstNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
+      var count = 0;
+      for (var xmlDiffNode = firstNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
         ++count;
       if (count >= 5)
         XmlDiff.QuickSortNodes(ref firstNode, ref lastNode, count, firstPreviousSibbling, nextSibling);
@@ -758,16 +758,16 @@ namespace Microsoft.XmlDiffPatch
       XmlDiffNode firstPreviousSibbling,
       XmlDiffNode lastNextSibling)
     {
-      XmlDiffNode xmlDiffNode1 = firstNode;
-      XmlDiffNode xmlDiffNode2 = firstNode;
-      XmlDiffNode xmlDiffNode3 = firstNode._nextSibling;
+            var xmlDiffNode1 = firstNode;
+            var xmlDiffNode2 = firstNode;
+            var xmlDiffNode3 = firstNode._nextSibling;
       xmlDiffNode2._nextSibling = (XmlDiffNode) null;
       while (xmlDiffNode3 != null)
       {
-        XmlDiffNode xmlDiffNode4 = xmlDiffNode1;
+                var xmlDiffNode4 = xmlDiffNode1;
         if (xmlDiffNode3.Position < xmlDiffNode1.Position)
         {
-          XmlDiffNode nextSibling = xmlDiffNode3._nextSibling;
+                    var nextSibling = xmlDiffNode3._nextSibling;
           xmlDiffNode3._nextSibling = xmlDiffNode1;
           xmlDiffNode1 = xmlDiffNode3;
           xmlDiffNode3 = nextSibling;
@@ -776,7 +776,7 @@ namespace Microsoft.XmlDiffPatch
         {
           while (xmlDiffNode4._nextSibling != null && xmlDiffNode3.Position > xmlDiffNode4._nextSibling.Position)
             xmlDiffNode4 = xmlDiffNode4._nextSibling;
-          XmlDiffNode nextSibling = xmlDiffNode3._nextSibling;
+                    var nextSibling = xmlDiffNode3._nextSibling;
           if (xmlDiffNode4._nextSibling == null)
             xmlDiffNode2 = xmlDiffNode3;
           xmlDiffNode3._nextSibling = xmlDiffNode4._nextSibling;
@@ -800,9 +800,9 @@ namespace Microsoft.XmlDiffPatch
       XmlDiffNode firstPreviousSibbling,
       XmlDiffNode lastNextSibling)
     {
-      XmlDiffNode[] sortArray = new XmlDiffNode[(int) checked ((uint) count)];
-      XmlDiffNode xmlDiffNode = firstNode;
-      int index1 = 0;
+      var sortArray = new XmlDiffNode[(int) checked ((uint) count)];
+            var xmlDiffNode = firstNode;
+      var index1 = 0;
       while (index1 < count)
       {
         sortArray[index1] = xmlDiffNode;
@@ -810,7 +810,7 @@ namespace Microsoft.XmlDiffPatch
         xmlDiffNode = xmlDiffNode._nextSibling;
       }
       XmlDiff.QuickSortNodesRecursion(ref sortArray, 0, count - 1);
-      for (int index2 = 0; index2 < count - 1; ++index2)
+      for (var index2 = 0; index2 < count - 1; ++index2)
         sortArray[index2]._nextSibling = sortArray[index2 + 1];
       if (firstPreviousSibbling == null)
         firstNode._parent._firstChildNode = sortArray[0];
@@ -826,9 +826,9 @@ namespace Microsoft.XmlDiffPatch
       int firstIndex,
       int lastIndex)
     {
-      int position = sortArray[(firstIndex + lastIndex) / 2].Position;
-      int firstIndex1 = firstIndex;
-      int lastIndex1 = lastIndex;
+      var position = sortArray[(firstIndex + lastIndex) / 2].Position;
+      var firstIndex1 = firstIndex;
+      var lastIndex1 = lastIndex;
       while (firstIndex1 < lastIndex1)
       {
         while (sortArray[firstIndex1].Position < position)
@@ -837,7 +837,7 @@ namespace Microsoft.XmlDiffPatch
           --lastIndex1;
         if (firstIndex1 < lastIndex1)
         {
-          XmlDiffNode xmlDiffNode = sortArray[firstIndex1];
+                    var xmlDiffNode = sortArray[firstIndex1];
           sortArray[firstIndex1] = sortArray[lastIndex1];
           sortArray[lastIndex1] = xmlDiffNode;
           ++firstIndex1;
@@ -867,7 +867,7 @@ namespace Microsoft.XmlDiffPatch
         return false;
       if (!node1.HasChildNodes)
         return true;
-      XmlDiffNode node1_1 = node1.FirstChildNode;
+            var node1_1 = node1.FirstChildNode;
       XmlDiffNode node2_1;
       for (node2_1 = node2.FirstChildNode; node1_1 != null && node2_1 != null; node2_1 = node2_1._nextSibling)
       {
@@ -894,9 +894,9 @@ namespace Microsoft.XmlDiffPatch
         throw new ArgumentNullException(nameof (options));
       if (options == XmlDiffOptions.None.ToString())
         return XmlDiffOptions.None;
-      XmlDiffOptions xmlDiffOptions = XmlDiffOptions.None;
+            var xmlDiffOptions = XmlDiffOptions.None;
       int num;
-      for (int startIndex = 0; startIndex < options.Length; startIndex = num + 1)
+      for (var startIndex = 0; startIndex < options.Length; startIndex = num + 1)
       {
         num = options.IndexOf(' ', startIndex);
         if (num == -1)
@@ -936,7 +936,7 @@ namespace Microsoft.XmlDiffPatch
 
     internal string GetXmlDiffOptionsString()
     {
-      string str = string.Empty;
+      var str = string.Empty;
       if (this._bIgnoreChildOrder)
         str = str + XmlDiffOptions.IgnoreChildOrder.ToString() + " ";
       if (this._bIgnoreComments)
@@ -963,15 +963,15 @@ namespace Microsoft.XmlDiffPatch
     {
       if (node == null)
         throw new ArgumentNullException(nameof (node));
-      ulong hash = new XmlHash().ComputeHash(node, options);
+      var hash = new XmlHash().ComputeHash(node, options);
       return (long) hashValue == (long) hash;
     }
 
     internal static string NormalizeText(string text)
     {
-      char[] charArray = text.ToCharArray();
-      int length = 0;
-      int index = 0;
+      var charArray = text.ToCharArray();
+      var length = 0;
+      var index = 0;
       while (true)
       {
         for (; index >= charArray.Length || !XmlDiff.IsWhitespace(text[index]); ++index)
@@ -1014,9 +1014,9 @@ namespace Microsoft.XmlDiffPatch
     private class XmlDiffNodeListMember
     {
       internal XmlDiffNode _node;
-      internal XmlDiff.XmlDiffNodeListMember _next;
+      internal XmlDiffNodeListMember _next;
 
-      internal XmlDiffNodeListMember(XmlDiffNode node, XmlDiff.XmlDiffNodeListMember next)
+      internal XmlDiffNodeListMember(XmlDiffNode node, XmlDiffNodeListMember next)
       {
         this._node = node;
         this._next = next;
@@ -1025,10 +1025,10 @@ namespace Microsoft.XmlDiffPatch
 
     private class XmlDiffNodeListHead
     {
-      internal XmlDiff.XmlDiffNodeListMember _first;
-      internal XmlDiff.XmlDiffNodeListMember _last;
+      internal XmlDiffNodeListMember _first;
+      internal XmlDiffNodeListMember _last;
 
-      internal XmlDiffNodeListHead(XmlDiff.XmlDiffNodeListMember firstMember)
+      internal XmlDiffNodeListHead(XmlDiffNodeListMember firstMember)
       {
         this._first = firstMember;
         this._last = firstMember;

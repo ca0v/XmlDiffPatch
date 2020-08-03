@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: Microsoft.XmlDiffPatch.DiffgramParentOperation
 // Assembly: XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 // MVID: 2B32D548-922A-4A84-B9AD-FF8E573DAC90
@@ -16,8 +16,8 @@ namespace Microsoft.XmlDiffPatch
         internal DiffgramParentOperation(ulong operationID)
           : base(operationID)
         {
-            this._firstChildOp = (DiffgramOperation)null;
-            this._lastChildOp = (DiffgramOperation)null;
+            this._firstChildOp = null;
+            this._lastChildOp = null;
         }
 
         internal void InsertAtBeginning(DiffgramOperation newOp)
@@ -31,7 +31,7 @@ namespace Microsoft.XmlDiffPatch
 
         internal void InsertAtEnd(DiffgramOperation newOp)
         {
-            newOp._nextSiblingOp = (DiffgramOperation)null;
+            newOp._nextSiblingOp = null;
             if (this._lastChildOp == null)
             {
                 this._firstChildOp = this._lastChildOp = newOp;
@@ -59,33 +59,33 @@ namespace Microsoft.XmlDiffPatch
 
         internal void WriteChildrenTo(XmlWriter xmlWriter, XmlDiff xmlDiff)
         {
-            for (DiffgramOperation diffgramOperation = this._firstChildOp; diffgramOperation != null; diffgramOperation = diffgramOperation._nextSiblingOp)
+            for (var diffgramOperation = this._firstChildOp; diffgramOperation != null; diffgramOperation = diffgramOperation._nextSiblingOp)
                 diffgramOperation.WriteTo(xmlWriter, xmlDiff);
         }
 
         internal bool MergeRemoveSubtreeAtBeginning(XmlDiffNode subtreeRoot)
         {
-            return this._firstChildOp is DiffgramRemoveSubtrees firstChildOp && firstChildOp.SetNewFirstNode(subtreeRoot);
+            return this._firstChildOp is DiffgramRemoveSubtrees && ( this._firstChildOp as DiffgramRemoveSubtrees ).SetNewFirstNode(subtreeRoot);
         }
 
         internal bool MergeRemoveSubtreeAtEnd(XmlDiffNode subtreeRoot)
         {
-            return this._lastChildOp is DiffgramRemoveSubtrees lastChildOp && lastChildOp.SetNewLastNode(subtreeRoot);
+            return this._lastChildOp is DiffgramRemoveSubtrees && ( this._lastChildOp as DiffgramRemoveSubtrees ).SetNewLastNode(subtreeRoot);
         }
 
         internal bool MergeRemoveAttributeAtBeginning(XmlDiffNode subtreeRoot)
         {
-            return subtreeRoot.NodeType == XmlDiffNodeType.Attribute && this._firstChildOp is DiffgramRemoveAttributes firstChildOp && firstChildOp.AddAttribute((XmlDiffAttribute)subtreeRoot);
+            return subtreeRoot.NodeType == XmlDiffNodeType.Attribute && this._firstChildOp is DiffgramRemoveAttributes && ( this._firstChildOp as DiffgramRemoveAttributes ).AddAttribute((XmlDiffAttribute)subtreeRoot);
         }
 
         internal bool MergeAddSubtreeAtBeginning(XmlDiffNode subtreeRoot)
         {
-            return this._firstChildOp is DiffgramAddSubtrees firstChildOp && firstChildOp.SetNewFirstNode(subtreeRoot);
+            return this._firstChildOp is DiffgramAddSubtrees && ( this._firstChildOp as DiffgramAddSubtrees ).SetNewFirstNode(subtreeRoot);
         }
 
         internal bool MergeAddSubtreeAtEnd(XmlDiffNode subtreeRoot)
         {
-            return this._lastChildOp is DiffgramAddSubtrees lastChildOp && lastChildOp.SetNewLastNode(subtreeRoot);
+            return this._lastChildOp is DiffgramAddSubtrees && ( this._lastChildOp as DiffgramAddSubtrees ).SetNewLastNode(subtreeRoot);
         }
     }
 }

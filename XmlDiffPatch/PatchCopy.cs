@@ -22,11 +22,11 @@ namespace Microsoft.XmlDiffPatch
 
     internal override void Apply(XmlNode parent, ref XmlNode currentPosition)
     {
-      IEnumerator enumerator = this._matchNodes.GetEnumerator();
+            var enumerator = this._matchNodes.GetEnumerator();
       enumerator.Reset();
       while (enumerator.MoveNext())
       {
-        XmlNode current = (XmlNode) enumerator.Current;
+                var current = (XmlNode) enumerator.Current;
         XmlNode xmlNode;
         if (this._bSubtree)
         {

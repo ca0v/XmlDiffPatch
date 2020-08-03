@@ -38,7 +38,7 @@ namespace Microsoft.XmlDiffPatch
 
     private void Sort()
     {
-      XmlDiffNode firstPreviousSibbling = (XmlDiffNode) null;
+            var firstPreviousSibbling = (XmlDiffNode) null;
       XmlDiff.SortNodesByPosition(ref this._firstSourceNode, ref this._lastSourceNode, ref firstPreviousSibbling);
       this._bSorted = true;
     }

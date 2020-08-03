@@ -28,8 +28,8 @@ namespace Microsoft.XmlDiffPatch
 
     protected void ApplyChildren(XmlNode parent)
     {
-      XmlNode currentPosition = (XmlNode) null;
-      for (XmlPatchOperation xmlPatchOperation = this._firstChild; xmlPatchOperation != null; xmlPatchOperation = xmlPatchOperation._nextOp)
+            var currentPosition = (XmlNode) null;
+      for (var xmlPatchOperation = this._firstChild; xmlPatchOperation != null; xmlPatchOperation = xmlPatchOperation._nextOp)
         xmlPatchOperation.Apply(parent, ref currentPosition);
     }
   }

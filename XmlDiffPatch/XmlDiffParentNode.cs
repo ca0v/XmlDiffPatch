@@ -40,8 +40,8 @@ namespace Microsoft.XmlDiffPatch
       {
         if (this._childNodesCount == -1)
         {
-          int num = 0;
-          for (XmlDiffNode xmlDiffNode = this._firstChildNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
+          var num = 0;
+          for (var xmlDiffNode = this._firstChildNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
             ++num;
           this._childNodesCount = num;
         }

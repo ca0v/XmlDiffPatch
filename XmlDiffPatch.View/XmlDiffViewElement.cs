@@ -31,7 +31,7 @@ namespace Microsoft.XmlDiffPatch
 
     internal XmlDiffViewAttribute GetAttribute(string name)
     {
-      for (XmlDiffViewAttribute diffViewAttribute = this._attributes; diffViewAttribute != null; diffViewAttribute = (XmlDiffViewAttribute) diffViewAttribute._nextSibbling)
+      for (var diffViewAttribute = this._attributes; diffViewAttribute != null; diffViewAttribute = (XmlDiffViewAttribute) diffViewAttribute._nextSibbling)
       {
         if (diffViewAttribute._name == name && diffViewAttribute._op == XmlDiffViewOperation.Match)
           return diffViewAttribute;
@@ -65,22 +65,22 @@ namespace Microsoft.XmlDiffPatch
 
     internal override XmlDiffViewNode Clone(bool bDeep)
     {
-      XmlDiffViewElement xmlDiffViewElement = new XmlDiffViewElement(this._localName, this._prefix, this._ns, this._ignorePrefixes);
-      XmlDiffViewAttribute diffViewAttribute = this._attributes;
-      XmlDiffViewAttribute refAttr = (XmlDiffViewAttribute) null;
+            var xmlDiffViewElement = new XmlDiffViewElement(this._localName, this._prefix, this._ns, this._ignorePrefixes);
+            var diffViewAttribute = this._attributes;
+            var refAttr = (XmlDiffViewAttribute) null;
       for (; diffViewAttribute != null; diffViewAttribute = (XmlDiffViewAttribute) diffViewAttribute._nextSibbling)
       {
-        XmlDiffViewAttribute newAttr = (XmlDiffViewAttribute) diffViewAttribute.Clone(true);
+                var newAttr = (XmlDiffViewAttribute) diffViewAttribute.Clone(true);
         xmlDiffViewElement.InsertAttributeAfter(newAttr, refAttr);
         refAttr = newAttr;
       }
       if (!bDeep)
         return (XmlDiffViewNode) xmlDiffViewElement;
-      XmlDiffViewNode xmlDiffViewNode = this._childNodes;
-      XmlDiffViewNode referenceChild = (XmlDiffViewNode) null;
+            var xmlDiffViewNode = this._childNodes;
+            var referenceChild = (XmlDiffViewNode) null;
       for (; xmlDiffViewNode != null; xmlDiffViewNode = xmlDiffViewNode._nextSibbling)
       {
-        XmlDiffViewNode newChild = xmlDiffViewNode.Clone(true);
+                var newChild = xmlDiffViewNode.Clone(true);
         xmlDiffViewElement.InsertChildAfter(newChild, referenceChild, false);
         referenceChild = newChild;
       }
@@ -89,15 +89,15 @@ namespace Microsoft.XmlDiffPatch
 
     internal override void DrawHtml(XmlWriter writer, int indent)
     {
-      XmlDiffViewOperation diffViewOperation = this._op;
-      bool flag1 = false;
+            var diffViewOperation = this._op;
+      var flag1 = false;
       XmlDiffView.HtmlStartRow(writer);
-      for (int paneNo = 0; paneNo < 2; ++paneNo)
+      for (var paneNo = 0; paneNo < 2; ++paneNo)
       {
         XmlDiffView.HtmlStartCell(writer, indent);
         if (XmlDiffView.HtmlWriteToPane[(int) this._op, paneNo])
         {
-          bool flag2 = this.OutputNavigation(writer);
+          var flag2 = this.OutputNavigation(writer);
           if (this._op == XmlDiffViewOperation.Change)
           {
             diffViewOperation = XmlDiffViewOperation.Match;
@@ -129,7 +129,7 @@ namespace Microsoft.XmlDiffPatch
         return;
       this.HtmlDrawChildNodes(writer, indent + XmlDiffView.DeltaIndent);
       XmlDiffView.HtmlStartRow(writer);
-      for (int index = 0; index < 2; ++index)
+      for (var index = 0; index < 2; ++index)
       {
         XmlDiffView.HtmlStartCell(writer, indent);
         if (XmlDiffView.HtmlWriteToPane[(int) this._op, index])
@@ -158,10 +158,10 @@ namespace Microsoft.XmlDiffPatch
     {
       if (this._attributes == null)
         return;
-      string data = string.Empty;
+      var data = string.Empty;
       if (this._attributes._nextSibbling != null)
         data = XmlDiffView.GetIndent(this._name.Length + 2);
-      XmlDiffViewAttribute attr = this._attributes;
+            var attr = this._attributes;
       while (attr != null)
       {
         if (XmlDiffView.HtmlWriteToPane[(int) attr._op, paneNo])

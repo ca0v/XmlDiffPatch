@@ -24,15 +24,15 @@ namespace Microsoft.XmlDiffPatch
     {
       if (!this._bSubtree)
       {
-        XmlNode parent1 = this._sourceNodes.Item(0);
+                var parent1 = this._sourceNodes.Item(0);
         this.ApplyChildren(parent1);
         currentPosition = parent1.PreviousSibling;
       }
-      IEnumerator enumerator = this._sourceNodes.GetEnumerator();
+            var enumerator = this._sourceNodes.GetEnumerator();
       enumerator.Reset();
       while (enumerator.MoveNext())
       {
-        XmlNode current = (XmlNode) enumerator.Current;
+                var current = (XmlNode) enumerator.Current;
         if (current.NodeType == XmlNodeType.Attribute)
         {
           ((XmlElement) parent).RemoveAttributeNode((XmlAttribute) current);
@@ -43,7 +43,7 @@ namespace Microsoft.XmlDiffPatch
           {
             while (current.FirstChild != null)
             {
-              XmlNode firstChild = current.FirstChild;
+                            var firstChild = current.FirstChild;
               current.RemoveChild(firstChild);
               parent.InsertAfter(firstChild, currentPosition);
               currentPosition = firstChild;

@@ -12,8 +12,8 @@ namespace Microsoft.XmlDiffPatch
   internal class MultiNodeList : XmlPatchNodeList
   {
     private int _count = 0;
-    internal MultiNodeList.ListChunk _chunks = (MultiNodeList.ListChunk) null;
-    private MultiNodeList.ListChunk _lastChunk = (MultiNodeList.ListChunk) null;
+    internal ListChunk _chunks = (ListChunk) null;
+    private ListChunk _lastChunk = (ListChunk) null;
 
     internal MultiNodeList()
     {
@@ -25,8 +25,8 @@ namespace Microsoft.XmlDiffPatch
         return (XmlNode) null;
       if (index < 10)
         return this._chunks[index];
-      int num = index / 10;
-      MultiNodeList.ListChunk listChunk = this._chunks;
+      var num = index / 10;
+            var listChunk = this._chunks;
       for (; num > 0; --num)
         listChunk = listChunk._next;
       return listChunk[index % 10];
@@ -42,19 +42,19 @@ namespace Microsoft.XmlDiffPatch
 
     public override IEnumerator GetEnumerator()
     {
-      return (IEnumerator) new MultiNodeList.Enumerator(this);
+      return (IEnumerator) new Enumerator(this);
     }
 
     internal override void AddNode(XmlNode node)
     {
       if (this._lastChunk == null)
       {
-        this._chunks = new MultiNodeList.ListChunk();
+        this._chunks = new ListChunk();
         this._lastChunk = this._chunks;
       }
       else if (this._lastChunk._count == 10)
       {
-        this._lastChunk._next = new MultiNodeList.ListChunk();
+        this._lastChunk._next = new ListChunk();
         this._lastChunk = this._lastChunk._next;
       }
       this._lastChunk.AddNode(node);
@@ -65,7 +65,7 @@ namespace Microsoft.XmlDiffPatch
     {
       internal XmlNode[] _nodes = new XmlNode[10];
       internal int _count = 0;
-      internal MultiNodeList.ListChunk _next = (MultiNodeList.ListChunk) null;
+      internal ListChunk _next = (ListChunk) null;
       internal const int ChunkSize = 10;
 
       internal XmlNode this[int i]
@@ -86,7 +86,7 @@ namespace Microsoft.XmlDiffPatch
     {
       private int _currentChunkIndex = 0;
       private MultiNodeList _nodeList;
-      private MultiNodeList.ListChunk _currentChunk;
+      private ListChunk _currentChunk;
 
       internal Enumerator(MultiNodeList nodeList)
       {

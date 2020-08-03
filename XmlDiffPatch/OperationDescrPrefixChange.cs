@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: Microsoft.XmlDiffPatch.OperationDescrPrefixChange
 // Assembly: XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 // MVID: 2B32D548-922A-4A84-B9AD-FF8E573DAC90
@@ -18,19 +18,11 @@ namespace Microsoft.XmlDiffPatch
       this._prefixChange = prefixChange;
     }
 
-    internal override string Type
-    {
-      get
-      {
-        return "prefix change";
-      }
-    }
-
     internal override void WriteTo(XmlWriter xmlWriter)
     {
       xmlWriter.WriteStartElement("xd", "descriptor", "http://schemas.microsoft.com/xmltools/2002/xmldiff");
-      xmlWriter.WriteAttributeString("opid", this._operationID.ToString());
-      xmlWriter.WriteAttributeString("type", this.Type);
+      xmlWriter.WriteAttributeString("opid", this._opid.ToString());
+      xmlWriter.WriteAttributeString("type", OperationDescriptor.Type.PrefixChange.ToString());
       xmlWriter.WriteAttributeString("ns", this._prefixChange._NS);
       xmlWriter.WriteAttributeString("oldPrefix", this._prefixChange._oldPrefix);
       xmlWriter.WriteAttributeString("newPrefix", this._prefixChange._newPrefix);

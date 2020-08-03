@@ -19,7 +19,7 @@ namespace Microsoft.XmlDiffPatch
 
     internal override void Apply(XmlNode parent, ref XmlNode currentPosition)
     {
-      XmlDocument ownerDocument = parent.OwnerDocument;
+            var ownerDocument = parent.OwnerDocument;
       this.ApplyChildren(parent);
     }
   }

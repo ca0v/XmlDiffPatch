@@ -29,7 +29,7 @@ namespace Microsoft.XmlDiffPatch
     {
       get
       {
-        string str = "<!DOCTYPE " + this._name + " ";
+        var str = "<!DOCTYPE " + this._name + " ";
         if (this._publicId != string.Empty)
           str = str + "PUBLIC \"" + this._publicId + "\" ";
         else if (this._systemId != string.Empty)
@@ -51,7 +51,7 @@ namespace Microsoft.XmlDiffPatch
       if (this._op == XmlDiffViewOperation.Change)
       {
         XmlDiffView.HtmlStartRow(writer);
-        for (int index = 0; index < 2; ++index)
+        for (var index = 0; index < 2; ++index)
         {
           XmlDiffView.HtmlStartCell(writer, indent);
           XmlDiffView.HtmlWriteString(writer, XmlDiffViewOperation.Match, "<!DOCTYPE ");
@@ -60,7 +60,7 @@ namespace Microsoft.XmlDiffPatch
           else
             XmlDiffView.HtmlWriteString(writer, this._name == this._changeInfo._localName ? XmlDiffViewOperation.Match : XmlDiffViewOperation.Change, this._changeInfo._localName);
           XmlDiffView.HtmlWriteString(writer, XmlDiffViewOperation.Match, " ");
-          string str = "SYSTEM ";
+          var str = "SYSTEM ";
           if (this._publicId == this._changeInfo._prefix)
           {
             if (this._publicId != string.Empty)

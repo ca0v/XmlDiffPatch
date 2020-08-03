@@ -76,7 +76,7 @@ namespace Microsoft.XmlDiffPatch
 
     private ulong ComputeHashXmlDocument(XmlDocument doc)
     {
-      HashAlgorithm ha = new HashAlgorithm();
+            var ha = new HashAlgorithm();
       this.HashDocument(ha);
       this.ComputeHashXmlChildren(ha, (XmlNode) doc);
       return ha.Hash;
@@ -84,14 +84,14 @@ namespace Microsoft.XmlDiffPatch
 
     private ulong ComputeHashXmlFragment(XmlDocumentFragment frag)
     {
-      HashAlgorithm ha = new HashAlgorithm();
+            var ha = new HashAlgorithm();
       this.ComputeHashXmlChildren(ha, (XmlNode) frag);
       return ha.Hash;
     }
 
     internal ulong ComputeHashXmlDiffDocument(XmlDiffDocument doc)
     {
-      HashAlgorithm ha = new HashAlgorithm();
+            var ha = new HashAlgorithm();
       this.HashDocument(ha);
       this.ComputeHashXmlDiffChildren(ha, (XmlDiffParentNode) doc);
       return ha.Hash;
@@ -99,7 +99,7 @@ namespace Microsoft.XmlDiffPatch
 
     internal ulong ComputeHashXmlDiffElement(XmlDiffElement el)
     {
-      HashAlgorithm ha = new HashAlgorithm();
+            var ha = new HashAlgorithm();
       this.HashElement(ha, el.LocalName, el.Prefix, el.NamespaceURI);
       this.ComputeHashXmlDiffAttributes(ha, el);
       this.ComputeHashXmlDiffChildren(ha, (XmlDiffParentNode) el);
@@ -108,9 +108,9 @@ namespace Microsoft.XmlDiffPatch
 
     private void ComputeHashXmlDiffAttributes(HashAlgorithm ha, XmlDiffElement el)
     {
-      int i = 0;
+      var i = 0;
       ulong u = 0;
-      for (XmlDiffAttributeOrNamespace attributeOrNamespace = el._attributes; attributeOrNamespace != null; attributeOrNamespace = (XmlDiffAttributeOrNamespace) attributeOrNamespace._nextSibling)
+      for (var attributeOrNamespace = el._attributes; attributeOrNamespace != null; attributeOrNamespace = (XmlDiffAttributeOrNamespace) attributeOrNamespace._nextSibling)
       {
         u += attributeOrNamespace.HashValue;
         ++i;
@@ -123,11 +123,11 @@ namespace Microsoft.XmlDiffPatch
 
     private void ComputeHashXmlDiffChildren(HashAlgorithm ha, XmlDiffParentNode parent)
     {
-      int i = 0;
+      var i = 0;
       if (this._bIgnoreChildOrder)
       {
         ulong u = 0;
-        for (XmlDiffNode xmlDiffNode = parent.FirstChildNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
+        for (var xmlDiffNode = parent.FirstChildNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
         {
           u += xmlDiffNode.HashValue;
           ++i;
@@ -136,7 +136,7 @@ namespace Microsoft.XmlDiffPatch
       }
       else
       {
-        for (XmlDiffNode xmlDiffNode = parent.FirstChildNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
+        for (var xmlDiffNode = parent.FirstChildNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
         {
           ha.AddULong(xmlDiffNode.HashValue);
           ++i;
@@ -152,11 +152,11 @@ namespace Microsoft.XmlDiffPatch
       if (parent is XmlElement)
       {
         ulong u = 0;
-        int i = 0;
-        XmlAttributeCollection attributes = parent.Attributes;
-        for (int index = 0; index < attributes.Count; ++index)
+        var i = 0;
+                var attributes = parent.Attributes;
+        for (var index = 0; index < attributes.Count; ++index)
         {
-          XmlAttribute xmlAttribute = (XmlAttribute) attributes.Item(index);
+                    var xmlAttribute = (XmlAttribute) attributes.Item(index);
           ulong num;
           if (xmlAttribute.LocalName == "xmlns" && xmlAttribute.Prefix == string.Empty)
           {
@@ -183,13 +183,13 @@ namespace Microsoft.XmlDiffPatch
           ha.AddInt(i);
         }
       }
-      int i1 = 0;
+      var i1 = 0;
       if (this._bIgnoreChildOrder)
       {
         ulong u = 0;
-        for (XmlNode node = parent.FirstChild; node != null; node = node.NextSibling)
+        for (var node = parent.FirstChild; node != null; node = node.NextSibling)
         {
-          ulong hashXmlNode = this.ComputeHashXmlNode(node);
+          var hashXmlNode = this.ComputeHashXmlNode(node);
           if (hashXmlNode != 0UL)
           {
             u += hashXmlNode;
@@ -200,9 +200,9 @@ namespace Microsoft.XmlDiffPatch
       }
       else
       {
-        for (XmlNode node = parent.FirstChild; node != null; node = node.NextSibling)
+        for (var node = parent.FirstChild; node != null; node = node.NextSibling)
         {
-          ulong hashXmlNode = this.ComputeHashXmlNode(node);
+          var hashXmlNode = this.ComputeHashXmlNode(node);
           if (hashXmlNode != 0UL)
           {
             ha.AddULong(hashXmlNode);
@@ -220,32 +220,32 @@ namespace Microsoft.XmlDiffPatch
       switch (node.NodeType)
       {
         case XmlNodeType.Element:
-          XmlElement xmlElement = (XmlElement) node;
-          HashAlgorithm ha = new HashAlgorithm();
+                    var xmlElement = (XmlElement) node;
+                    var ha = new HashAlgorithm();
           this.HashElement(ha, xmlElement.LocalName, xmlElement.Prefix, xmlElement.NamespaceURI);
           this.ComputeHashXmlChildren(ha, (XmlNode) xmlElement);
           return ha.Hash;
         case XmlNodeType.Attribute:
           return 0;
         case XmlNodeType.Text:
-          XmlCharacterData xmlCharacterData1 = (XmlCharacterData) node;
+                    var xmlCharacterData1 = (XmlCharacterData) node;
           return this._bIgnoreWhitespace ? this.HashCharacterNode(xmlCharacterData1.NodeType, XmlDiff.NormalizeText(xmlCharacterData1.Value)) : this.HashCharacterNode(xmlCharacterData1.NodeType, xmlCharacterData1.Value);
         case XmlNodeType.CDATA:
-          XmlCharacterData xmlCharacterData2 = (XmlCharacterData) node;
+                    var xmlCharacterData2 = (XmlCharacterData) node;
           return this.HashCharacterNode(xmlCharacterData2.NodeType, xmlCharacterData2.Value);
         case XmlNodeType.EntityReference:
           return this.HashER(node.Name);
         case XmlNodeType.ProcessingInstruction:
           if (this._bIgnorePI)
             return 0;
-          XmlProcessingInstruction processingInstruction = (XmlProcessingInstruction) node;
+                    var processingInstruction = (XmlProcessingInstruction) node;
           return this.HashPI(processingInstruction.Target, processingInstruction.Value);
         case XmlNodeType.Comment:
           return !this._bIgnoreComments ? this.HashCharacterNode(XmlNodeType.Comment, node.Value) : 0UL;
         case XmlNodeType.DocumentType:
           if (this._bIgnoreDtd)
             return 0;
-          XmlDocumentType xmlDocumentType = (XmlDocumentType) node;
+                    var xmlDocumentType = (XmlDocumentType) node;
           return this.HashDocumentType(xmlDocumentType.Name, xmlDocumentType.PublicId, xmlDocumentType.SystemId, xmlDocumentType.InternalSubset);
         case XmlNodeType.DocumentFragment:
           return 0;

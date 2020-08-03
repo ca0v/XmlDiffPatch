@@ -22,7 +22,7 @@ namespace Microsoft.XmlDiffPatch
       this._firstNode = firstNode;
       this._lastNode = lastNode;
       this._matchingShrankNode = (XmlDiffShrankNode) null;
-      XmlDiffNode xmlDiffNode = firstNode;
+            var xmlDiffNode = firstNode;
       while (true)
       {
         this._hashValue += (this._hashValue << 7) + xmlDiffNode.HashValue;
@@ -94,7 +94,7 @@ namespace Microsoft.XmlDiffPatch
 
     internal override void WriteContentTo(XmlWriter w)
     {
-      XmlDiffNode xmlDiffNode = this._firstNode;
+            var xmlDiffNode = this._firstNode;
       while (true)
       {
         xmlDiffNode.WriteTo(w);

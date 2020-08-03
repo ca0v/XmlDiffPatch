@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: Microsoft.XmlDiffPatch.OperationDescrMove
 // Assembly: XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 // MVID: 2B32D548-922A-4A84-B9AD-FF8E573DAC90
@@ -6,19 +6,12 @@
 
 namespace Microsoft.XmlDiffPatch
 {
-  internal class OperationDescrMove : OperationDescriptor
-  {
-    internal OperationDescrMove(ulong opid)
-      : base(opid)
+    internal class OperationDescrMove : OperationDescriptor
     {
+        internal OperationDescrMove(ulong opid)
+          : base(opid)
+        {
+            this._type = Type.Move;
+        }
     }
-
-    internal override string Type
-    {
-      get
-      {
-        return "move";
-      }
-    }
-  }
 }

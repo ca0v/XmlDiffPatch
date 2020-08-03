@@ -34,12 +34,12 @@ namespace Microsoft.XmlDiffPatch
         xmlWriter.WriteAttributeString("opid", this._operationID.ToString());
       if (this._bNeedNamespaces)
       {
-        Hashtable hashtable = new Hashtable();
-        for (XmlDiffParentNode parent = this._firstTargetNode._parent; parent != null; parent = parent._parent)
+                var hashtable = new Hashtable();
+        for (var parent = this._firstTargetNode._parent; parent != null; parent = parent._parent)
         {
           if (parent._bDefinesNamespaces)
           {
-            for (XmlDiffAttributeOrNamespace attributeOrNamespace = ((XmlDiffElement) parent)._attributes; attributeOrNamespace != null && attributeOrNamespace.NodeType == XmlDiffNodeType.Namespace; attributeOrNamespace = (XmlDiffAttributeOrNamespace) attributeOrNamespace._nextSibling)
+            for (var attributeOrNamespace = ((XmlDiffElement) parent)._attributes; attributeOrNamespace != null && attributeOrNamespace.NodeType == XmlDiffNodeType.Namespace; attributeOrNamespace = (XmlDiffAttributeOrNamespace) attributeOrNamespace._nextSibling)
             {
               if (hashtable[(object) attributeOrNamespace.Prefix] == null)
               {
@@ -53,7 +53,7 @@ namespace Microsoft.XmlDiffPatch
           }
         }
       }
-      XmlDiffNode xmlDiffNode = this._firstTargetNode;
+            var xmlDiffNode = this._firstTargetNode;
       while (true)
       {
         xmlDiffNode.WriteTo(xmlWriter);
@@ -67,7 +67,7 @@ namespace Microsoft.XmlDiffPatch
 
     private void Sort()
     {
-      XmlDiffNode firstPreviousSibbling = (XmlDiffNode) null;
+            var firstPreviousSibbling = (XmlDiffNode) null;
       XmlDiff.SortNodesByPosition(ref this._firstTargetNode, ref this._lastTargetNode, ref firstPreviousSibbling);
       this._bSorted = true;
     }

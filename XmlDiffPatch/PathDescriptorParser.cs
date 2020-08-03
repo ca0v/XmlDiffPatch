@@ -48,14 +48,14 @@ namespace Microsoft.XmlDiffPatch
 
     private static XmlNodeList SelectAbsoluteNodes(XmlNode rootNode, string path)
     {
-      int pos = 1;
-      XmlNode xmlNode = rootNode;
+      var pos = 1;
+            var xmlNode = rootNode;
       int startPos;
       while (true)
       {
         startPos = pos;
-        XmlNodeList childNodes = xmlNode.ChildNodes;
-        int num = PathDescriptorParser.ReadPosition(path, ref pos);
+                var childNodes = xmlNode.ChildNodes;
+        var num = PathDescriptorParser.ReadPosition(path, ref pos);
         if (pos == path.Length || path[pos] == '/')
         {
           if (childNodes.Count == 0 || num < 0 || num > childNodes.Count)
@@ -71,7 +71,7 @@ namespace Microsoft.XmlDiffPatch
         else
           goto label_8;
       }
-      XmlPatchNodeList xmlPatchNodeList = (XmlPatchNodeList) new SingleNodeList();
+            var xmlPatchNodeList = (XmlPatchNodeList) new SingleNodeList();
       xmlPatchNodeList.AddNode(xmlNode);
       return (XmlNodeList) xmlPatchNodeList;
 label_8:
@@ -80,7 +80,7 @@ label_8:
 
     private static XmlNodeList SelectAllAttributes(XmlNode parentNode)
     {
-      XmlAttributeCollection attributes = parentNode.Attributes;
+            var attributes = parentNode.Attributes;
       if (attributes.Count == 0)
       {
         PathDescriptorParser.OnNoMatchingNode("@*");
@@ -88,12 +88,12 @@ label_8:
       }
       if (attributes.Count == 1)
       {
-        XmlPatchNodeList xmlPatchNodeList = (XmlPatchNodeList) new SingleNodeList();
+                var xmlPatchNodeList = (XmlPatchNodeList) new SingleNodeList();
         xmlPatchNodeList.AddNode(attributes.Item(0));
         return (XmlNodeList) xmlPatchNodeList;
       }
-      IEnumerator enumerator = attributes.GetEnumerator();
-      XmlPatchNodeList xmlPatchNodeList1 = (XmlPatchNodeList) new MultiNodeList();
+            var enumerator = attributes.GetEnumerator();
+            var xmlPatchNodeList1 = (XmlPatchNodeList) new MultiNodeList();
       while (enumerator.MoveNext())
         xmlPatchNodeList1.AddNode((XmlNode) enumerator.Current);
       return (XmlNodeList) xmlPatchNodeList1;
@@ -101,15 +101,15 @@ label_8:
 
     private static XmlNodeList SelectAttributes(XmlNode parentNode, string path)
     {
-      int pos = 1;
-      XmlAttributeCollection attributes = parentNode.Attributes;
-      XmlPatchNodeList xmlPatchNodeList = (XmlPatchNodeList) null;
+      var pos = 1;
+            var attributes = parentNode.Attributes;
+            var xmlPatchNodeList = (XmlPatchNodeList) null;
       while (true)
       {
-        string name = PathDescriptorParser.ReadAttrName(path, ref pos);
+        var name = PathDescriptorParser.ReadAttrName(path, ref pos);
         if (xmlPatchNodeList == null)
           xmlPatchNodeList = pos != path.Length ? (XmlPatchNodeList) new MultiNodeList() : (XmlPatchNodeList) new SingleNodeList();
-        XmlNode namedItem = attributes.GetNamedItem(name);
+                var namedItem = attributes.GetNamedItem(name);
         if (namedItem == null)
           PathDescriptorParser.OnNoMatchingNode(path);
         xmlPatchNodeList.AddNode(namedItem);
@@ -133,7 +133,7 @@ label_8:
 
     private static XmlNodeList SelectAllChildren(XmlNode parentNode)
     {
-      XmlNodeList childNodes = parentNode.ChildNodes;
+            var childNodes = parentNode.ChildNodes;
       if (childNodes.Count == 0)
       {
         PathDescriptorParser.OnNoMatchingNode("*");
@@ -141,12 +141,12 @@ label_8:
       }
       if (childNodes.Count == 1)
       {
-        XmlPatchNodeList xmlPatchNodeList = (XmlPatchNodeList) new SingleNodeList();
+                var xmlPatchNodeList = (XmlPatchNodeList) new SingleNodeList();
         xmlPatchNodeList.AddNode(childNodes.Item(0));
         return (XmlNodeList) xmlPatchNodeList;
       }
-      IEnumerator enumerator = childNodes.GetEnumerator();
-      XmlPatchNodeList xmlPatchNodeList1 = (XmlPatchNodeList) new MultiNodeList();
+            var enumerator = childNodes.GetEnumerator();
+            var xmlPatchNodeList1 = (XmlPatchNodeList) new MultiNodeList();
       while (enumerator.MoveNext())
         xmlPatchNodeList1.AddNode((XmlNode) enumerator.Current);
       return (XmlNodeList) xmlPatchNodeList1;
@@ -157,15 +157,15 @@ label_8:
       string path,
       int startPos)
     {
-      int pos = startPos;
-      XmlNodeList childNodes = parentNode.ChildNodes;
-      int num1 = PathDescriptorParser.ReadPosition(path, ref pos);
-      XmlPatchNodeList xmlPatchNodeList = pos != path.Length ? (XmlPatchNodeList) new MultiNodeList() : (XmlPatchNodeList) new SingleNodeList();
+      var pos = startPos;
+            var childNodes = parentNode.ChildNodes;
+      var num1 = PathDescriptorParser.ReadPosition(path, ref pos);
+            var xmlPatchNodeList = pos != path.Length ? (XmlPatchNodeList) new MultiNodeList() : (XmlPatchNodeList) new SingleNodeList();
       while (true)
       {
         if (num1 <= 0 || num1 > childNodes.Count)
           PathDescriptorParser.OnNoMatchingNode(path);
-        XmlNode node = childNodes.Item(num1 - 1);
+                var node = childNodes.Item(num1 - 1);
         xmlPatchNodeList.AddNode(node);
         if (pos != path.Length)
         {
@@ -174,7 +174,7 @@ label_8:
           else if (path[pos] == '-')
           {
             ++pos;
-            int num2 = PathDescriptorParser.ReadPosition(path, ref pos);
+            var num2 = PathDescriptorParser.ReadPosition(path, ref pos);
             if (num2 <= 0 || num2 > childNodes.Count)
               PathDescriptorParser.OnNoMatchingNode(path);
             while (num1 < num2)
@@ -203,20 +203,20 @@ label_8:
 
     private static int ReadPosition(string str, ref int pos)
     {
-      int num1 = str.IndexOfAny(PathDescriptorParser.Delimiters, pos);
+      var num1 = str.IndexOfAny(PathDescriptorParser.Delimiters, pos);
       if (num1 < 0)
         num1 = str.Length;
-      int num2 = int.Parse(str.Substring(pos, num1 - pos));
+      var num2 = int.Parse(str.Substring(pos, num1 - pos));
       pos = num1;
       return num2;
     }
 
     private static string ReadAttrName(string str, ref int pos)
     {
-      int num = str.IndexOf('|', pos);
+      var num = str.IndexOf('|', pos);
       if (num < 0)
         num = str.Length;
-      string str1 = str.Substring(pos, num - pos);
+      var str1 = str.Substring(pos, num - pos);
       pos = num;
       return str1;
     }

@@ -49,7 +49,7 @@ namespace Microsoft.XmlDiffPatch
     {
       get
       {
-        string str = string.Empty;
+        var str = string.Empty;
         if (this._prefix != string.Empty)
           str = this._prefix + ":";
         return str + this._localName + "=\"" + this._value + "\"";

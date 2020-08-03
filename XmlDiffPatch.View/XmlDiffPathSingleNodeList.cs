@@ -10,7 +10,7 @@ namespace Microsoft.XmlDiffPatch
 {
   internal class XmlDiffPathSingleNodeList : XmlDiffPathNodeList
   {
-    private XmlDiffPathSingleNodeList.State _state = XmlDiffPathSingleNodeList.State.BeforeNode;
+    private State _state = XmlDiffPathSingleNodeList.State.BeforeNode;
     private XmlDiffViewNode _node;
 
     internal XmlDiffPathSingleNodeList()

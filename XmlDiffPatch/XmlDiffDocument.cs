@@ -36,12 +36,12 @@ namespace Microsoft.XmlDiffPatch
     {
       get
       {
-        XmlDiffNode xmlDiffNode = this._firstChildNode;
+                var xmlDiffNode = this._firstChildNode;
         while (xmlDiffNode != null && xmlDiffNode.NodeType != XmlDiffNodeType.Element)
           xmlDiffNode = xmlDiffNode._nextSibling;
         if (xmlDiffNode == null)
           return true;
-        XmlDiffNode nextSibling = xmlDiffNode._nextSibling;
+                var nextSibling = xmlDiffNode._nextSibling;
         while (nextSibling != null && nextSibling.NodeType != XmlDiffNodeType.Element)
           nextSibling = nextSibling._nextSibling;
         return nextSibling != null;
@@ -80,7 +80,7 @@ namespace Microsoft.XmlDiffPatch
 
     internal void LoadChildNodes(XmlDiffParentNode parent, XmlReader reader, bool bEmptyElement)
     {
-      XmlDiffNode curLastChild = this._curLastChild;
+            var curLastChild = this._curLastChild;
       this._curLastChild = (XmlDiffNode) null;
       while (reader.MoveToNextAttribute())
       {
@@ -88,7 +88,7 @@ namespace Microsoft.XmlDiffPatch
         {
           if (!this._XmlDiff.IgnoreNamespaces)
           {
-            XmlDiffNamespace xmlDiffNamespace = new XmlDiffNamespace(reader.LocalName, reader.Value);
+                        var xmlDiffNamespace = new XmlDiffNamespace(reader.LocalName, reader.Value);
             xmlDiffNamespace.ComputeHashValue(this._xmlHash);
             this.InsertAttributeOrNamespace((XmlDiffElement) parent, (XmlDiffAttributeOrNamespace) xmlDiffNamespace);
           }
@@ -97,22 +97,22 @@ namespace Microsoft.XmlDiffPatch
         {
           if (!this._XmlDiff.IgnoreNamespaces)
           {
-            XmlDiffNamespace xmlDiffNamespace = new XmlDiffNamespace(string.Empty, reader.Value);
+                        var xmlDiffNamespace = new XmlDiffNamespace(string.Empty, reader.Value);
             xmlDiffNamespace.ComputeHashValue(this._xmlHash);
             this.InsertAttributeOrNamespace((XmlDiffElement) parent, (XmlDiffAttributeOrNamespace) xmlDiffNamespace);
           }
         }
         else
         {
-          string str = this._XmlDiff.IgnoreWhitespace ? XmlDiff.NormalizeText(reader.Value) : reader.Value;
-          XmlDiffAttribute xmlDiffAttribute = new XmlDiffAttribute(reader.LocalName, reader.Prefix, reader.NamespaceURI, str);
+          var str = this._XmlDiff.IgnoreWhitespace ? XmlDiff.NormalizeText(reader.Value) : reader.Value;
+                    var xmlDiffAttribute = new XmlDiffAttribute(reader.LocalName, reader.Prefix, reader.NamespaceURI, str);
           xmlDiffAttribute.ComputeHashValue(this._xmlHash);
           this.InsertAttributeOrNamespace((XmlDiffElement) parent, (XmlDiffAttributeOrNamespace) xmlDiffAttribute);
         }
       }
       if (!bEmptyElement)
       {
-        int position = 0;
+        var position = 0;
         if (reader.Read())
         {
           do
@@ -122,25 +122,25 @@ namespace Microsoft.XmlDiffPatch
               switch (reader.NodeType)
               {
                 case XmlNodeType.Element:
-                  bool isEmptyElement = reader.IsEmptyElement;
-                  XmlDiffElement xmlDiffElement = new XmlDiffElement(++position, reader.LocalName, reader.Prefix, reader.NamespaceURI);
+                  var isEmptyElement = reader.IsEmptyElement;
+                                    var xmlDiffElement = new XmlDiffElement(++position, reader.LocalName, reader.Prefix, reader.NamespaceURI);
                   this.LoadChildNodes((XmlDiffParentNode) xmlDiffElement, reader, isEmptyElement);
                   xmlDiffElement.ComputeHashValue(this._xmlHash);
                   this.InsertChild(parent, (XmlDiffNode) xmlDiffElement);
                   break;
                 case XmlNodeType.Text:
-                  string str = this._XmlDiff.IgnoreWhitespace ? XmlDiff.NormalizeText(reader.Value) : reader.Value;
-                  XmlDiffCharData xmlDiffCharData1 = new XmlDiffCharData(++position, str, XmlDiffNodeType.Text);
+                  var str = this._XmlDiff.IgnoreWhitespace ? XmlDiff.NormalizeText(reader.Value) : reader.Value;
+                                    var xmlDiffCharData1 = new XmlDiffCharData(++position, str, XmlDiffNodeType.Text);
                   xmlDiffCharData1.ComputeHashValue(this._xmlHash);
                   this.InsertChild(parent, (XmlDiffNode) xmlDiffCharData1);
                   break;
                 case XmlNodeType.CDATA:
-                  XmlDiffCharData xmlDiffCharData2 = new XmlDiffCharData(++position, reader.Value, XmlDiffNodeType.CDATA);
+                                    var xmlDiffCharData2 = new XmlDiffCharData(++position, reader.Value, XmlDiffNodeType.CDATA);
                   xmlDiffCharData2.ComputeHashValue(this._xmlHash);
                   this.InsertChild(parent, (XmlDiffNode) xmlDiffCharData2);
                   break;
                 case XmlNodeType.EntityReference:
-                  XmlDiffER xmlDiffEr = new XmlDiffER(++position, reader.Name);
+                                    var xmlDiffEr = new XmlDiffER(++position, reader.Name);
                   xmlDiffEr.ComputeHashValue(this._xmlHash);
                   this.InsertChild(parent, (XmlDiffNode) xmlDiffEr);
                   break;
@@ -148,7 +148,7 @@ namespace Microsoft.XmlDiffPatch
                   ++position;
                   if (!this._XmlDiff.IgnorePI)
                   {
-                    XmlDiffPI xmlDiffPi = new XmlDiffPI(position, reader.Name, reader.Value);
+                                        var xmlDiffPi = new XmlDiffPI(position, reader.Name, reader.Value);
                     xmlDiffPi.ComputeHashValue(this._xmlHash);
                     this.InsertChild(parent, (XmlDiffNode) xmlDiffPi);
                     break;
@@ -158,7 +158,7 @@ namespace Microsoft.XmlDiffPatch
                   ++position;
                   if (!this._XmlDiff.IgnoreComments)
                   {
-                    XmlDiffCharData xmlDiffCharData3 = new XmlDiffCharData(position, reader.Value, XmlDiffNodeType.Comment);
+                                        var xmlDiffCharData3 = new XmlDiffCharData(position, reader.Value, XmlDiffNodeType.Comment);
                     xmlDiffCharData3.ComputeHashValue(this._xmlHash);
                     this.InsertChild(parent, (XmlDiffNode) xmlDiffCharData3);
                     break;
@@ -168,7 +168,7 @@ namespace Microsoft.XmlDiffPatch
                   ++position;
                   if (!this._XmlDiff.IgnoreDtd)
                   {
-                    XmlDiffDocumentType diffDocumentType = new XmlDiffDocumentType(position, reader.Name, reader.GetAttribute("PUBLIC"), reader.GetAttribute("SYSTEM"), reader.Value);
+                                        var diffDocumentType = new XmlDiffDocumentType(position, reader.Name, reader.GetAttribute("PUBLIC"), reader.GetAttribute("SYSTEM"), reader.Value);
                     diffDocumentType.ComputeHashValue(this._xmlHash);
                     this.InsertChild(parent, (XmlDiffNode) diffDocumentType);
                     break;
@@ -180,7 +180,7 @@ namespace Microsoft.XmlDiffPatch
                     ++position;
                     if (!this._XmlDiff.IgnoreWhitespace)
                     {
-                      XmlDiffCharData xmlDiffCharData3 = new XmlDiffCharData(position, reader.Value, XmlDiffNodeType.SignificantWhitespace);
+                                            var xmlDiffCharData3 = new XmlDiffCharData(position, reader.Value, XmlDiffNodeType.SignificantWhitespace);
                       xmlDiffCharData3.ComputeHashValue(this._xmlHash);
                       this.InsertChild(parent, (XmlDiffNode) xmlDiffCharData3);
                       break;
@@ -194,7 +194,7 @@ namespace Microsoft.XmlDiffPatch
                   ++position;
                   if (!this._XmlDiff.IgnoreXmlDecl)
                   {
-                    XmlDiffXmlDeclaration diffXmlDeclaration = new XmlDiffXmlDeclaration(position, XmlDiff.NormalizeXmlDeclaration(reader.Value));
+                                        var diffXmlDeclaration = new XmlDiffXmlDeclaration(position, XmlDiff.NormalizeXmlDeclaration(reader.Value));
                     diffXmlDeclaration.ComputeHashValue(this._xmlHash);
                     this.InsertChild(parent, (XmlDiffNode) diffXmlDeclaration);
                     break;
@@ -229,8 +229,8 @@ label_29:
             }
             else
             {
-              int childPosition = 0;
-              XmlDiffNode newChildNode = this.LoadNode(node, ref childPosition);
+              var childPosition = 0;
+                            var newChildNode = this.LoadNode(node, ref childPosition);
               if (newChildNode != null)
               {
                 this.InsertChildNodeAfter((XmlDiffNode) null, newChildNode);
@@ -254,52 +254,52 @@ label_29:
       switch (node.NodeType)
       {
         case XmlNodeType.Element:
-          XmlDiffElement xmlDiffElement = new XmlDiffElement(++childPosition, node.LocalName, node.Prefix, node.NamespaceURI);
+                    var xmlDiffElement = new XmlDiffElement(++childPosition, node.LocalName, node.Prefix, node.NamespaceURI);
           this.LoadChildNodes((XmlDiffParentNode) xmlDiffElement, node);
           xmlDiffElement.ComputeHashValue(this._xmlHash);
           return (XmlDiffNode) xmlDiffElement;
         case XmlNodeType.Attribute:
           return (XmlDiffNode) null;
         case XmlNodeType.Text:
-          string str = this._XmlDiff.IgnoreWhitespace ? XmlDiff.NormalizeText(node.Value) : node.Value;
-          XmlDiffCharData xmlDiffCharData1 = new XmlDiffCharData(++childPosition, str, XmlDiffNodeType.Text);
+          var str = this._XmlDiff.IgnoreWhitespace ? XmlDiff.NormalizeText(node.Value) : node.Value;
+                    var xmlDiffCharData1 = new XmlDiffCharData(++childPosition, str, XmlDiffNodeType.Text);
           xmlDiffCharData1.ComputeHashValue(this._xmlHash);
           return (XmlDiffNode) xmlDiffCharData1;
         case XmlNodeType.CDATA:
-          XmlDiffCharData xmlDiffCharData2 = new XmlDiffCharData(++childPosition, node.Value, XmlDiffNodeType.CDATA);
+                    var xmlDiffCharData2 = new XmlDiffCharData(++childPosition, node.Value, XmlDiffNodeType.CDATA);
           xmlDiffCharData2.ComputeHashValue(this._xmlHash);
           return (XmlDiffNode) xmlDiffCharData2;
         case XmlNodeType.EntityReference:
-          XmlDiffER xmlDiffEr = new XmlDiffER(++childPosition, node.Name);
+                    var xmlDiffEr = new XmlDiffER(++childPosition, node.Name);
           xmlDiffEr.ComputeHashValue(this._xmlHash);
           return (XmlDiffNode) xmlDiffEr;
         case XmlNodeType.ProcessingInstruction:
           ++childPosition;
           if (this._XmlDiff.IgnorePI)
             return (XmlDiffNode) null;
-          XmlDiffPI xmlDiffPi = new XmlDiffPI(childPosition, node.Name, node.Value);
+                    var xmlDiffPi = new XmlDiffPI(childPosition, node.Name, node.Value);
           xmlDiffPi.ComputeHashValue(this._xmlHash);
           return (XmlDiffNode) xmlDiffPi;
         case XmlNodeType.Comment:
           ++childPosition;
           if (this._XmlDiff.IgnoreComments)
             return (XmlDiffNode) null;
-          XmlDiffCharData xmlDiffCharData3 = new XmlDiffCharData(childPosition, node.Value, XmlDiffNodeType.Comment);
+                    var xmlDiffCharData3 = new XmlDiffCharData(childPosition, node.Value, XmlDiffNodeType.Comment);
           xmlDiffCharData3.ComputeHashValue(this._xmlHash);
           return (XmlDiffNode) xmlDiffCharData3;
         case XmlNodeType.DocumentType:
           ++childPosition;
           if (this._XmlDiff.IgnoreDtd)
             return (XmlDiffNode) null;
-          XmlDocumentType xmlDocumentType = (XmlDocumentType) node;
-          XmlDiffDocumentType diffDocumentType = new XmlDiffDocumentType(childPosition, xmlDocumentType.Name, xmlDocumentType.PublicId, xmlDocumentType.SystemId, xmlDocumentType.InternalSubset);
+                    var xmlDocumentType = (XmlDocumentType) node;
+                    var diffDocumentType = new XmlDiffDocumentType(childPosition, xmlDocumentType.Name, xmlDocumentType.PublicId, xmlDocumentType.SystemId, xmlDocumentType.InternalSubset);
           diffDocumentType.ComputeHashValue(this._xmlHash);
           return (XmlDiffNode) diffDocumentType;
         case XmlNodeType.SignificantWhitespace:
           ++childPosition;
           if (this._XmlDiff.IgnoreWhitespace)
             return (XmlDiffNode) null;
-          XmlDiffCharData xmlDiffCharData4 = new XmlDiffCharData(childPosition, node.Value, XmlDiffNodeType.SignificantWhitespace);
+                    var xmlDiffCharData4 = new XmlDiffCharData(childPosition, node.Value, XmlDiffNodeType.SignificantWhitespace);
           xmlDiffCharData4.ComputeHashValue(this._xmlHash);
           return (XmlDiffNode) xmlDiffCharData4;
         case XmlNodeType.EndElement:
@@ -308,7 +308,7 @@ label_29:
           ++childPosition;
           if (this._XmlDiff.IgnoreXmlDecl)
             return (XmlDiffNode) null;
-          XmlDiffXmlDeclaration diffXmlDeclaration = new XmlDiffXmlDeclaration(childPosition, XmlDiff.NormalizeXmlDeclaration(node.Value));
+                    var diffXmlDeclaration = new XmlDiffXmlDeclaration(childPosition, XmlDiff.NormalizeXmlDeclaration(node.Value));
           diffXmlDeclaration.ComputeHashValue(this._xmlHash);
           return (XmlDiffNode) diffXmlDeclaration;
         default:
@@ -318,9 +318,9 @@ label_29:
 
     internal void LoadChildNodes(XmlDiffParentNode parent, XmlNode parentDomNode)
     {
-      XmlDiffNode curLastChild = this._curLastChild;
+            var curLastChild = this._curLastChild;
       this._curLastChild = (XmlDiffNode) null;
-      XmlNamedNodeMap attributes = (XmlNamedNodeMap) parentDomNode.Attributes;
+            var attributes = (XmlNamedNodeMap) parentDomNode.Attributes;
       if (attributes != null && attributes.Count > 0)
       {
         foreach (XmlAttribute xmlAttribute in attributes)
@@ -329,7 +329,7 @@ label_29:
           {
             if (!this._XmlDiff.IgnoreNamespaces)
             {
-              XmlDiffNamespace xmlDiffNamespace = new XmlDiffNamespace(xmlAttribute.LocalName, xmlAttribute.Value);
+                            var xmlDiffNamespace = new XmlDiffNamespace(xmlAttribute.LocalName, xmlAttribute.Value);
               xmlDiffNamespace.ComputeHashValue(this._xmlHash);
               this.InsertAttributeOrNamespace((XmlDiffElement) parent, (XmlDiffAttributeOrNamespace) xmlDiffNamespace);
             }
@@ -338,30 +338,30 @@ label_29:
           {
             if (!this._XmlDiff.IgnoreNamespaces)
             {
-              XmlDiffNamespace xmlDiffNamespace = new XmlDiffNamespace(string.Empty, xmlAttribute.Value);
+                            var xmlDiffNamespace = new XmlDiffNamespace(string.Empty, xmlAttribute.Value);
               xmlDiffNamespace.ComputeHashValue(this._xmlHash);
               this.InsertAttributeOrNamespace((XmlDiffElement) parent, (XmlDiffAttributeOrNamespace) xmlDiffNamespace);
             }
           }
           else
           {
-            string str = this._XmlDiff.IgnoreWhitespace ? XmlDiff.NormalizeText(xmlAttribute.Value) : xmlAttribute.Value;
-            XmlDiffAttribute xmlDiffAttribute = new XmlDiffAttribute(xmlAttribute.LocalName, xmlAttribute.Prefix, xmlAttribute.NamespaceURI, str);
+            var str = this._XmlDiff.IgnoreWhitespace ? XmlDiff.NormalizeText(xmlAttribute.Value) : xmlAttribute.Value;
+                        var xmlDiffAttribute = new XmlDiffAttribute(xmlAttribute.LocalName, xmlAttribute.Prefix, xmlAttribute.NamespaceURI, str);
             xmlDiffAttribute.ComputeHashValue(this._xmlHash);
             this.InsertAttributeOrNamespace((XmlDiffElement) parent, (XmlDiffAttributeOrNamespace) xmlDiffAttribute);
           }
         }
       }
-      XmlNodeList childNodes = parentDomNode.ChildNodes;
+            var childNodes = parentDomNode.ChildNodes;
       if (childNodes.Count != 0)
       {
-        int childPosition = 0;
-        IEnumerator enumerator = childNodes.GetEnumerator();
+        var childPosition = 0;
+                var enumerator = childNodes.GetEnumerator();
         while (enumerator.MoveNext())
         {
           if (((XmlNode) enumerator.Current).NodeType != XmlNodeType.Whitespace)
           {
-            XmlDiffNode newChild = this.LoadNode((XmlNode) enumerator.Current, ref childPosition);
+                        var newChild = this.LoadNode((XmlNode) enumerator.Current, ref childPosition);
             if (newChild != null)
               this.InsertChild(parent, newChild);
           }
@@ -374,8 +374,8 @@ label_29:
     {
       if (this._XmlDiff.IgnoreChildOrder)
       {
-        XmlDiffNode node1 = parent.FirstChildNode;
-        XmlDiffNode childNode = (XmlDiffNode) null;
+                var node1 = parent.FirstChildNode;
+                var childNode = (XmlDiffNode) null;
         for (; node1 != null && XmlDiffDocument.OrderChildren(node1, newChild) <= 0; node1 = node1._nextSibling)
           childNode = node1;
         parent.InsertChildNodeAfter(childNode, newChild);
@@ -396,8 +396,8 @@ label_29:
 
     internal static int OrderChildren(XmlDiffNode node1, XmlDiffNode node2)
     {
-      int nodeType1 = (int) node1.NodeType;
-      int nodeType2 = (int) node2.NodeType;
+      var nodeType1 = (int) node1.NodeType;
+      var nodeType2 = (int) node2.NodeType;
       if (nodeType1 < nodeType2)
         return -1;
       if (nodeType2 < nodeType1)
@@ -454,8 +454,8 @@ label_29:
 
     internal static int OrderStrings(string s1, string s2)
     {
-      int num = s1.Length < s2.Length ? s1.Length : s2.Length;
-      int index = 0;
+      var num = s1.Length < s2.Length ? s1.Length : s2.Length;
+      var index = 0;
       while (index < num && (int) s1[index] == (int) s2[index])
         ++index;
       if (index < num)
@@ -467,8 +467,8 @@ label_29:
 
     internal static int OrderSubTrees(XmlDiffElement elem1, XmlDiffElement elem2)
     {
-      XmlDiffAttributeOrNamespace node1_1 = elem1._attributes;
-      XmlDiffAttributeOrNamespace node2_1 = elem2._attributes;
+            var node1_1 = elem1._attributes;
+            var node2_1 = elem2._attributes;
       while (node1_1 != null && node1_1.NodeType == XmlDiffNodeType.Namespace)
         node1_1 = (XmlDiffAttributeOrNamespace) node1_1._nextSibling;
       while (node2_1 != null && node2_1.NodeType == XmlDiffNodeType.Namespace)
@@ -482,7 +482,7 @@ label_29:
       }
       if (node1_1 == node2_1)
       {
-        XmlDiffNode node1_2 = elem1.FirstChildNode;
+                var node1_2 = elem1.FirstChildNode;
         XmlDiffNode node2_2;
         for (node2_2 = elem2.FirstChildNode; node1_2 != null && node2_2 != null; node2_2 = node2_2._nextSibling)
         {
@@ -505,7 +505,7 @@ label_29:
 
     internal override void WriteContentTo(XmlWriter w)
     {
-      for (XmlDiffNode xmlDiffNode = this.FirstChildNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
+      for (var xmlDiffNode = this.FirstChildNode; xmlDiffNode != null; xmlDiffNode = xmlDiffNode._nextSibling)
         xmlDiffNode.WriteTo(w);
     }
   }

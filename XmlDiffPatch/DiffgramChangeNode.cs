@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: Microsoft.XmlDiffPatch.DiffgramChangeNode
 // Assembly: XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 // MVID: 2B32D548-922A-4A84-B9AD-FF8E573DAC90
@@ -35,8 +35,8 @@ namespace Microsoft.XmlDiffPatch
       switch (this._op)
       {
         case XmlDiffOperation.ChangeElementName:
-          XmlDiffElement sourceNode1 = (XmlDiffElement) this._sourceNode;
-          XmlDiffElement targetNode1 = (XmlDiffElement) this._targetNode;
+                    var sourceNode1 = (XmlDiffElement) this._sourceNode;
+                    var targetNode1 = (XmlDiffElement) this._targetNode;
           if (sourceNode1.LocalName != targetNode1.LocalName)
             xmlWriter.WriteAttributeString("name", targetNode1.LocalName);
           if (sourceNode1.Prefix != targetNode1.Prefix && !xmlDiff.IgnorePrefixes && !xmlDiff.IgnoreNamespaces)
@@ -46,8 +46,8 @@ namespace Microsoft.XmlDiffPatch
           this.WriteChildrenTo(xmlWriter, xmlDiff);
           break;
         case XmlDiffOperation.ChangePI:
-          XmlDiffPI sourceNode2 = (XmlDiffPI) this._sourceNode;
-          XmlDiffPI targetNode2 = (XmlDiffPI) this._targetNode;
+                    var sourceNode2 = (XmlDiffPI) this._sourceNode;
+                    var targetNode2 = (XmlDiffPI) this._targetNode;
           if (sourceNode2.Value == targetNode2.Value)
           {
             xmlWriter.WriteAttributeString("name", targetNode2.Name);
@@ -59,7 +59,7 @@ namespace Microsoft.XmlDiffPatch
           xmlWriter.WriteAttributeString("name", ((XmlDiffER) this._targetNode).Name);
           break;
         case XmlDiffOperation.ChangeCharacterData:
-          XmlDiffCharData targetNode3 = (XmlDiffCharData) this._targetNode;
+                    var targetNode3 = (XmlDiffCharData) this._targetNode;
           switch (this._targetNode.NodeType)
           {
             case XmlDiffNodeType.Text:
@@ -78,8 +78,8 @@ namespace Microsoft.XmlDiffPatch
           xmlWriter.WriteString(((XmlDiffXmlDeclaration) this._targetNode).Value);
           break;
         case XmlDiffOperation.ChangeDTD:
-          XmlDiffDocumentType sourceNode3 = (XmlDiffDocumentType) this._sourceNode;
-          XmlDiffDocumentType targetNode4 = (XmlDiffDocumentType) this._targetNode;
+                    var sourceNode3 = (XmlDiffDocumentType) this._sourceNode;
+                    var targetNode4 = (XmlDiffDocumentType) this._targetNode;
           if (sourceNode3.Name != targetNode4.Name)
             xmlWriter.WriteAttributeString("name", targetNode4.Name);
           if (sourceNode3.SystemId != targetNode4.SystemId)
@@ -93,8 +93,8 @@ namespace Microsoft.XmlDiffPatch
           }
           break;
         case XmlDiffOperation.ChangeAttr:
-          XmlDiffAttribute sourceNode4 = (XmlDiffAttribute) this._sourceNode;
-          XmlDiffAttribute targetNode5 = (XmlDiffAttribute) this._targetNode;
+                    var sourceNode4 = (XmlDiffAttribute) this._sourceNode;
+                    var targetNode5 = (XmlDiffAttribute) this._targetNode;
           if (sourceNode4.Prefix != targetNode5.Prefix && !xmlDiff.IgnorePrefixes && !xmlDiff.IgnoreNamespaces)
             xmlWriter.WriteAttributeString("prefix", targetNode5.Prefix);
           if (sourceNode4.NamespaceURI != targetNode5.NamespaceURI && !xmlDiff.IgnoreNamespaces)

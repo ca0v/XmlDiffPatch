@@ -37,7 +37,7 @@ namespace Microsoft.XmlDiffPatch
     {
       if (changedNode.NodeType != XmlDiffNodeType.ProcessingInstruction)
         return XmlDiffOperation.Undefined;
-      XmlDiffPI xmlDiffPi = (XmlDiffPI) changedNode;
+            var xmlDiffPi = (XmlDiffPI) changedNode;
       return this.Name == xmlDiffPi.Name ? (this.Value == xmlDiffPi.Value ? XmlDiffOperation.Match : XmlDiffOperation.ChangePI) : (this.Value == xmlDiffPi.Value ? XmlDiffOperation.ChangePI : XmlDiffOperation.Undefined);
     }
 

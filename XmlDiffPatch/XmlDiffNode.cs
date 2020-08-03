@@ -97,8 +97,8 @@ namespace Microsoft.XmlDiffPatch
     {
       get
       {
-        StringWriter stringWriter = new StringWriter();
-        XmlTextWriter xmlTextWriter = new XmlTextWriter((TextWriter) stringWriter);
+                var stringWriter = new StringWriter();
+                var xmlTextWriter = new XmlTextWriter((TextWriter) stringWriter);
         this.WriteTo((XmlWriter) xmlTextWriter);
         xmlTextWriter.Close();
         return stringWriter.ToString();
@@ -109,8 +109,8 @@ namespace Microsoft.XmlDiffPatch
     {
       get
       {
-        StringWriter stringWriter = new StringWriter();
-        XmlTextWriter xmlTextWriter = new XmlTextWriter((TextWriter) stringWriter);
+                var stringWriter = new StringWriter();
+                var xmlTextWriter = new XmlTextWriter((TextWriter) stringWriter);
         this.WriteContentTo((XmlWriter) xmlTextWriter);
         xmlTextWriter.Close();
         return stringWriter.ToString();
@@ -147,8 +147,8 @@ namespace Microsoft.XmlDiffPatch
 
     internal string GetAbsoluteAddress()
     {
-      string str = this.GetRelativeAddress();
-      for (XmlDiffNode parent = (XmlDiffNode) this._parent; parent.NodeType != XmlDiffNodeType.Document; parent = (XmlDiffNode) parent._parent)
+      var str = this.GetRelativeAddress();
+      for (var parent = (XmlDiffNode) this._parent; parent.NodeType != XmlDiffNodeType.Document; parent = (XmlDiffNode) parent._parent)
         str = parent.GetRelativeAddress() + "/" + str;
       return "/" + str;
     }

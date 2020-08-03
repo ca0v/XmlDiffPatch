@@ -35,8 +35,8 @@ namespace Microsoft.XmlDiffPatch
     {
       if (this._op == XmlDiffViewOperation.Change)
       {
-        XmlDiffViewOperation op1 = this._name == this._changeInfo._localName ? XmlDiffViewOperation.Match : XmlDiffViewOperation.Change;
-        XmlDiffViewOperation op2 = this._value == this._changeInfo._value ? XmlDiffViewOperation.Match : XmlDiffViewOperation.Change;
+                var op1 = this._name == this._changeInfo._localName ? XmlDiffViewOperation.Match : XmlDiffViewOperation.Change;
+                var op2 = this._value == this._changeInfo._value ? XmlDiffViewOperation.Match : XmlDiffViewOperation.Change;
         XmlDiffView.HtmlStartRow(writer);
         XmlDiffView.HtmlStartCell(writer, indent);
         XmlDiffView.HtmlWriteString(writer, "<?");

@@ -15,7 +15,7 @@ namespace Microsoft.XmlDiffPatch
     internal XmlDiffViewNode _parent = (XmlDiffViewNode) null;
     internal XmlDiffViewOperation _op = XmlDiffViewOperation.Match;
     internal int _opid = 0;
-    internal XmlDiffViewNode.ChangeInfo _changeInfo = (XmlDiffViewNode.ChangeInfo) null;
+    internal ChangeInfo _changeInfo = (ChangeInfo) null;
     internal XmlNodeType _nodeType;
 
     internal XmlDiffViewNode(XmlNodeType nodeType)
@@ -40,12 +40,12 @@ namespace Microsoft.XmlDiffPatch
     internal void DrawHtmlNoChange(XmlWriter writer, int indent)
     {
       XmlDiffView.HtmlStartRow(writer);
-      for (int index = 0; index < 2; ++index)
+      for (var index = 0; index < 2; ++index)
       {
         XmlDiffView.HtmlStartCell(writer, indent);
         if (XmlDiffView.HtmlWriteToPane[(int) this._op, index])
         {
-          bool flag = this.OutputNavigation(writer);
+          var flag = this.OutputNavigation(writer);
           XmlDiffView.HtmlWriteString(writer, this._op, this.OuterXml);
           if (flag)
             writer.WriteEndElement();

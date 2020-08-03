@@ -51,18 +51,18 @@ namespace Microsoft.XmlDiffPatch
       string path)
     {
       Debug.Assert(path[0] == '/');
-      int pos = 1;
-      XmlDiffViewNode node = (XmlDiffViewNode) rootNode;
+      var pos = 1;
+            var node = (XmlDiffViewNode) rootNode;
       int startPos;
       while (true)
       {
         startPos = pos;
-        int num = XmlDiffPath.ReadPosition(path, ref pos);
+        var num = XmlDiffPath.ReadPosition(path, ref pos);
         if (pos == path.Length || path[pos] == '/')
         {
           if (node.FirstChildNode == null)
             XmlDiffPath.OnNoMatchingNode(path);
-          XmlDiffViewParentNode diffViewParentNode = (XmlDiffViewParentNode) node;
+                    var diffViewParentNode = (XmlDiffViewParentNode) node;
           if (num <= 0 || num > diffViewParentNode._sourceChildNodesCount)
             XmlDiffPath.OnNoMatchingNode(path);
           node = diffViewParentNode.GetSourceChildNode(num - 1);
@@ -76,7 +76,7 @@ namespace Microsoft.XmlDiffPatch
         else
           goto label_10;
       }
-      XmlDiffPathNodeList diffPathNodeList = (XmlDiffPathNodeList) new XmlDiffPathSingleNodeList();
+            var diffPathNodeList = (XmlDiffPathNodeList) new XmlDiffPathSingleNodeList();
       diffPathNodeList.AddNode(node);
       return diffPathNodeList;
 label_10:
@@ -95,12 +95,12 @@ label_10:
       }
       if (parentElement._attributes._nextSibbling == null)
       {
-        XmlDiffPathNodeList diffPathNodeList = (XmlDiffPathNodeList) new XmlDiffPathSingleNodeList();
+                var diffPathNodeList = (XmlDiffPathNodeList) new XmlDiffPathSingleNodeList();
         diffPathNodeList.AddNode((XmlDiffViewNode) parentElement._attributes);
         return diffPathNodeList;
       }
-      XmlDiffPathNodeList diffPathNodeList1 = (XmlDiffPathNodeList) new XmlDiffPathMultiNodeList();
-      XmlDiffViewAttribute attributes = parentElement._attributes;
+            var diffPathNodeList1 = (XmlDiffPathNodeList) new XmlDiffPathMultiNodeList();
+            var attributes = parentElement._attributes;
       while (attributes != null)
         diffPathNodeList1.AddNode((XmlDiffViewNode) attributes);
       return diffPathNodeList1;
@@ -111,14 +111,14 @@ label_10:
       string path)
     {
       Debug.Assert(path[0] == '@');
-      int pos = 1;
-      XmlDiffPathNodeList diffPathNodeList = (XmlDiffPathNodeList) null;
+      var pos = 1;
+            var diffPathNodeList = (XmlDiffPathNodeList) null;
       while (true)
       {
-        string name = XmlDiffPath.ReadAttrName(path, ref pos);
+        var name = XmlDiffPath.ReadAttrName(path, ref pos);
         if (diffPathNodeList == null)
           diffPathNodeList = pos != path.Length ? (XmlDiffPathNodeList) new XmlDiffPathMultiNodeList() : (XmlDiffPathNodeList) new XmlDiffPathSingleNodeList();
-        XmlDiffViewAttribute attribute = parentElement.GetAttribute(name);
+                var attribute = parentElement.GetAttribute(name);
         if (attribute == null)
           XmlDiffPath.OnNoMatchingNode(path);
         diffPathNodeList.AddNode((XmlDiffViewNode) attribute);
@@ -126,7 +126,7 @@ label_10:
         {
           if (path[pos] == '|')
           {
-            int index = pos + 1;
+            var index = pos + 1;
             if (path[index] != '@')
               XmlDiffPath.OnInvalidExpression(path);
             pos = index + 1;
@@ -150,12 +150,12 @@ label_10:
       }
       if (parentNode._childNodes._nextSibbling == null)
       {
-        XmlDiffPathNodeList diffPathNodeList = (XmlDiffPathNodeList) new XmlDiffPathSingleNodeList();
+                var diffPathNodeList = (XmlDiffPathNodeList) new XmlDiffPathSingleNodeList();
         diffPathNodeList.AddNode(parentNode._childNodes);
         return diffPathNodeList;
       }
-      XmlDiffPathNodeList diffPathNodeList1 = (XmlDiffPathNodeList) new XmlDiffPathMultiNodeList();
-      for (XmlDiffViewNode node = parentNode._childNodes; node != null; node = node._nextSibbling)
+            var diffPathNodeList1 = (XmlDiffPathNodeList) new XmlDiffPathMultiNodeList();
+      for (var node = parentNode._childNodes; node != null; node = node._nextSibbling)
         diffPathNodeList1.AddNode(node);
       return diffPathNodeList1;
     }
@@ -165,7 +165,7 @@ label_10:
       string path,
       int startPos)
     {
-      int pos = startPos;
+      var pos = startPos;
       XmlDiffPathNodeList diffPathNodeList;
       while (true)
       {
@@ -187,7 +187,7 @@ label_10:
         }
         while (path[pos] != '-');
         ++pos;
-        int num2 = XmlDiffPath.ReadPosition(path, ref pos);
+        var num2 = XmlDiffPath.ReadPosition(path, ref pos);
         if (num2 <= 0 || num2 > parentNode._sourceChildNodesCount)
           XmlDiffPath.OnNoMatchingNode(path);
         while (num1 < num2)
@@ -211,20 +211,20 @@ label_15:
 
     private static int ReadPosition(string str, ref int pos)
     {
-      int num1 = str.IndexOfAny(XmlDiffPath.Delimites, pos);
+      var num1 = str.IndexOfAny(XmlDiffPath.Delimites, pos);
       if (num1 < 0)
         num1 = str.Length;
-      int num2 = int.Parse(str.Substring(pos, num1 - pos));
+      var num2 = int.Parse(str.Substring(pos, num1 - pos));
       pos = num1;
       return num2;
     }
 
     private static string ReadAttrName(string str, ref int pos)
     {
-      int num = str.IndexOf('|', pos);
+      var num = str.IndexOf('|', pos);
       if (num < 0)
         num = str.Length;
-      string str1 = str.Substring(pos, num - pos);
+      var str1 = str.Substring(pos, num - pos);
       pos = num;
       return str1;
     }

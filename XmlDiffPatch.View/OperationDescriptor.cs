@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: Microsoft.XmlDiffPatch.OperationDescriptor
 // Assembly: XmlDiffPatch.View, Version=1.0.1493.40755, Culture=neutral, PublicKeyToken=null
 // MVID: 0D4C313F-7E60-4DB8-9CA5-4749E3A923DE
@@ -10,13 +10,19 @@ namespace Microsoft.XmlDiffPatch
 {
     internal class OperationDescriptor
     {
-        private int _opid;
-        internal OperationDescriptor.Type _type;
+        internal readonly ulong _opid;
+        internal Type _type;
         internal XmlDiffPathMultiNodeList _nodeList;
+        internal OperationDescriptor _nextDescriptor;
 
-        public OperationDescriptor(int opid, OperationDescriptor.Type type)
+        internal OperationDescriptor(ulong opid)
         {
             this._opid = opid;
+        }
+
+        public OperationDescriptor(int opid, Type type)
+        {
+            this._opid = (ulong)opid;
             this._type = type;
             this._nodeList = new XmlDiffPathMultiNodeList();
         }

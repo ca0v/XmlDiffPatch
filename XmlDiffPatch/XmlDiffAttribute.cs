@@ -86,7 +86,7 @@ namespace Microsoft.XmlDiffPatch
 
     internal override bool IsSameAs(XmlDiffNode node, XmlDiff xmlDiff)
     {
-      XmlDiffAttribute xmlDiffAttribute = (XmlDiffAttribute) node;
+            var xmlDiffAttribute = (XmlDiffAttribute) node;
       return this.LocalName == xmlDiffAttribute.LocalName && (xmlDiff.IgnoreNamespaces || this.NamespaceURI == xmlDiffAttribute.NamespaceURI) && (xmlDiff.IgnorePrefixes || this.Prefix == xmlDiffAttribute.Prefix) && this.Value == xmlDiffAttribute.Value;
     }
 

@@ -31,7 +31,7 @@ namespace Microsoft.XmlDiffPatch
           break;
         case XmlDiffNodeType.DocumentType:
           xmlWriter.WriteAttributeString("type", 10.ToString());
-          XmlDiffDocumentType targetNode1 = (XmlDiffDocumentType) this._targetNode;
+                    var targetNode1 = (XmlDiffDocumentType) this._targetNode;
           if (this._operationID != 0UL)
             xmlWriter.WriteAttributeString("opid", this._operationID.ToString());
           xmlWriter.WriteAttributeString("name", targetNode1.Name);
@@ -47,7 +47,7 @@ namespace Microsoft.XmlDiffPatch
           break;
         case XmlDiffNodeType.Element:
           xmlWriter.WriteAttributeString("type", 1.ToString());
-          XmlDiffElement targetNode2 = this._targetNode as XmlDiffElement;
+                    var targetNode2 = this._targetNode as XmlDiffElement;
           xmlWriter.WriteAttributeString("name", targetNode2.LocalName);
           if (targetNode2.NamespaceURI != string.Empty)
             xmlWriter.WriteAttributeString("ns", targetNode2.NamespaceURI);
@@ -59,7 +59,7 @@ namespace Microsoft.XmlDiffPatch
           break;
         case XmlDiffNodeType.Attribute:
           xmlWriter.WriteAttributeString("type", 2.ToString());
-          XmlDiffAttribute targetNode3 = this._targetNode as XmlDiffAttribute;
+                    var targetNode3 = this._targetNode as XmlDiffAttribute;
           xmlWriter.WriteAttributeString("name", targetNode3.LocalName);
           if (targetNode3.NamespaceURI != string.Empty)
             xmlWriter.WriteAttributeString("ns", targetNode3.NamespaceURI);
@@ -91,7 +91,7 @@ namespace Microsoft.XmlDiffPatch
           xmlWriter.WriteAttributeString("type", ((int) this._targetNode.NodeType).ToString());
           if (this._operationID != 0UL)
             xmlWriter.WriteAttributeString("opid", this._operationID.ToString());
-          XmlDiffPI targetNode4 = this._targetNode as XmlDiffPI;
+                    var targetNode4 = this._targetNode as XmlDiffPI;
           xmlWriter.WriteProcessingInstruction(targetNode4.Name, targetNode4.Value);
           break;
         case XmlDiffNodeType.Comment:
@@ -108,7 +108,7 @@ namespace Microsoft.XmlDiffPatch
           break;
         case XmlDiffNodeType.Namespace:
           xmlWriter.WriteAttributeString("type", 2.ToString());
-          XmlDiffNamespace targetNode5 = this._targetNode as XmlDiffNamespace;
+                    var targetNode5 = this._targetNode as XmlDiffNamespace;
           if (targetNode5.Prefix != string.Empty)
           {
             xmlWriter.WriteAttributeString("prefix", "xmlns");

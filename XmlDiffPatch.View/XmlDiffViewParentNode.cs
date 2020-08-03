@@ -45,8 +45,8 @@ namespace Microsoft.XmlDiffPatch
       if (this._sourceChildNodesIndex != null || this._sourceChildNodesCount == 0)
         return;
       this._sourceChildNodesIndex = new XmlDiffViewNode[this._sourceChildNodesCount];
-      XmlDiffViewNode xmlDiffViewNode = this._childNodes;
-      int index = 0;
+            var xmlDiffViewNode = this._childNodes;
+      var index = 0;
       while (index < this._sourceChildNodesCount)
       {
         Debug.Assert(xmlDiffViewNode != null);
@@ -80,7 +80,7 @@ namespace Microsoft.XmlDiffPatch
 
     internal void HtmlDrawChildNodes(XmlWriter writer, int indent)
     {
-      for (XmlDiffViewNode xmlDiffViewNode = this._childNodes; xmlDiffViewNode != null; xmlDiffViewNode = xmlDiffViewNode._nextSibbling)
+      for (var xmlDiffViewNode = this._childNodes; xmlDiffViewNode != null; xmlDiffViewNode = xmlDiffViewNode._nextSibbling)
         xmlDiffViewNode.DrawHtml(writer, indent);
     }
   }

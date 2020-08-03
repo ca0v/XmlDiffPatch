@@ -1,4 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
+// Decompiled with JetBrains decompiler
 // Type: Microsoft.XmlDiffPatch.DiffgramOperation
 // Assembly: XmlDiffPatch, Version=1.0.8.28, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 // MVID: 2B32D548-922A-4A84-B9AD-FF8E573DAC90
@@ -16,7 +16,7 @@ namespace Microsoft.XmlDiffPatch
 
         internal DiffgramOperation(ulong operationID)
         {
-            this._nextSiblingOp = (DiffgramOperation)null;
+            this._nextSiblingOp = null;
             this._operationID = operationID;
         }
 
@@ -24,10 +24,10 @@ namespace Microsoft.XmlDiffPatch
 
         internal static string GetRelativeAddressOfNodeset(XmlDiffNode firstNode, XmlDiffNode lastNode)
         {
-            int num = -1;
-            bool flag = false;
-            StringBuilder stringBuilder = new StringBuilder();
-            XmlDiffNode xmlDiffNode = firstNode;
+            var num = -1;
+            var flag = false;
+            var stringBuilder = new StringBuilder();
+            var xmlDiffNode = firstNode;
             while (true)
             {
                 if (xmlDiffNode.Position != num + 1)
@@ -74,17 +74,17 @@ namespace Microsoft.XmlDiffPatch
                     xmlWriter.WriteAttributeString("match", interval._firstAttr.GetRelativeAddress());
                     return;
                 }
-                if (interval._firstAttr._parent._firstChildNode == interval._firstAttr && (interval._lastAttr._nextSibling == null || interval._lastAttr._nextSibling.NodeType != XmlDiffNodeType.Attribute))
+                if (interval._firstAttr._parent._firstChildNode == interval._firstAttr && ( interval._lastAttr._nextSibling == null || interval._lastAttr._nextSibling.NodeType != XmlDiffNodeType.Attribute ))
                 {
                     xmlWriter.WriteAttributeString("match", "@*");
                     return;
                 }
             }
-            string str1 = string.Empty;
+            var str1 = string.Empty;
             string str2;
             while (true)
             {
-                XmlDiffAttribute xmlDiffAttribute = interval._firstAttr;
+                var xmlDiffAttribute = interval._firstAttr;
                 while (true)
                 {
                     str2 = str1 + xmlDiffAttribute.GetRelativeAddress();
@@ -107,7 +107,8 @@ namespace Microsoft.XmlDiffPatch
 
         internal static void WriteAbsoluteMatchAttribute(XmlDiffNode node, XmlWriter xmlWriter)
         {
-            if (node is XmlDiffAttribute attr && attr.NamespaceURI != string.Empty)
+            var attr = node as XmlDiffAttribute;
+            if (attr is XmlDiffAttribute && attr.NamespaceURI != string.Empty)
             {
                 DiffgramOperation.WriteNamespaceDefinition(attr, xmlWriter);
             }

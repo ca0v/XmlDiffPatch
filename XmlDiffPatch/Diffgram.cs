@@ -40,7 +40,7 @@ namespace Microsoft.XmlDiffPatch
       xmlWriter.WriteAttributeString("options", this._xmlDiff.GetXmlDiffOptionsString());
       xmlWriter.WriteAttributeString("fragments", this._xmlDiff._fragments == TriStateBool.Yes ? "yes" : "no");
       this.WriteChildrenTo(xmlWriter, this._xmlDiff);
-      for (OperationDescriptor operationDescriptor = this._descriptors; operationDescriptor != null; operationDescriptor = operationDescriptor._nextDescriptor)
+      for (var operationDescriptor = this._descriptors; operationDescriptor != null; operationDescriptor = operationDescriptor._nextDescriptor)
         operationDescriptor.WriteTo(xmlWriter);
       xmlWriter.WriteEndElement();
       xmlWriter.WriteEndDocument();
